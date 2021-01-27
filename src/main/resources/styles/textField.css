@@ -1,0 +1,10 @@
+.text-field {
+    -fx-border-color: rgba(27, 72, 171, 0.4);
+    -fx-border-radius: 2em;
+    -fx-background-color: -fx-control-inner-background;
+    -fx-background-insets: 0;
+    -fx-padding: 1 7 1 7;
+}
+.text-field:focused {
+    -fx-focus-color: transparent;
+}

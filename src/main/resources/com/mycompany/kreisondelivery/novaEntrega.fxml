@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.kreisondelivery.NovaEntregaController">
+   <children>
+      <AnchorPane prefHeight="27.0" prefWidth="800.0" style="-fx-background-color: #1b48ab;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="18.0" fitWidth="22.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#homeScreen" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/setaEsquerda.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="27.0" prefHeight="153.0" prefWidth="800.0" style="-fx-background-color: #1b48ab;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
+      <AnchorPane layoutX="19.0" layoutY="33.0" minHeight="-Infinity" prefHeight="500.0" prefWidth="749.0" style="-fx-background-color: #ffffff; -fx-background-radius: 1em;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="26.0" AnchorPane.topAnchor="33.0">
+         <children>
+            <HBox layoutX="10.0" layoutY="13.0" prefHeight="328.0" prefWidth="728.0" spacing="5.0" AnchorPane.bottomAnchor="159.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="13.0">
+               <children>
+                  <TableView fx:id="table_entegador" accessibleRole="IMAGE_VIEW" fixedCellSize="0.0" focusTraversable="false" prefHeight="328.0" prefWidth="355.0" stylesheets="@../../../styles/table.css">
+                    <columns>
+                      <TableColumn fx:id="entregador" editable="false" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="177.0" resizable="false" sortable="false" text="Especificação do produto" />
+                        <TableColumn fx:id="precoProduto" editable="false" maxWidth="1.7976931348623157E308" prefWidth="68.0" resizable="false" sortable="false" text="Preço" />
+                        <TableColumn fx:id="qtd_restante" editable="false" maxWidth="1.7976931348623157E308" prefWidth="101.0" resizable="false" sortable="false" text="Qtd restante" />
+                    </columns>
+                  </TableView>
+                  <TableView fx:id="tb_nome_entregador" focusTraversable="false" prefHeight="245.0" prefWidth="371.0" stylesheets="@../../../styles/table.css">
+                    <columns>
+                      <TableColumn fx:id="nome_entregador" prefWidth="364.0" text="Nome do entregador" />
+                    </columns>
+                  </TableView>
+               </children>
+            </HBox>
+            <VBox layoutX="100.0" layoutY="354.0" prefHeight="146.0" prefWidth="549.0" spacing="8.0" stylesheets="@../../../styles/textField.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+               <children>
+                  <TextField fx:id="endereco_entrega" focusTraversable="false" prefHeight="30.0" prefWidth="743.0" promptText="Endereço de entrega" stylesheets="@../../../styles/textField.css">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </TextField>
+                  <TextField fx:id="nome_cliente" focusTraversable="false" prefHeight="30.0" prefWidth="551.0" promptText="Nome do cliente">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="bairro" focusTraversable="false" prefHeight="30.0" prefWidth="551.0" promptText="Bairro" />
+                  <HBox prefHeight="32.0" prefWidth="549.0" spacing="5.0">
+                     <children>
+                        <TextField fx:id="cep" focusTraversable="false" prefHeight="30.0" prefWidth="232.0" promptText="Cep" />
+                        <TextField fx:id="numero" focusTraversable="false" prefHeight="30.0" prefWidth="232.0" promptText="Número" />
+                        <TextField fx:id="quantidade" focusTraversable="false" prefHeight="30.0" prefWidth="232.0" promptText="Quantidade" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Button focusTraversable="false" layoutX="229.0" layoutY="614.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="343.0" style="-fx-background-radius: 3em; -fx-background-color: #1b48ab;" text="Cadastrar nova entrega" textFill="WHITE" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="229.0" AnchorPane.rightAnchor="229.0">
+         <font>
+            <Font name="Arial Bold" size="12.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
