@@ -39,7 +39,7 @@
       </AnchorPane>
       <ImageView fitHeight="66.0" fitWidth="79.0" layoutX="729.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="2.0">
          <image>
-            <Image url="@../../../images/suseLogo.png" />
+            <Image url="@../../../images/logo.png" />
          </image>
       </ImageView>
    </children>
