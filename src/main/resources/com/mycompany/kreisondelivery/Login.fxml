@@ -37,7 +37,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="75.0" fitWidth="89.0" layoutX="709.7327117919922" layoutY="422.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="4.871246337890625">
+      <ImageView fitHeight="66.0" fitWidth="79.0" layoutX="729.0" layoutY="427.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="2.0">
          <image>
             <Image url="@../../../images/logo.png" />
          </image>
