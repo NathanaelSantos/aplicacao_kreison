@@ -19,7 +19,7 @@
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #f2f2f2;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.kreisondelivery.CadastraController">
 
    <children>
-      <AnchorPane prefHeight="183.0" prefWidth="800.0" style="-fx-background-color: #1b48ab;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="183.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Label layoutX="90.0" layoutY="35.0" prefHeight="15.0" prefWidth="131.0" text="Cadastro de Usuário" textFill="WHITE" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="35.0">
                <font>
@@ -29,7 +29,7 @@
          </children></AnchorPane>
       <AnchorPane layoutX="86.0" layoutY="77.0" prefHeight="381.0" prefWidth="620.0" style="-fx-background-radius: 1em; -fx-background-color: #ffffff;" AnchorPane.leftAnchor="90.0" AnchorPane.rightAnchor="90.0" AnchorPane.topAnchor="77.0">
          <children>
-            <Button focusTraversable="false" layoutX="141.0" layoutY="301.0" mnemonicParsing="false" onAction="#insertUsuarioDB" prefHeight="32.0" prefWidth="343.0" style="-fx-background-radius: 3em; -fx-background-color: #1b48ab;" text="Cadastrar" textFill="WHITE" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="141.0">
+            <Button focusTraversable="false" layoutX="141.0" layoutY="301.0" mnemonicParsing="false" onAction="#insertUsuarioDB" prefHeight="32.0" prefWidth="343.0" style="-fx-background-radius: 3em; -fx-background-color: #00b4d8;" text="Cadastrar" textFill="WHITE" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="141.0">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font>
@@ -60,8 +60,8 @@
             </VBox>
             <HBox layoutX="14.0" layoutY="184.0" prefHeight="32.0" prefWidth="323.0" spacing="5.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="283.0">
                <children>
-                  <DatePicker fx:id="dataNascimento" editable="false" focusTraversable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="118.0" showWeekNumbers="true" style="-fx-background-color: #1b48ab;" />
-                  <MenuButton fx:id="tipoFuncionario" focusTraversable="false" lineSpacing="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #1b48ab; -fx-border-radius: 2em;" text="Tipo de funcionário" textFill="WHITE">
+                  <DatePicker fx:id="dataNascimento" editable="false" focusTraversable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="118.0" showWeekNumbers="true" style="-fx-background-color: #00b4d8;" />
+                  <MenuButton fx:id="tipoFuncionario" focusTraversable="false" lineSpacing="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #00b4d8; -fx-border-radius: 2em;" text="Tipo de funcionário" textFill="WHITE">
                     <items>
                         <RadioMenuItem fx:id="entregador" mnemonicParsing="false" text="Entregador">
                            <toggleGroup>
@@ -81,9 +81,14 @@
                   <Font name="Arial" size="12.0" />
                </font>
             </Label>
+            <Label fx:id="alerta" layoutX="13.0" layoutY="228.0" prefHeight="15.0" prefWidth="210.0" text="*Campos precisam ser preenchidos!" textFill="RED" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="397.0">
+               <font>
+                  <Font name="Arial Bold" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <AnchorPane prefHeight="27.0" prefWidth="800.0" style="-fx-background-color: #1b48ab;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="27.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="18.0" fitWidth="22.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#screenLogin" pickOnBounds="true" preserveRatio="true">
                <image>

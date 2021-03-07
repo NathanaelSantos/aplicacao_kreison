@@ -29,4 +29,5 @@ public class Mouse {
     public void setY(double y) {
         this.y = y;
     }
+
 }

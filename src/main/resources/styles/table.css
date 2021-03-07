@@ -1,6 +1,6 @@
 .table-view .column-header,
 .table-view .column-header-background .filler {
-    -fx-background-color:   #1b48ab;
+    -fx-background-color:    #00b4d8;
 }
 .table-view .column-header .label{
     -fx-text-fill: #fdfdfd;
@@ -9,12 +9,12 @@
 }
 
 .table-row-cell:selected {
-    -fx-text-background-color:   #1b48ab;
+    -fx-text-background-color: #92fc87;
 }
 
 .table-view .column-header,
 .table-view .column-header-background .filler {
-    -fx-background-color:  #1b48ab;
+    -fx-background-color:   #00b4d8;
 }
 
 .table-view .cell{
@@ -35,14 +35,14 @@
 /* The main scrollbar **thumb** CSS class which we drag every time (movable) */
 .table-view .scroll-bar:horizontal .thumb,
 .table-view .scroll-bar:vertical .thumb {
-    -fx-background-color:derive( #4176d7,90%);
+    -fx-background-color:derive(  #00b4d8,90%);
 
 }
 .table-row-cell:selected {
-    -fx-background-color: #4176D7;
+    -fx-background-color: #92fc87;
 }
 .table-row-cell:selected .text {
-    -fx-fill: #fdfdfd;
+    -fx-fill: #0c0c0c;
 
 }
 

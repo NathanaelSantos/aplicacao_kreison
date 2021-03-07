@@ -4,11 +4,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #FDFDFD;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.kreisondelivery.HomeController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="1.0" prefHeight="27.0" prefWidth="787.0" style="-fx-background-color: #1b48ab;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="14.0" layoutY="1.0" prefHeight="27.0" prefWidth="787.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="18.0" fitWidth="22.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#screenLogin" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -17,41 +19,49 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <Button id="botao" alignment="CENTER" contentDisplay="TOP" layoutX="146.0" layoutY="112.0" mnemonicParsing="false" onAction="#novaEntrega" prefHeight="54.0" prefWidth="508.0" style="-fx-background-color: #1b48ab; -fx-background-radius: 1.2em;" text="Nova entrega" textAlignment="CENTER" textFill="#fdfdfd" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="146.0" AnchorPane.topAnchor="112.0">
-         <font>
-            <Font name="Arial Bold" size="12.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/caminhao-de-entrega.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button alignment="CENTER" contentDisplay="TOP" layoutX="146.0" layoutY="261.0" mnemonicParsing="false" onAction="#estoqueScreen" prefHeight="54.0" prefWidth="508.0" style="-fx-background-color: #1b48ab; -fx-background-radius: 1.2em;" text="Consultar estoque" textFill="#fdfdfd" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="146.0" AnchorPane.topAnchor="261.0">
-         <font>
-            <Font name="Arial Bold" size="12.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/carrinho-de-mao.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <Button alignment="CENTER" contentDisplay="TOP" layoutX="146.0" layoutY="186.0" mnemonicParsing="false" onAction="#cadastraProduto" prefHeight="54.0" prefWidth="508.0" style="-fx-background-color: #1b48ab; -fx-background-radius: 1.2em;" text="Cadastrar produto" textFill="#fdfdfd" AnchorPane.leftAnchor="146.0" AnchorPane.rightAnchor="146.0">
-         <font>
-            <Font name="Arial Bold" size="12.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../../images/produto.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
+      <StackPane layoutX="165.0" layoutY="58.0" prefHeight="240.0" prefWidth="470.0" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="58.0">
+         <children>
+            <VBox alignment="CENTER" fillWidth="false" prefHeight="237.0" prefWidth="470.0" spacing="15.0" StackPane.alignment="TOP_CENTER">
+               <children>
+                  <Button id="botao" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#novaEntrega" prefHeight="54.0" prefWidth="508.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Nova entrega" textAlignment="CENTER" textFill="#fdfdfd">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/produto.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#estoqueScreen" prefHeight="54.0" prefWidth="508.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Consultar estoque" textFill="#fdfdfd">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/carrinho-de-mao.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#cadastraProduto" prefHeight="54.0" prefWidth="508.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Cadastrar produto" textFill="#fdfdfd">
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/produto.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
    </children>
 </AnchorPane>

@@ -7,23 +7,26 @@ import java.sql.SQLException;
 
 public class ReturnConnection {
 
-    public Connection returnConnection() throws ClassNotFoundException, SQLException {
+    public static Connection connection;
 
-        Connection connection = null;
-        MysqlConnection mysqlConnection = new MysqlConnection();
+    public static Connection getConnection() {
+        try {
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_kreison_delivery", "root", "");
+        } catch (SQLException throwables) {
+              throwables.printStackTrace();
+        }
 
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        connection = DriverManager.getConnection(mysqlConnection.getUrl(),mysqlConnection.getUser(),mysqlConnection.getPassword());
-
-        return  connection;
+        return connection;
     }
 
-    public void closeConnection(Connection connection) throws SQLException {
-       connection.close();
-    }
 
-    public void closePreparedStatement(PreparedStatement preparedStatement) throws SQLException {
-        preparedStatement.close();
+    public  void closeConnection(Connection connection,PreparedStatement preparedStatement)  {
+        try {
+            connection.close();
+            preparedStatement.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
 }

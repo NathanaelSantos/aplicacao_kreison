@@ -6,11 +6,14 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #FDFDFD;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.kreisondelivery.EstoqueController">
    <children>
-      <AnchorPane prefHeight="27.0" prefWidth="800.0" style="-fx-background-color: #1b48ab;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="27.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="18.0" fitWidth="22.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#homeScreen" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -19,29 +22,42 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <PieChart id="pieChart" fx:id="pieChart" accessibleRoleDescription=" " labelLineLength="10.0" layoutX="239.0" layoutY="101.0" legendSide="TOP" legendVisible="false" prefHeight="299.0" prefWidth="322.0" style="-fx-background-color: #FDFDFD; -fx-border-color: #FDFDFD;" stylesheets="@../../../styles/pieChart.css" title="Quantidade de galões" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="239.0" AnchorPane.rightAnchor="239.0" AnchorPane.topAnchor="101.0">
-         <styleClass>
-            <String fx:value="chart-pie" />
-            <String fx:value="chart" />
-            <String fx:value="default-color0" />
-         </styleClass></PieChart>
-      <AnchorPane layoutX="14.0" layoutY="40.0" prefHeight="18.0" prefWidth="136.0" style="-fx-background-color: red; -fx-background-radius: 2em;" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="40.0">
+      <StackPane layoutX="166.0" layoutY="41.0" prefHeight="385.0" prefWidth="480.0" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="154.0" AnchorPane.rightAnchor="154.0" AnchorPane.topAnchor="41.0">
          <children>
-            <Label layoutX="28.0" layoutY="2.0" text="Galões vazios" textFill="WHITE">
-               <font>
-                  <Font name="Arial Bold" size="12.0" />
-               </font>
-            </Label>
+            <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="4.0">
+               <children>
+                  <PieChart id="pieChart" fx:id="pieChart" accessibleRoleDescription=" " labelLineLength="10.0" legendSide="TOP" legendVisible="false" prefHeight="359.0" prefWidth="480.0" style="-fx-background-color: #FDFDFD; -fx-border-color: #FDFDFD;" stylesheets="@../../../styles/pieChart.css" title="Quantidade de galões">
+                     <styleClass>
+                        <String fx:value="chart-pie" />
+                        <String fx:value="chart" />
+                        <String fx:value="default-color0" />
+                     </styleClass>
+                  </PieChart>
+                  <HBox alignment="CENTER" prefHeight="15.0" prefWidth="336.0" spacing="7.0">
+                     <children>
+                        <AnchorPane prefWidth="136.0" style="-fx-background-color: #ccff33; -fx-background-radius: 2em;">
+                           <children>
+                              <Label layoutX="27.0" layoutY="2.0" text="Galões cheios" textFill="#1e1e1e">
+                                 <font>
+                                    <Font name="Arial Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane prefHeight="17.0" prefWidth="136.0" style="-fx-background-color: red; -fx-background-radius: 2em;">
+                           <children>
+                              <Label layoutX="28.0" layoutY="2.0" prefWidth="105.0" text="Galões vazios" textFill="WHITE">
+                                 <font>
+                                    <Font name="Arial Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
-      </AnchorPane>
-      <AnchorPane layoutX="14.0" layoutY="65.0" prefHeight="18.0" prefWidth="136.0" style="-fx-background-color: cyan; -fx-background-radius: 2em;" AnchorPane.leftAnchor="14.0">
-         <children>
-            <Label layoutX="27.0" layoutY="2.0" text="Galões cheios" textFill="#1e1e1e">
-               <font>
-                  <Font name="Arial Bold" size="12.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
+      </StackPane>
    </children>
 </AnchorPane>

@@ -8,20 +8,20 @@ import javafx.scene.control.MenuItem;
 import java.time.LocalDate;
 
 public class Usuario extends Cliente{
-    public int Senha;
+    public String Senha;
     public int tipoUsuario;
 
-    public Usuario(String nome, int senha, String cpf, String dataNascimento, int tipoUsuario) {
+    public Usuario(String nome, String senha, String cpf, String dataNascimento, int tipoUsuario) {
         super(cpf,nome,dataNascimento);
         this.setSenha(senha);
         this.setTipoUsuario(tipoUsuario);
     }
 
-    public Integer getSenha() {
+    public String getSenha() {
         return Senha;
     }
 
-    public void setSenha(Integer senha) {
+    public void setSenha(String senha) {
         Senha = senha;
     }
 

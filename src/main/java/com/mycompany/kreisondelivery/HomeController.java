@@ -13,15 +13,6 @@ public class HomeController implements Initializable, Windows {
     App app = new App();
     private static boolean screenMax = false;
 
-    @FXML
-    private void handleClose(MouseEvent event) throws IOException {
-        System.exit(0);
-    }
-
-    @FXML
-    private void handleMinimize(MouseEvent event) throws IOException {
-        app.getStage().setIconified(true);
-    }
 
     @FXML
     private void screenLogin() throws IOException {

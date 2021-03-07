@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import model.ReturnConnection;
 import model.Windows;
@@ -100,7 +99,7 @@ public class EstoqueController implements Initializable, Windows {
         try {
 
             String query = "SELECT quantidade,venda FROM db_produto";
-            preparedStatement = returnConnection.returnConnection().prepareStatement(query);
+            preparedStatement = returnConnection.getConnection().prepareStatement(query);
 
             res = preparedStatement.executeQuery();
 
@@ -110,14 +109,10 @@ public class EstoqueController implements Initializable, Windows {
                 valueVenda += res.getInt("venda");
             }
 
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
-            returnConnection.closeConnection(returnConnection.returnConnection());
-            returnConnection.closePreparedStatement(preparedStatement);
-
+            returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
         }
     }
 }

@@ -7,9 +7,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import javafx.stage.StageStyle;
-import model.MoveWindow;
-import java.sql.*;
 
 /**
  * JavaFX App
@@ -20,16 +17,17 @@ public class App extends Application {
     private static Stage stage;
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) throws IOException, InterruptedException {
 
         App.stage = stage;
         scene = new Scene(loadFXML("Login"), 800, 500);
         //stage.initStyle(StageStyle.UNDECORATED);
+        //new MoveWindow().moveWindow(scene, stage);
+
         stage.setScene(scene);
         stage.show();
-
-        new MoveWindow().moveWindow(scene, stage);
     }
+
 
     static void setRoot(String fxml) throws IOException {
         stage.setFullScreen(false);
