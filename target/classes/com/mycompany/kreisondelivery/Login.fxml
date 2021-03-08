@@ -19,7 +19,7 @@
             <Image url="@../../../images/logo.png" />
          </image>
       </ImageView>
-      <StackPane layoutX="174.0" layoutY="67.0" prefHeight="307.0" prefWidth="452.0" style="-fx-background-color: #38b6ff; -fx-background-radius: 2em;" AnchorPane.bottomAnchor="126.0" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="174.0" AnchorPane.topAnchor="67.0">
+      <StackPane layoutX="174.0" layoutY="42.0" prefHeight="289.0" prefWidth="452.0" style="-fx-background-color: #38b6ff; -fx-background-radius: 2em;" AnchorPane.bottomAnchor="169.0" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="174.0" AnchorPane.topAnchor="42.0">
          <children>
             <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="353.0" prefWidth="452.0" spacing="15.0" style="-fx-background-color: #00b4d8;" StackPane.alignment="CENTER">
                <children>
