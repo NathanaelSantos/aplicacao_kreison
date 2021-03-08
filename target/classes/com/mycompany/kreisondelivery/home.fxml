@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -17,51 +23,93 @@
                   <Image url="@../../../images/setaEsquerda.png" />
                </image>
             </ImageView>
+            <HBox alignment="CENTER" layoutX="433.0" onMouseClicked="#telaLogin" prefHeight="25.0" prefWidth="67.0" spacing="3.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/admin.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="Admin" />
+               </children>
+            </HBox>
          </children>
       </AnchorPane>
-      <StackPane layoutX="165.0" layoutY="58.0" prefHeight="240.0" prefWidth="470.0" AnchorPane.bottomAnchor="202.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="58.0">
+      <StackPane layoutX="165.0" layoutY="45.0" prefHeight="272.0" prefWidth="470.0" AnchorPane.bottomAnchor="183.0" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="165.0" AnchorPane.topAnchor="45.0">
          <children>
-            <VBox alignment="CENTER" fillWidth="false" prefHeight="237.0" prefWidth="470.0" spacing="15.0" StackPane.alignment="TOP_CENTER">
+            <VBox alignment="CENTER" fillWidth="false" prefHeight="263.0" prefWidth="470.0" spacing="15.0" StackPane.alignment="CENTER">
                <children>
-                  <Button id="botao" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#novaEntrega" prefHeight="54.0" prefWidth="508.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Nova entrega" textAlignment="CENTER" textFill="#fdfdfd">
-                     <font>
-                        <Font name="Arial Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../images/produto.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#estoqueScreen" prefHeight="54.0" prefWidth="508.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Consultar estoque" textFill="#fdfdfd">
-                     <font>
-                        <Font name="Arial Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../images/carrinho-de-mao.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#cadastraProduto" prefHeight="54.0" prefWidth="508.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Cadastrar produto" textFill="#fdfdfd">
-                     <font>
-                        <Font name="Arial Bold" size="12.0" />
-                     </font>
-                     <graphic>
-                        <ImageView fitHeight="20.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../images/produto.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="469.0" spacing="20.0">
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#estoqueScreen" prefHeight="98.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Consultar estoque" textFill="#fdfdfd">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/estoque.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button id="botao" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#novaEntrega" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Nova entrega" textAlignment="CENTER" textFill="#fdfdfd">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/novaEntrega.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>
       </StackPane>
+      <AnchorPane fx:id="telaLogin" layoutX="516.0" layoutY="27.0" prefHeight="289.0" prefWidth="296.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
+         <children>
+            <StackPane prefHeight="289.0" prefWidth="296.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 2em;">
+               <children>
+                  <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="289.0" prefWidth="257.0" spacing="15.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 2em;" StackPane.alignment="CENTER">
+                     <children>
+                        <Label contentDisplay="CENTER" text="Login admin" textFill="#fdfdfd">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="login" focusTraversable="false" prefHeight="32.0" prefWidth="234.0" promptText="Cpf" style="-fx-background-radius: 2em;" text="07765328557" />
+                        <PasswordField fx:id="senha" focusTraversable="false" prefHeight="32.0" prefWidth="234.0" promptText="Senha" style="-fx-background-radius: 2em;" stylesheets="@../../../styles/textField.css" text="111111" />
+                        <Label fx:id="alerta" text="*Campos precisam estar preenchidos!" textFill="RED">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="alertaCpf" text="*Cpf inválido!" textFill="RED">
+                           <font>
+                              <Font name="Arial Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Button id="buttonLogin" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="32.0" prefWidth="234.0" style="-fx-background-radius: 3em; -fx-background-color: #ffffff;" text="Fazer login" textFill="#1b48ab">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Button>
+                     </children>
+                     <padding>
+                        <Insets top="20.0" />
+                     </padding>
+                  </VBox>
+               </children>
+            </StackPane>
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
    </children>
 </AnchorPane>
