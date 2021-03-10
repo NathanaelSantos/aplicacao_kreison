@@ -28,7 +28,6 @@ public class App extends Application {
         stage.show();
     }
 
-
     static void setRoot(String fxml) throws IOException {
         stage.setFullScreen(false);
         scene.setRoot(loadFXML(fxml));

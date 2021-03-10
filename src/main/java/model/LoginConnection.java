@@ -10,19 +10,19 @@ public class LoginConnection {
     PreparedStatement preparedStatement = null;
     ResultSet res;
 
-    public String loginConection(String cpfUser)  {
+    public String loginConection(String parameterValue, String columnName)  {
 
-        String returnSenha = null;
+        String returnStr = null;
 
             try {
-                preparedStatement = returnConnection.getConnection().prepareStatement("SELECT senha FROM db_usuario WHERE cpf = ?");
+                preparedStatement = returnConnection.getConnection().prepareStatement("SELECT " + columnName + " FROM db_usuario WHERE cpf = ?");
 
                 if(preparedStatement!= null){
-                    preparedStatement.setString(1, cpfUser);
+                    preparedStatement.setString(1, parameterValue);
                     res = preparedStatement.executeQuery();
 
                     while (res.next()) {
-                        returnSenha = res.getString("senha");
+                        returnStr = res.getString(columnName);
                     }
                 }else{
                     new AlertDialog().alertDialog("Erro de conexao!");
@@ -34,6 +34,6 @@ public class LoginConnection {
                     returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
             }
 
-        return returnSenha;
+        return returnStr;
     }
 }
