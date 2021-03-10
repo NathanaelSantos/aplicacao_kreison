@@ -11,6 +11,7 @@ public class Pessoa {
     public String nome;
     public String dataNascimento;
 
+    public Pessoa() { }
     public Pessoa(String nome) {
         this.nome = nome;
     }

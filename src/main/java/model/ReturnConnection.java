@@ -7,11 +7,11 @@ import java.sql.SQLException;
 
 public class ReturnConnection {
 
-    public static Connection connection;
+    private Connection connection;
 
-    public static Connection getConnection() {
+    public Connection getConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_kreison_delivery", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://35.199.122.95:3306/db_kreison_delivery?useSSL=false", "root", "1uCelvjuIChNpF0C");
         } catch (SQLException throwables) {
               throwables.printStackTrace();
         }
