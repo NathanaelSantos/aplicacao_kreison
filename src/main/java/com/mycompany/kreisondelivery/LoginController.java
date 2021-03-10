@@ -42,10 +42,13 @@ public class LoginController implements Initializable, Windows{
 
     @FXML
     private Label alertaCpf;
-
+    @FXML
+    private Label txtCadastra;
+    @FXML
+    private Label recoverPassword;
 
     @FXML
-    private void switchToPrimary() throws IOException, SQLException, ClassNotFoundException, InterruptedException {
+    private void switchToPrimary() throws Exception {
         ReturnConnection returnConnection = new ReturnConnection();
 
         if(login.getText().isBlank() || senha.getText().isBlank()){
@@ -57,7 +60,7 @@ public class LoginController implements Initializable, Windows{
 
                 if (returnConnection.getConnection() != null) {
 
-                    if (new StringUtil().encodeBase64String(senha.getText()).equals(new LoginConnection().loginConection(login.getText())))
+                    if (new StringUtil().gerarHash(senha.getText()).equals(new LoginConnection().loginConection(login.getText(),"senha")))
                         App.setRoot("home");
                     else
                         new AlertDialog().alertDialog("Erro ao fazer login!");
@@ -68,7 +71,16 @@ public class LoginController implements Initializable, Windows{
             }
         }
     }
-    
+
+    @FXML
+    private void mouseEnteredTxtCad(){ txtCadastra.setStyle("-fx-text-fill:  #037f99");}
+    @FXML
+    private void mouseExitedTxtCad(){ txtCadastra.setStyle("-fx-text-fill-color:  #ffffff");}
+    @FXML
+    private void mouseEnteredRecoverPassword(){ recoverPassword.setStyle("-fx-text-fill:  #038ca9"); }
+    @FXML
+    private void mouseExitedRecoverPassword(){ recoverPassword.setStyle("-fx-text-fill-color:  #ffffff"); }
+
     @FXML
     private void cadastrar() throws IOException {
         App.setRoot("cadastra");
@@ -80,6 +92,7 @@ public class LoginController implements Initializable, Windows{
 
         alerta.setVisible(false);
         alertaCpf.setVisible(false);
+
 
         isTextFormatterNumber(login);
             addTextLimiter(login,11);

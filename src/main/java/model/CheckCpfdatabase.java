@@ -1,6 +1,4 @@
-package com.mycompany.kreisondelivery;
-
-import model.ReturnConnection;
+package model;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +11,7 @@ public class CheckCpfdatabase {
 
         PreparedStatement preparedStatement = null;
         ResultSet res = null;
-        boolean existe = false;
+        boolean check = false;
 
         try {
 
@@ -23,7 +21,7 @@ public class CheckCpfdatabase {
 
             while (res.next()) {
                 if(res.getRow() > 0)
-                    existe = true;
+                    check = true;
             }
 
         } catch (SQLException throwables) {
@@ -32,6 +30,6 @@ public class CheckCpfdatabase {
             returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
         }
 
-        return existe;
+        return check;
     }
 }

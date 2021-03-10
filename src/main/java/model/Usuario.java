@@ -1,36 +1,29 @@
 package model;
 
-import javafx.collections.ObservableList;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-
-import java.time.LocalDate;
-
 public class Usuario extends Cliente{
-    public String Senha;
-    public int tipoUsuario;
+    public String password;
+    public int userType;
 
-    public Usuario(String nome, String senha, String cpf, String dataNascimento, int tipoUsuario) {
-        super(cpf,nome,dataNascimento);
-        this.setSenha(senha);
-        this.setTipoUsuario(tipoUsuario);
-    }
-
-    public String getSenha() {
-        return Senha;
-    }
-
-    public void setSenha(String senha) {
-        Senha = senha;
+    public Usuario(String name, String password, String cpf, String birthDate, int userType) {
+        super(cpf,name,birthDate);
+        this.setPassword(password);
+        this.setUserType(userType);
     }
 
 
-    public int getTipoUsuario() {
-        return tipoUsuario;
+    public String getPassword() {
+        return password;
     }
 
-    public void setTipoUsuario(int tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public int getUserType() {
+        return userType;
+    }
+
+    public void setUserType(int userType) {
+        this.userType = userType;
     }
 }

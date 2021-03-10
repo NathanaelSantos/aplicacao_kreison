@@ -26,7 +26,7 @@
          <children>
             <VBox alignment="CENTER" fillWidth="false" prefHeight="200.0" prefWidth="100.0" spacing="4.0">
                <children>
-                  <PieChart id="pieChart" fx:id="pieChart" accessibleRoleDescription=" " labelLineLength="10.0" legendSide="TOP" legendVisible="false" prefHeight="359.0" prefWidth="480.0" style="-fx-background-color: #FDFDFD; -fx-border-color: #FDFDFD;" stylesheets="@../../../styles/pieChart.css" title="Quantidade de galões">
+                  <PieChart id="pieChart" fx:id="pieChart" accessibleRoleDescription=" " labelLineLength="10.0" legendSide="TOP" legendVisible="false" opacity="0.82" prefHeight="359.0" prefWidth="480.0" style="-fx-background-color: #FDFDFD; -fx-border-color: #FDFDFD;" stylesheets="@../../../styles/pieChart.css" title="Quantidade de galões">
                      <styleClass>
                         <String fx:value="chart-pie" />
                         <String fx:value="chart" />
@@ -35,20 +35,20 @@
                   </PieChart>
                   <HBox alignment="CENTER" prefHeight="15.0" prefWidth="336.0" spacing="7.0">
                      <children>
-                        <AnchorPane prefWidth="136.0" style="-fx-background-color: #ccff33; -fx-background-radius: 2em;">
+                        <AnchorPane prefWidth="136.0" style="-fx-background-color: #0fff95; -fx-background-radius: 2em;">
                            <children>
-                              <Label layoutX="27.0" layoutY="2.0" text="Galões cheios" textFill="#1e1e1e">
+                              <Label layoutX="32.0" layoutY="1.0" text="Galões cheios" textFill="#1e1e1e">
                                  <font>
-                                    <Font name="Arial Bold" size="12.0" />
+                                    <Font name="Segoe UI" size="12.0" />
                                  </font>
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="17.0" prefWidth="136.0" style="-fx-background-color: red; -fx-background-radius: 2em;">
+                        <AnchorPane prefHeight="17.0" prefWidth="136.0" style="-fx-background-color: #ff4343; -fx-background-radius: 2em;">
                            <children>
-                              <Label layoutX="28.0" layoutY="2.0" prefWidth="105.0" text="Galões vazios" textFill="WHITE">
+                              <Label layoutX="32.0" layoutY="1.0" prefHeight="15.0" prefWidth="73.0" text="Galões vazios" textFill="WHITE">
                                  <font>
-                                    <Font name="Arial Bold" size="12.0" />
+                                    <Font name="Segoe UI" size="12.0" />
                                  </font>
                               </Label>
                            </children>
