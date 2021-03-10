@@ -34,9 +34,12 @@ public class ProdutoController implements Initializable, Windows{
     @FXML
     private TextField precoProduto;
     @FXML
-
     private void homeScreen() throws IOException {
         App.setRoot("home");
+    }
+    @FXML
+    private void adminScreen() throws IOException {
+        App.setRoot("admin");
     }
 
     public void composVazios() throws SQLException, ClassNotFoundException {
