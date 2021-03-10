@@ -1,0 +1,5 @@
+.jfx-date-picker .date-picker-popup .calendar-grid .day-cell:hover,
+.jfx-date-picker .data-picker-list-cell:hover {
+    -fx-background-color: pink;
+    -fx-cursor: hand;
+}
