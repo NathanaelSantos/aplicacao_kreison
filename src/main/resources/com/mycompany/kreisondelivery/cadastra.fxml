@@ -58,10 +58,10 @@
                   </TextField>
                </children>
             </VBox>
-            <HBox layoutX="14.0" layoutY="184.0" prefHeight="32.0" prefWidth="323.0" spacing="5.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="283.0">
+            <HBox layoutX="14.0" layoutY="184.0" prefHeight="32.0" prefWidth="515.0" spacing="5.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="91.0">
                <children>
                   <DatePicker fx:id="dataNascimento" editable="false" focusTraversable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="118.0" showWeekNumbers="true" style="-fx-background-color: #00b4d8;" />
-                  <MenuButton fx:id="tipoFuncionario" focusTraversable="false" lineSpacing="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #00b4d8; -fx-border-radius: 2em;" text="Tipo de funcionário" textFill="WHITE">
+                  <MenuButton fx:id="tipoFuncionario" focusTraversable="false" lineSpacing="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #00b4d8; -fx-border-radius: 2em;" text="Tipo de funcionário" textFill="WHITE">
                     <items>
                         <RadioMenuItem fx:id="entregador" mnemonicParsing="false" text="Entregador">
                            <toggleGroup>
@@ -74,6 +74,11 @@
                         <Font name="Arial" size="12.0" />
                      </font>
                   </MenuButton>
+                  <TextField fx:id="codAdmin" alignment="CENTER" focusTraversable="false" prefHeight="30.0" prefWidth="90.0" promptText="Código admin">
+                     <font>
+                        <Font name="Arial" size="12.0" />
+                     </font>
+                  </TextField>
                </children>
             </HBox>
             <Label layoutX="13.0" layoutY="168.0" text="Data de nascimento" textFill="#1b48ab">

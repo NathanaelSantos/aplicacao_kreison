@@ -12,6 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import model.*;
 
 import static model.AddTextLimiter.addTextLimiter;
@@ -19,26 +20,23 @@ import static model.TextFormatter.isTextFormatterNumber;
 
 public class HomeController implements Initializable, Windows {
 
-    App app = new App();
-    private static boolean screenMax = false;
+    static boolean onScreenLogin = false;
 
     @FXML
     private AnchorPane telaLogin;
-
     @FXML
     private TextField login;
-
     @FXML
     private PasswordField senha;
-
     @FXML
     private Label alerta;
-
     @FXML
     private Label alertaCpf;
-
     @FXML
-    private Button btnLogin;
+    private Button buttonAdmin;
+    @FXML
+    private TextField codAdmin;
+
 
     @FXML
     private void screenLogin() throws IOException {
@@ -61,15 +59,76 @@ public class HomeController implements Initializable, Windows {
     }
 
     @FXML
-    private void telaLogin() throws IOException {
-        telaLogin.setVisible(true);
+    private void mouseExitedBtnAdmin() throws IOException {
+        buttonAdmin.setStyle("-fx-background-color: #00b4d8");
     }
 
     @FXML
-    private void switchToPrimary() throws IOException, SQLException, ClassNotFoundException, InterruptedException {
+    private void mouseEnteredBtnAdmin() throws IOException {
+        buttonAdmin.setStyle("-fx-background-color: #038ca9");
+    }
+
+    @FXML
+    private void telaLogin() throws IOException {
+        if(!onScreenLogin){
+            telaLogin.setVisible(true);
+            onScreenLogin = true;
+        }else {
+            telaLogin.setVisible(false);
+            onScreenLogin = false;
+        }
+
+    }
+
+    public boolean emptyFields() throws SQLException, ClassNotFoundException {
+        boolean validate = false;
+
+        if(login.getText().isBlank())
+
+            login.setStyle(" -fx-border-color: #ff3b3b;\n" +
+                    "        -fx-border-radius: 2em;\n" +
+                    "        -fx-background-color: #00b4d8;\n" +
+                    "        -fx-text-fill: #ffffff;");
+        else
+            login.setStyle(" -fx-border-color: #ffffff;\n" +
+                    "    -fx-border-radius: 2em;\n" +
+                    "    -fx-background-color: #00b4d8;\n" +
+                    "    -fx-text-fill: #ffffff;");
+
+        if(senha.getText().isBlank())
+            senha.setStyle(" -fx-border-color: #ff3b3b;\n" +
+                    "        -fx-border-radius: 2em;\n" +
+                    "        -fx-background-color: #00b4d8;\n" +
+                    "        -fx-text-fill: #ffffff;");
+        else
+            senha.setStyle(" -fx-border-color: #ffffff;\n" +
+                    "    -fx-border-radius: 2em;\n" +
+                    "    -fx-background-color: #00b4d8;\n" +
+                    "    -fx-text-fill: #ffffff;");
+
+        if(codAdmin.getText().isBlank())
+            codAdmin.setStyle(" -fx-border-color: #ff3b3b;\n" +
+                    "        -fx-border-radius: 2em;\n" +
+                    "        -fx-background-color: #00b4d8;\n" +
+                    "        -fx-text-fill: #ffffff;");
+        else
+            codAdmin.setStyle(" -fx-border-color: #ffffff;\n" +
+                    "    -fx-border-radius: 2em;\n" +
+                    "    -fx-background-color: #00b4d8;\n" +
+                    "    -fx-text-fill: #ffffff;");
+
+        if(login.getText().isBlank()|| senha.getText().isBlank() || codAdmin.getText().isBlank() ){
+            validate = true;
+        }
+
+        return validate;
+    }
+
+    @FXML
+    private void switchToPrimary() throws Exception {
         ReturnConnection returnConnection = new ReturnConnection();
 
-        if(login.getText().isBlank() || senha.getText().isBlank()){
+        if(emptyFields()){
             alerta.setVisible(true);
         }else {
 
@@ -78,7 +137,7 @@ public class HomeController implements Initializable, Windows {
 
                 if (returnConnection.getConnection() != null) {
 
-                    if (new StringUtil().encodeBase64String(senha.getText()).equals(new LoginConnection().loginConection(login.getText())))
+                    if (new StringUtil().gerarHash(senha.getText()).equals(new LoginConnection().loginConection(login.getText(),"senha")) && new LoginConnection().loginConection(login.getText(),"codAdmin").equals(codAdmin.getText()))
                         App.setRoot("admin");
                     else
                         new AlertDialog().alertDialog("Erro ao fazer login!");
@@ -91,9 +150,9 @@ public class HomeController implements Initializable, Windows {
     }
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         telaLogin.setVisible(false);
         alerta.setVisible(false);
         alertaCpf.setVisible(false);
@@ -102,5 +161,7 @@ public class HomeController implements Initializable, Windows {
         addTextLimiter(login,11);
         isTextFormatterNumber(senha);
         addTextLimiter(senha,6);
+        isTextFormatterNumber(codAdmin);
+        addTextLimiter(codAdmin,6);
     }
 }

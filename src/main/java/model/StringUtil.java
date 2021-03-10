@@ -1,16 +1,18 @@
 package model;
 
-import java.util.Base64;
+import java.security.MessageDigest;
 
 public class StringUtil {
 
-    public String encodeBase64String(String userInfo) {
-        String encode = "<fh!@"+userInfo+"&bFYX>";
-        String test = Base64.getEncoder().encodeToString(encode.getBytes());
-        return Base64.getEncoder().encodeToString(test.getBytes());
+    public String gerarHash(String senha) throws Exception {
+        MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+        byte hash[] = algorithm.digest(senha.getBytes("UTF-8"));
+
+        StringBuilder texto = new StringBuilder();
+        for (byte b : hash) {
+            texto.append(String.format("%02x", 0xFF & b));
+        }
+        return texto.toString();
     }
 
-    public String decodeBase64String(String encodedString) {
-        return new String(Base64.getDecoder().decode(encodedString));
-    }
 }
