@@ -5,6 +5,7 @@ module com.mycompany.kreisondelivery {
     requires javafx.base;
     requires java.sql;
     requires java.desktop;
+    requires unirest.java;
 
 
     opens com.mycompany.kreisondelivery to javafx.fxml,sample.Datamodel, javafx.base;
