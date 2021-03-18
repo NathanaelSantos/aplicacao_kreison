@@ -22,6 +22,7 @@ import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 import static model.TextFormatter.isTextFormatterString;
 
+
 public class CadastraController implements Initializable, Windows {
 
     AlertDialog alertDialog = new AlertDialog();
