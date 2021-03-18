@@ -15,11 +15,6 @@
 
 <AnchorPane id="AnchorPane" fx:id="home" prefHeight="484.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.kreisondelivery.LoginController">
    <children>
-      <ImageView fitHeight="66.0" fitWidth="79.0" layoutX="701.3266448974609" layoutY="416.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="23.52484130859375">
-         <image>
-            <Image url="@../../../images/logo.png" />
-         </image>
-      </ImageView>
       <StackPane layoutX="174.0" layoutY="24.0" prefHeight="350.0" prefWidth="452.0" style="-fx-background-color: #38b6ff; -fx-background-radius: 2em;" AnchorPane.bottomAnchor="110.0" AnchorPane.leftAnchor="174.0" AnchorPane.rightAnchor="174.0" AnchorPane.topAnchor="24.0">
          <children>
             <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="344.0" prefWidth="452.0" spacing="12.0" style="-fx-background-color: #00b4d8;" StackPane.alignment="CENTER">
@@ -75,7 +70,7 @@
             </VBox>
          </children>
       </StackPane>
-      <Label layoutX="776.0" layoutY="449.0" text="v0.1" textFill="#ffffffa6" AnchorPane.bottomAnchor="19.0" AnchorPane.rightAnchor="4.0">
+      <Label layoutX="776.0" layoutY="462.0" text="v0.1" textFill="#ffffffa6" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="4.0">
          <font>
             <Font size="11.0" />
          </font>

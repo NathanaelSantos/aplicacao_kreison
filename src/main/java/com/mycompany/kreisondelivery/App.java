@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -23,6 +24,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
+
+        stage.getIcons (). add (new Image(new File("images/icon.ico").toURI().toString()));
+        Image icon =  new Image(getClass().getResourceAsStream("/images/k.png"));
+        stage.getIcons().add(icon);
 
         App.stage = stage;
         scene = new Scene(loadFXML("Login"), 800, 500);
