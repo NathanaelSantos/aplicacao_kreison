@@ -26,10 +26,8 @@ public class EmailClient {
                 .queryString("from", getEmailFrom())
                 .queryString("to", getEmailTo())
                 .queryString("subject", getSubjectText())
-                .queryString("text", getCodeText())
+                .queryString("text", "Olá, tudo bem? aqui está o seu código: "+ getCodeText())
                 .asJson();
-
-        System.out.println(request.getBody());
         return request.getBody();
     }
 

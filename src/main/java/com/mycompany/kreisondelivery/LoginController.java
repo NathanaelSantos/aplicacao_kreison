@@ -8,78 +8,67 @@ package com.mycompany.kreisondelivery;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import model.*;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 
 public class LoginController implements Initializable, Windows{
-    ReturnConnection returnConnection = new ReturnConnection();
-    private Timer time;
-
-
-    @FXML
-    private AnchorPane home1;
-
-    @FXML
-    private Button btnLogin;
 
     @FXML
     private TextField login;
-
     @FXML
     private PasswordField senha;
-
     @FXML
     private Label alerta;
-
     @FXML
     private Label alertaCpf;
     @FXML
     private Label txtCadastra;
     @FXML
     private Label recoverPassword;
+    @FXML
+    private void recoverPassword() throws IOException {
+        App.setRoot("recoverPassword");
+    }
 
     @FXML
     private void switchToPrimary() throws Exception {
         ReturnConnection returnConnection = new ReturnConnection();
 
-        if(login.getText().isBlank() || senha.getText().isBlank()){
-            alerta.setVisible(true);
+        if(getLogin().getText().isBlank() || getSenha().getText().isBlank()){
+            getAlerta().setVisible(true);
         }else {
-
-            if (new ValidateCPF().validate(login.getText())) {
-                alertaCpf.setVisible(false);
+            getAlerta().setVisible(false);
+            if (new ValidateCPF().validate(getLogin().getText())) {
+                getAlertaCpf().setVisible(false);
 
                 if (returnConnection.getConnection() != null) {
 
-                    if (new StringUtil().gerarHash(senha.getText()).equals(new LoginConnection().loginConection(login.getText(),"senha")))
+                    if (new StringUtil().gerarHash(getSenha().getText()).equals(new LoginConnection().loginConection(getLogin().getText(),"senha")))
                         App.setRoot("home");
                     else
                         new AlertDialog().alertDialog("Erro ao fazer login!");
                 } else
                     new AlertDialog().alertDialog("Erro de conexao!");
             } else {
-                alertaCpf.setVisible(true);
+                getAlertaCpf().setVisible(true);
             }
         }
     }
 
     @FXML
-    private void mouseEnteredTxtCad(){ txtCadastra.setStyle("-fx-text-fill:  #037f99");}
+    private void mouseEnteredTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill:  #037f99");}
     @FXML
-    private void mouseExitedTxtCad(){ txtCadastra.setStyle("-fx-text-fill-color:  #ffffff");}
+    private void mouseExitedTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill-color:  #ffffff");}
     @FXML
-    private void mouseEnteredRecoverPassword(){ recoverPassword.setStyle("-fx-text-fill:  #038ca9"); }
+    private void mouseEnteredRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill:  #038ca9"); }
     @FXML
-    private void mouseExitedRecoverPassword(){ recoverPassword.setStyle("-fx-text-fill-color:  #ffffff"); }
+    private void mouseExitedRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill-color:  #ffffff"); }
 
     @FXML
     private void cadastrar() throws IOException {
@@ -90,14 +79,60 @@ public class LoginController implements Initializable, Windows{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        alerta.setVisible(false);
-        alertaCpf.setVisible(false);
+        getAlerta().setVisible(false);
+        getAlertaCpf().setVisible(false);
 
-
-        isTextFormatterNumber(login);
-            addTextLimiter(login,11);
-        isTextFormatterNumber(senha);
-            addTextLimiter(senha,6);
+        isTextFormatterNumber(getLogin());
+            addTextLimiter(getLogin(),11);
+        isTextFormatterNumber(getSenha());
+            addTextLimiter(getSenha(),6);
     }
 
+    public TextField getLogin() {
+        return login;
+    }
+
+    public void setLogin(TextField login) {
+        this.login = login;
+    }
+
+    public PasswordField getSenha() {
+        return senha;
+    }
+
+    public void setSenha(PasswordField senha) {
+        this.senha = senha;
+    }
+
+    public Label getAlerta() {
+        return alerta;
+    }
+
+    public void setAlerta(Label alerta) {
+        this.alerta = alerta;
+    }
+
+    public Label getAlertaCpf() {
+        return alertaCpf;
+    }
+
+    public void setAlertaCpf(Label alertaCpf) {
+        this.alertaCpf = alertaCpf;
+    }
+
+    public Label getTxtCadastra() {
+        return txtCadastra;
+    }
+
+    public void setTxtCadastra(Label txtCadastra) {
+        this.txtCadastra = txtCadastra;
+    }
+
+    public Label getRecoverPassword() {
+        return recoverPassword;
+    }
+
+    public void setRecoverPassword(Label recoverPassword) {
+        this.recoverPassword = recoverPassword;
+    }
 }
