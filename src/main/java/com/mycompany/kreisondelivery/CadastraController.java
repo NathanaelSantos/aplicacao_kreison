@@ -5,28 +5,27 @@
  */
 package com.mycompany.kreisondelivery;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.*;
-import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import model.*;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
 
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 import static model.TextFormatter.isTextFormatterString;
 
-public class CadastraController implements Initializable,Windows {
+public class CadastraController implements Initializable, Windows {
 
     AlertDialog alertDialog = new AlertDialog();
-    
+
     @FXML
     private TextField nome;
 
@@ -64,126 +63,119 @@ public class CadastraController implements Initializable,Windows {
 
     @FXML
     private void screenLogin() throws IOException {
-        App.setRoot("Login");      
+        App.setRoot("Login");
     }
 
-    public boolean composVazios() throws SQLException, ClassNotFoundException {
-        boolean validate = false;
+    public boolean composVazios() {
 
-        if(nome.getText().isBlank())
+        if (nome.getText().isBlank())
             nome.setStyle("-fx-border-color: red;");
         else
             nome.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(senha.getText().isBlank())
+        if (senha.getText().isBlank())
             senha.setStyle("-fx-border-color: red;");
         else
             senha.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(confirmaSenha.getText().isBlank())
+        if (confirmaSenha.getText().isBlank())
             confirmaSenha.setStyle("-fx-border-color: red;");
         else
             confirmaSenha.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(cpf.getText().isBlank())
+        if (cpf.getText().isBlank())
             cpf.setStyle("-fx-border-color: red;");
         else
             cpf.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(dataNascimento.getValue() == null)
+        if (dataNascimento.getValue() == null)
             dataNascimento.setStyle("-fx-border-color: red;");
         else
             dataNascimento.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(selection.getSelectedToggle() == null)
+        if (selection.getSelectedToggle() == null)
             tipoFuncionario.setStyle("-fx-border-color: red;");
         else
             tipoFuncionario.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(codAdmin.getText().isBlank())
+        if (codAdmin.getText().isBlank())
             codAdmin.setStyle("-fx-border-color: red;");
         else
             codAdmin.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(nome.getText().isBlank()||
-                senha.getText().isBlank() ||
-                confirmaSenha.getText().isBlank() ||
-                cpf.getText().isBlank() || codAdmin.getText().isBlank()){validate = true;}
-        if(selection.getSelectedToggle() == null || dataNascimento.getValue() == null)
-            validate = true;
-
-        return validate;
+        return ((nome.getText().isBlank() || senha.getText().isBlank() || confirmaSenha.getText().isBlank() || cpf.getText().isBlank() || codAdmin.getText().isBlank()) ||
+                (selection.getSelectedToggle() == null || dataNascimento.getValue() == null));
     }
-    
-    public int tipoFuncionario(){
+
+    public int tipoFuncionario() {
         int tipoFunc = -1;
-        if(entregador.isSelected()){
+        if (entregador.isSelected()) {
             tipoFunc = 2;
-        }else if(gerente.isSelected()){
+        } else if (gerente.isSelected()) {
             tipoFunc = 1;
         }
         return tipoFunc;
     }
 
-    public String dateNascimento(){
+    public String dateNascimento() {
         return dataNascimento.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
-    public boolean verificaCodigoAdimin(String codAdmin){
+    public boolean verificaCodigoAdimin(String codAdmin) {
 
         int valueCodAdmin = 0;
 
-            ReturnConnection returnConnection = new ReturnConnection();
-            PreparedStatement preparedStatement = null;
-            ResultSet res = null;
+        ReturnConnection returnConnection = new ReturnConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet res = null;
 
-            try {
+        try {
 
-                preparedStatement = returnConnection.getConnection().prepareStatement("SELECT codAdmin FROM db_usuario WHERE tipo_usuario = 1");
-                res = preparedStatement.executeQuery();
+            preparedStatement = returnConnection.getConnection().prepareStatement("SELECT codAdmin FROM db_usuario WHERE tipo_usuario = 1");
+            res = preparedStatement.executeQuery();
 
-                while (res.next())
-                    valueCodAdmin = res.getInt("codAdmin");
+            while (res.next())
+                valueCodAdmin = res.getInt("codAdmin");
 
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }finally {
-                returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
-            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            returnConnection.closeConnection(returnConnection.getConnection(), preparedStatement);
+        }
 
-        return (Integer.parseInt(codAdmin) == valueCodAdmin)?true:false;
+        return (Integer.parseInt(codAdmin) == valueCodAdmin) ? true : false;
     }
 
     public void insertUsuarioDB() throws Exception {
 
-        if(composVazios()){
+        if (composVazios()) {
             alerta.setVisible(true);
-        }else{
+        } else {
             alerta.setVisible(false);
-            if(senha.getText().equals(confirmaSenha.getText())){
-                if(new ValidateCPF().validate(cpf.getText())){
-                    if(new CheckCpfdatabase().checkCpfdatabase(cpf.getText())){
+            if (senha.getText().equals(confirmaSenha.getText())) {
+                if (new ValidateCPF().validate(cpf.getText())) {
+                    if (new CheckCpfdatabase().checkCpfdatabase(cpf.getText())) {
                         alertDialog.alertDialog("Cpf ja cadastrado!");
-                    }else{
-                        if(new CadastraController().verificaCodigoAdimin(codAdmin.getText())){
+                    } else {
+                        if (new CadastraController().verificaCodigoAdimin(codAdmin.getText())) {
 
-                            if(tipoFuncionario() == 1){
+                            if (tipoFuncionario() == 1) {
                                 codAdmin1.setVisible(true);
                             }
                             ReturnConnection returnConnection = new ReturnConnection();
-                            Usuario usuario = new Usuario(nome.getText(),new StringUtil().gerarHash(senha.getText()),cpf.getText(),dateNascimento(),tipoFuncionario());
-                            PreparedStatement preparedStatement = null;
+                            Usuario user = new Usuario(nome.getText(), new StringUtil().gerarHash(senha.getText()), cpf.getText(), dateNascimento(), tipoFuncionario());
+                            PreparedStatement pstment = null;
 
                             try {
-                                preparedStatement = returnConnection.getConnection().prepareStatement("INSERT INTO db_usuario(nome, cpf, data_nasc, senha,tipo_usuario)  VALUES (?,?,?,?,?)");
+                                pstment = returnConnection.getConnection().prepareStatement("INSERT INTO db_usuario(nome, cpf, data_nasc, senha,tipo_usuario)  VALUES (?,?,?,?,?)");
 
-                                preparedStatement.setString(1,usuario.getNome());
-                                preparedStatement.setString(2,usuario.getCpf());
-                                preparedStatement.setString(3,usuario.getDataNascimento());
-                                preparedStatement.setString(4,usuario.getPassword());
-                                preparedStatement.setInt(5,usuario.getUserType());
+                                pstment.setString(1, user.getNome());
+                                pstment.setString(2, user.getCpf());
+                                pstment.setString(3, user.getDataNascimento());
+                                pstment.setString(4, user.getPassword());
+                                pstment.setInt(5, user.getUserType());
 
-                                preparedStatement.executeUpdate();
+                                pstment.executeUpdate();
 
                                 alertDialog.alertDialog("Usuário cadastrado com sucesso!!!");
 
@@ -196,16 +188,16 @@ public class CadastraController implements Initializable,Windows {
                             } catch (SQLException throwables) {
                                 throwables.printStackTrace();
                             } finally {
-                                returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
+                                returnConnection.closeConnection(returnConnection.getConnection(), pstment);
                             }
-                        }else{
+                        } else {
                             alertDialog.alertDialog("Código inválido!");
                         }
                     }
-                }else{
+                } else {
                     alertDialog.alertDialog("Cpf inválido!");
                 }
-            }else{
+            } else {
                 alertDialog.alertDialog("Senhas diferentes!");
             }
         }
@@ -216,15 +208,15 @@ public class CadastraController implements Initializable,Windows {
 
         alerta.setVisible(false);
         isTextFormatterString(nome);
-        addTextLimiter(nome,200);
+        addTextLimiter(nome, 200);
         isTextFormatterNumber(cpf);
-        addTextLimiter(cpf,11);
+        addTextLimiter(cpf, 11);
         isTextFormatterNumber(senha);
-        addTextLimiter(senha,6);
+        addTextLimiter(senha, 6);
         isTextFormatterNumber(confirmaSenha);
-        addTextLimiter(confirmaSenha,6);
+        addTextLimiter(confirmaSenha, 6);
         isTextFormatterNumber(codAdmin);
-        addTextLimiter(codAdmin,6);
+        addTextLimiter(codAdmin, 6);
     }
 
 }

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,21 +16,21 @@ public class App extends Application {
 
     private static Scene scene;
     private static Stage stage;
+    
+    public static void main(String[] args) {
+        Application.launch(App.class, args);
+    }
 
     @Override
     public void start(Stage stage) throws IOException, InterruptedException {
 
         App.stage = stage;
         scene = new Scene(loadFXML("Login"), 800, 500);
-        //stage.initStyle(StageStyle.UNDECORATED);
-        //new MoveWindow().moveWindow(scene, stage);
-
         stage.setScene(scene);
         stage.show();
     }
 
     static void setRoot(String fxml) throws IOException {
-        stage.setFullScreen(false);
         scene.setRoot(loadFXML(fxml));
     }
 
@@ -38,13 +39,6 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
-        launch();
-    }
-
-    /**
-     * @return the stage
-     */
     public Stage getStage() {
         return stage;
     }

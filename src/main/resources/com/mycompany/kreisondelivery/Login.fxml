@@ -46,7 +46,7 @@
                               <Font name="Arial Bold" size="11.0" />
                            </font>
                         </Label>
-                        <Label fx:id="recoverPassword" onMouseEntered="#mouseEnteredRecoverPassword" onMouseExited="#mouseExitedRecoverPassword" text="Recuperar senha" textFill="WHITE">
+                        <Label fx:id="recoverPassword" onMouseClicked="#recoverPassword" onMouseEntered="#mouseEnteredRecoverPassword" onMouseExited="#mouseExitedRecoverPassword" text="Recuperar senha" textFill="WHITE">
                            <font>
                               <Font name="Arial Bold" size="11.0" />
                            </font>

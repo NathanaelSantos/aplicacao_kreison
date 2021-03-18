@@ -33,7 +33,6 @@ import static model.TextFormatter.isTextFormatterString;
 
 public class NovaEntregaController implements Initializable, Windows {
 
-    Produto produtoId = new Produto();
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     AlertDialog alertDialog = new AlertDialog();
 
@@ -51,11 +50,6 @@ public class NovaEntregaController implements Initializable, Windows {
     private TableColumn<Produto, String> precoProduto;
     @FXML
     private TableColumn<Produto, Integer> idProduto;
-    @FXML
-    private TableView<Produto> tb_especificacaoProd;
-    @FXML
-    private TableColumn<Produto, String> especificacaoProd;
-
     @FXML
     private TextField endereco_entrega;
     @FXML
@@ -94,7 +88,7 @@ public class NovaEntregaController implements Initializable, Windows {
         return validate;
     }
 
-    public boolean composVazios() throws SQLException, ClassNotFoundException {
+    public boolean composVazios() {
         boolean validate = false;
 
         if(endereco_entrega.getText().isBlank())
@@ -154,28 +148,23 @@ public class NovaEntregaController implements Initializable, Windows {
                 if (Integer.parseInt(quantidade.getText()) <= table_entegador.getSelectionModel().getSelectedItem().getQuantidade()) {
 
                     ReturnConnection returnConnection = new ReturnConnection();
-                    PreparedStatement preparedStatement = null;
-
-
+                    PreparedStatement pstment = null;
                     ObservableList<Produto> oblist = FXCollections.observableArrayList();
 
                     try {
-                        preparedStatement = returnConnection.getConnection().prepareStatement("INSERT INTO db_pedido(especiProduto,nomeEntregador,enderEntrega,nomeCliente,bairro,cep,numero,quantidade, data_entrega) VALUES (?,?,?,?,?,?,?,?,?)");
-                        preparedStatement.setString(1, table_entegador.getSelectionModel().getSelectedItem().getNome());
-                        preparedStatement.setString(2, tb_nome_entregador.getSelectionModel().getSelectedItem().getNome());
-                        preparedStatement.setString(3, endereco_entrega.getText());
-                        preparedStatement.setString(4, nome_cliente.getText());
-                        preparedStatement.setString(5, bairro.getText());
-                        preparedStatement.setInt(6, Integer.parseInt(cep.getText()));
-                        preparedStatement.setInt(7, Integer.parseInt(numero.getText()));
-                        preparedStatement.setInt(8, Integer.parseInt(quantidade.getText()));
-                        preparedStatement.setString(9, getDateTime());
+                        pstment = returnConnection.getConnection().prepareStatement("INSERT INTO db_pedido(especiProduto,nomeEntregador,enderEntrega,nomeCliente,bairro,cep,numero,quantidade, data_entrega) VALUES (?,?,?,?,?,?,?,?,?)");
+                        pstment.setString(1, table_entegador.getSelectionModel().getSelectedItem().getNome());
+                        pstment.setString(2, tb_nome_entregador.getSelectionModel().getSelectedItem().getNome());
+                        pstment.setString(3, endereco_entrega.getText());
+                        pstment.setString(4, nome_cliente.getText());
+                        pstment.setString(5, bairro.getText());
+                        pstment.setInt(6, Integer.parseInt(cep.getText()));
+                        pstment.setInt(7, Integer.parseInt(numero.getText()));
+                        pstment.setInt(8, Integer.parseInt(quantidade.getText()));
+                        pstment.setString(9, getDateTime());
 
-
-                        preparedStatement.executeUpdate();
-
+                        pstment.executeUpdate();
                         atualizaVenda();
-
                         alertDialog.alertDialog("Pedido realizado com sucesso!");
 
                         try {
@@ -185,7 +174,7 @@ public class NovaEntregaController implements Initializable, Windows {
                         }
 
                     } finally {
-                        returnConnection.closeConnection(returnConnection.getConnection(), preparedStatement);
+                        returnConnection.closeConnection(returnConnection.getConnection(), pstment);
                     }
 
                 } else {
