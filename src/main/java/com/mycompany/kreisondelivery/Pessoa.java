@@ -1,25 +1,27 @@
 package com.mycompany.kreisondelivery;
 
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.ZoneId;
-
 public class Pessoa {
-    public String cpf;
-    public String nome;
-    public String dataNascimento;
+    private String cpf;
+    private String nome;
+    private int id_usuario;
+    private String data_nasc;
+
 
     public Pessoa() { }
     public Pessoa(String nome) {
-        this.nome = nome;
+        this.setNome(nome);
     }
 
-    public Pessoa(String cpf, String nome, String dataNascimento) {
-        this.cpf = cpf;
-        this.nome = nome;
-        this.setDataNascimento(dataNascimento);
+    public Pessoa(String cpf, String nome, String data_nasc) {
+        this.setCpf(cpf);
+        this.setNome(nome);
+        this.setData_nasc(data_nasc);
+    }
+
+    public Pessoa(String cpf, String nome, int id_usuario) {
+        this.setCpf(cpf);
+        this.setNome(nome);
+        this.setId_usuario(id_usuario);
     }
 
     public String getCpf() {
@@ -39,11 +41,19 @@ public class Pessoa {
     }
 
 
-    public String getDataNascimento() {
-        return dataNascimento;
+    public String getData_nasc() {
+        return data_nasc;
     }
 
-    public void setDataNascimento(String dataNascimento) {
-        this.dataNascimento = dataNascimento;
+    public void setData_nasc(String data_nasc) {
+        this.data_nasc = data_nasc;
+    }
+
+    public int getId_usuario() {
+        return id_usuario;
+    }
+
+    public void setId_usuario(int id_usuario) {
+        this.id_usuario = id_usuario;
     }
 }

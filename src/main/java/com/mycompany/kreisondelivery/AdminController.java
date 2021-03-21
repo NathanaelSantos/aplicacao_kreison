@@ -28,6 +28,12 @@ public class AdminController implements Initializable {
         editOrDeleteProduct();
     }
 
+    @FXML
+    private void deletaFuncionario() throws IOException {
+        App.setRoot("deletaFuncionario");
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
