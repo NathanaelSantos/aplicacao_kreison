@@ -9,7 +9,7 @@
 }
 
 .table-row-cell:selected {
-    -fx-text-background-color: #92fc87;
+    -fx-text-background-color: #abfaa4;
 }
 
 .table-view .column-header,
@@ -39,7 +39,7 @@
 
 }
 .table-row-cell:selected {
-    -fx-background-color: #92fc87;
+    -fx-background-color: #abfaa4;
 }
 .table-row-cell:selected .text {
     -fx-fill: #0c0c0c;

@@ -2,7 +2,6 @@ package com.mycompany.kreisondelivery;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +17,15 @@ public class AdminController implements Initializable {
     @FXML
     private void cadastraProduto() throws IOException {
         App.setRoot("produto");
+    }
+
+    @FXML
+    private void editOrDeleteProduct() throws IOException {
+        App.setRoot("editOrDeleteProduct");
+    }
+
+    public void updateTableProduct() throws IOException {
+        editOrDeleteProduct();
     }
 
     @Override
