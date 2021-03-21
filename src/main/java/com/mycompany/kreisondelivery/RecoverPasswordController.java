@@ -59,7 +59,7 @@ public class RecoverPasswordController implements Initializable {
 
 
     @FXML
-    private void screenLogin() throws IOException {
+    private void screenLogin() throws IOException, ClassNotFoundException {
         App.setRoot("Login");
     }
     @FXML

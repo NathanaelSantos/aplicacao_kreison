@@ -6,32 +6,38 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import model.Deserializer;
+import model.Serializer;
 
-import java.io.File;
 import java.io.IOException;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
     private static Scene scene;
     private static Stage stage;
+    Deserializer deserializer = new Deserializer();
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Application.launch(App.class, args);
+        new Serializer().Serializer(stage.isMaximized());
     }
 
     @Override
-    public void start(Stage stage) throws IOException, InterruptedException {
+    public void start(Stage stage) throws IOException, ClassNotFoundException {
 
-        stage.getIcons (). add (new Image(new File("images/icon.ico").toURI().toString()));
-        Image icon =  new Image(getClass().getResourceAsStream("/images/k.png"));
-        stage.getIcons().add(icon);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/k.png")));
 
         App.stage = stage;
         scene = new Scene(loadFXML("Login"), 800, 500);
         stage.setScene(scene);
+
+        deserializer.deserializer();
+        if(deserializer.isFullScreen){
+            stage.setMaximized(true);
+        }else{
+            stage.setMaximized(false);
+        }
+
         stage.show();
     }
 
