@@ -172,7 +172,7 @@ public class CadastraController implements Initializable, Windows {
 
                                 pstment.setString(1, user.getNome());
                                 pstment.setString(2, user.getCpf());
-                                pstment.setString(3, user.getDataNascimento());
+                                pstment.setString(3, user.getData_nasc());
                                 pstment.setString(4, user.getPassword());
                                 pstment.setInt(5, user.getUserType());
 

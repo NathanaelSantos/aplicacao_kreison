@@ -19,7 +19,7 @@ import static model.TextFormatter.isTextFormatterNumber;
 
 public class HomeController implements Initializable, Windows {
 
-    static boolean onScreenLogin = false;
+    private static boolean onScreenLogin = false;
 
     @FXML
     private AnchorPane telaLogin;
@@ -35,6 +35,14 @@ public class HomeController implements Initializable, Windows {
     private Button buttonAdmin;
     @FXML
     private TextField codAdmin;
+
+    public static boolean isOnScreenLogin() {
+        return onScreenLogin;
+    }
+
+    public static void setOnScreenLogin(boolean onScreenLogin) {
+        HomeController.onScreenLogin = onScreenLogin;
+    }
 
 
     @FXML
@@ -59,22 +67,22 @@ public class HomeController implements Initializable, Windows {
 
     @FXML
     private void mouseExitedBtnAdmin() throws IOException {
-        buttonAdmin.setStyle("-fx-background-color: #00b4d8");
+        getButtonAdmin().setStyle("-fx-background-color: #00b4d8");
     }
 
     @FXML
     private void mouseEnteredBtnAdmin() throws IOException {
-        buttonAdmin.setStyle("-fx-background-color: #038ca9");
+        getButtonAdmin().setStyle("-fx-background-color: #038ca9");
     }
 
     @FXML
     private void telaLogin() throws IOException {
-        if(!onScreenLogin){
-            telaLogin.setVisible(true);
-            onScreenLogin = true;
+        if(!isOnScreenLogin()){
+            getTelaLogin().setVisible(true);
+            setOnScreenLogin(true);
         }else {
-            telaLogin.setVisible(false);
-            onScreenLogin = false;
+            getTelaLogin().setVisible(false);
+            setOnScreenLogin(false);
         }
 
     }
@@ -82,41 +90,41 @@ public class HomeController implements Initializable, Windows {
     public boolean emptyFields() throws SQLException, ClassNotFoundException {
         boolean validate = false;
 
-        if(login.getText().isBlank())
+        if(getLogin().getText().isBlank())
 
-            login.setStyle(" -fx-border-color: #ff3b3b;\n" +
+            getLogin().setStyle(" -fx-border-color: #ff3b3b;\n" +
                     "        -fx-border-radius: 2em;\n" +
                     "        -fx-background-color: #00b4d8;\n" +
                     "        -fx-text-fill: #ffffff;");
         else
-            login.setStyle(" -fx-border-color: #ffffff;\n" +
+            getLogin().setStyle(" -fx-border-color: #ffffff;\n" +
                     "    -fx-border-radius: 2em;\n" +
                     "    -fx-background-color: #00b4d8;\n" +
                     "    -fx-text-fill: #ffffff;");
 
-        if(senha.getText().isBlank())
-            senha.setStyle(" -fx-border-color: #ff3b3b;\n" +
+        if(getSenha().getText().isBlank())
+            getSenha().setStyle(" -fx-border-color: #ff3b3b;\n" +
                     "        -fx-border-radius: 2em;\n" +
                     "        -fx-background-color: #00b4d8;\n" +
                     "        -fx-text-fill: #ffffff;");
         else
-            senha.setStyle(" -fx-border-color: #ffffff;\n" +
+            getSenha().setStyle(" -fx-border-color: #ffffff;\n" +
                     "    -fx-border-radius: 2em;\n" +
                     "    -fx-background-color: #00b4d8;\n" +
                     "    -fx-text-fill: #ffffff;");
 
-        if(codAdmin.getText().isBlank())
-            codAdmin.setStyle(" -fx-border-color: #ff3b3b;\n" +
+        if(getCodAdmin().getText().isBlank())
+            getCodAdmin().setStyle(" -fx-border-color: #ff3b3b;\n" +
                     "        -fx-border-radius: 2em;\n" +
                     "        -fx-background-color: #00b4d8;\n" +
                     "        -fx-text-fill: #ffffff;");
         else
-            codAdmin.setStyle(" -fx-border-color: #ffffff;\n" +
+            getCodAdmin().setStyle(" -fx-border-color: #ffffff;\n" +
                     "    -fx-border-radius: 2em;\n" +
                     "    -fx-background-color: #00b4d8;\n" +
                     "    -fx-text-fill: #ffffff;");
 
-        if(login.getText().isBlank()|| senha.getText().isBlank() || codAdmin.getText().isBlank() ){
+        if(getLogin().getText().isBlank()|| getSenha().getText().isBlank() || getCodAdmin().getText().isBlank() ){
             validate = true;
         }
 
@@ -128,22 +136,22 @@ public class HomeController implements Initializable, Windows {
         ReturnConnection returnConnection = new ReturnConnection();
 
         if(emptyFields()){
-            alerta.setVisible(true);
+            getAlerta().setVisible(true);
         }else {
 
-            if (new ValidateCPF().validate(login.getText())) {
-                alertaCpf.setVisible(false);
+            if (new ValidateCPF().validate(getLogin().getText())) {
+                getAlertaCpf().setVisible(false);
 
                 if (returnConnection.getConnection() != null) {
 
-                    if (new StringUtil().gerarHash(senha.getText()).equals(new LoginConnection().loginConection(login.getText(),"senha")) && new LoginConnection().loginConection(login.getText(),"codAdmin").equals(codAdmin.getText()))
+                    if (new StringUtil().gerarHash(getSenha().getText()).equals(new LoginConnection().loginConection(getLogin().getText(),"senha")) && new LoginConnection().loginConection(getLogin().getText(),"codAdmin").equals(getCodAdmin().getText()))
                         App.setRoot("admin");
                     else
                         new AlertDialog().alertDialog("Erro ao fazer login!");
                 } else
                     new AlertDialog().alertDialog("Erro de conexao!");
             } else {
-                alertaCpf.setVisible(true);
+                getAlertaCpf().setVisible(true);
             }
         }
     }
@@ -152,15 +160,71 @@ public class HomeController implements Initializable, Windows {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        telaLogin.setVisible(false);
-        alerta.setVisible(false);
-        alertaCpf.setVisible(false);
+        getTelaLogin().setVisible(false);
+        getAlerta().setVisible(false);
+        getAlertaCpf().setVisible(false);
 
-        isTextFormatterNumber(login);
-        addTextLimiter(login,11);
-        isTextFormatterNumber(senha);
-        addTextLimiter(senha,6);
-        isTextFormatterNumber(codAdmin);
-        addTextLimiter(codAdmin,6);
+        isTextFormatterNumber(getLogin());
+        addTextLimiter(getLogin(),11);
+        isTextFormatterNumber(getSenha());
+        addTextLimiter(getSenha(),6);
+        isTextFormatterNumber(getCodAdmin());
+        addTextLimiter(getCodAdmin(),6);
+    }
+
+    public AnchorPane getTelaLogin() {
+        return telaLogin;
+    }
+
+    public void setTelaLogin(AnchorPane telaLogin) {
+        this.telaLogin = telaLogin;
+    }
+
+    public TextField getLogin() {
+        return login;
+    }
+
+    public void setLogin(TextField login) {
+        this.login = login;
+    }
+
+    public PasswordField getSenha() {
+        return senha;
+    }
+
+    public void setSenha(PasswordField senha) {
+        this.senha = senha;
+    }
+
+    public Label getAlerta() {
+        return alerta;
+    }
+
+    public void setAlerta(Label alerta) {
+        this.alerta = alerta;
+    }
+
+    public Label getAlertaCpf() {
+        return alertaCpf;
+    }
+
+    public void setAlertaCpf(Label alertaCpf) {
+        this.alertaCpf = alertaCpf;
+    }
+
+    public Button getButtonAdmin() {
+        return buttonAdmin;
+    }
+
+    public void setButtonAdmin(Button buttonAdmin) {
+        this.buttonAdmin = buttonAdmin;
+    }
+
+    public TextField getCodAdmin() {
+        return codAdmin;
+    }
+
+    public void setCodAdmin(TextField codAdmin) {
+        this.codAdmin = codAdmin;
     }
 }

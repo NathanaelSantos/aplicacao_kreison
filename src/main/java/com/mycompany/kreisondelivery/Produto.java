@@ -14,36 +14,36 @@ package com.mycompany.kreisondelivery;
 public class Produto {
 
     private int id_produto;
-    public String nome;
+    private String nome;
     private float preco;
-    public int quantidade;
+    private int quantidade;
     private int venda;
 
 
     public Produto(){}
 
     public Produto(String nome,float preco,int quantidade) {
-        this.nome = nome;
-        this.preco = preco;
-        this.quantidade = quantidade;
+        this.setNome(nome);
+        this.setPreco(preco);
+        this.setQuantidade(quantidade);
     }
 
     public Produto(float preco , String nome,int quantidade, int idProduto) {
-        this.nome = nome;
-        this.preco = preco;
-        this.quantidade = quantidade;
-        this.id_produto = idProduto;
+        this.setNome(nome);
+        this.setPreco(preco);
+        this.setQuantidade(quantidade);
+        this.setId_produto(idProduto);
     }
 
     public Produto(String nome, float preco, int quantidade, int venda) {
-        this.nome = nome;
-        this.preco = preco;
-        this.quantidade = quantidade;
+        this.setNome(nome);
+        this.setPreco(preco);
+        this.setQuantidade(quantidade);
         this.setVenda(venda);
     }
 
     public Produto(int quantidade) {
-        this.quantidade = quantidade;
+        this.setQuantidade(quantidade);
     }
 
     /**

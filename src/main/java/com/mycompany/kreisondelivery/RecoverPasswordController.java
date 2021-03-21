@@ -25,10 +25,10 @@ import static model.TextFormatter.isTextFormatterNumber;
 public class RecoverPasswordController implements Initializable {
 
     private static int randomCode;
-    AlertDialog alertDialog = new AlertDialog();
-    Random random = new Random();
+    private AlertDialog alertDialog = new AlertDialog();
+    private Random random = new Random();
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-    private static final Pattern pattern = Pattern.compile(EMAIL_PATTERN, Pattern.CASE_INSENSITIVE);
+    private static final Pattern pattern = Pattern.compile(getEmailPattern(), Pattern.CASE_INSENSITIVE);
 
     @FXML
     private StackPane stackPaneLogin;
@@ -57,6 +57,14 @@ public class RecoverPasswordController implements Initializable {
     @FXML
     private Label alertaCode;
 
+    public static String getEmailPattern() {
+        return EMAIL_PATTERN;
+    }
+
+    public static Pattern getPattern() {
+        return pattern;
+    }
+
 
     @FXML
     private void screenLogin() throws IOException, ClassNotFoundException {
@@ -67,12 +75,12 @@ public class RecoverPasswordController implements Initializable {
         if(composVazios()){
             composVazios();
         }else{
-            if(new ValidateCPF().validate(cpf.getText())){
+            if(new ValidateCPF().validate(getCpf().getText())){
                 getAlertaCpf().setVisible(false);
-                if(newPassword.getText().equals(confPassword.getText())){
-                    String value = Integer.toString(random.nextInt(999999));
+                if(getNewPassword().getText().equals(getConfPassword().getText())){
+                    String value = Integer.toString(getRandom().nextInt(999999));
                     while (value.length() < 6)
-                        value = Integer.toString(random.nextInt(999999));
+                        value = Integer.toString(getRandom().nextInt(999999));
 
                     setRandomCode(Integer.parseInt(value));
 
@@ -82,10 +90,10 @@ public class RecoverPasswordController implements Initializable {
                         getStackPaneLogin().setVisible(false);
                         getStackPaneCode().setVisible(true);
                     }else{
-                        alertDialog.alertDialog("Email inválido!");
+                        getAlertDialog().alertDialog("Email inválido!");
                     }
                 }else{
-                    alertDialog.alertDialog("Senhas diferentes!");
+                    getAlertDialog().alertDialog("Senhas diferentes!");
                 }
             }else{
                 getAlertaCpf().setVisible(true);
@@ -96,23 +104,23 @@ public class RecoverPasswordController implements Initializable {
     @FXML
     private void cadastraNovaSenha() throws Exception {
 
-        if(Integer.parseInt(codeEmail.getText()) == getRandomCode()){
+        if(Integer.parseInt(getCodeEmail().getText()) == getRandomCode()){
             getAlertaCode().setVisible(false);
-            ReturnConnection returnConnection = new ReturnConnection();
-            PreparedStatement pstment = null;
+            ReturnConnection connection = new ReturnConnection();
+            PreparedStatement preparedStatement = null;
             try {
-                pstment = returnConnection.getConnection().prepareStatement("UPDATE db_usuario SET senha = ? WHERE cpf = ?");
-                pstment.setString(1,new StringUtil().gerarHash(newPassword.getText()));
-                pstment.setString(2,cpf.getText());
-                pstment.executeUpdate();
+                preparedStatement = connection.getConnection().prepareStatement("UPDATE db_usuario SET senha = ? WHERE cpf = ?");
+                preparedStatement.setString(1,new StringUtil().gerarHash(getNewPassword().getText()));
+                preparedStatement.setString(2, getCpf().getText());
+                preparedStatement.executeUpdate();
 
-                alertDialog.alertDialog("Senha alterada com sucesso!");
+                getAlertDialog().alertDialog("Senha alterada com sucesso!");
                 screenLogin();
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             } finally {
-                returnConnection.closeConnection(returnConnection.getConnection(),pstment);
+                connection.closeConnection(connection.getConnection(),preparedStatement);
             }
         }else{
             getAlertaCode().setVisible(true);
@@ -121,27 +129,27 @@ public class RecoverPasswordController implements Initializable {
 
     public boolean composVazios() {
 
-        if(cpf.getText().isBlank())
-            cpf.setStyle("-fx-border-color: red;");
+        if(getCpf().getText().isBlank())
+            getCpf().setStyle("-fx-border-color: red;");
         else
-            cpf.setStyle("-fx-border-color: rgba(27,72,171,0.4)");
+            getCpf().setStyle("-fx-border-color: rgba(27,72,171,0.4)");
 
-        if(email.getText().isBlank())
-            email.setStyle("-fx-border-color: red;");
+        if(getEmail().getText().isBlank())
+            getEmail().setStyle("-fx-border-color: red;");
         else
-            email.setStyle("-fx-border-color: rgba(27,72,171,0.4)");
+            getEmail().setStyle("-fx-border-color: rgba(27,72,171,0.4)");
 
-        if(newPassword.getText().isBlank())
-            newPassword.setStyle("-fx-border-color: red;");
+        if(getNewPassword().getText().isBlank())
+            getNewPassword().setStyle("-fx-border-color: red;");
         else
-            newPassword.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getNewPassword().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(confPassword.getText().isBlank())
-            confPassword.setStyle("-fx-border-color: red;");
+        if(getConfPassword().getText().isBlank())
+            getConfPassword().setStyle("-fx-border-color: red;");
         else
-            confPassword.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getConfPassword().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        return (cpf.getText().isBlank()|| email.getText().isBlank() || newPassword.getText().isBlank() || confPassword.getText().isBlank());
+        return (getCpf().getText().isBlank()|| getEmail().getText().isBlank() || getNewPassword().getText().isBlank() || getConfPassword().getText().isBlank());
     }
 
     @Override
@@ -271,5 +279,21 @@ public class RecoverPasswordController implements Initializable {
 
     public void setAlertaCode(Label alertaCode) {
         this.alertaCode = alertaCode;
+    }
+
+    public AlertDialog getAlertDialog() {
+        return alertDialog;
+    }
+
+    public void setAlertDialog(AlertDialog alertDialog) {
+        this.alertDialog = alertDialog;
+    }
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
     }
 }

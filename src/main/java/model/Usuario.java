@@ -10,7 +10,6 @@ public class Usuario extends Cliente{
         this.setUserType(userType);
     }
 
-
     public String getPassword() {
         return password;
     }
@@ -26,4 +25,5 @@ public class Usuario extends Cliente{
     public void setUserType(int userType) {
         this.userType = userType;
     }
+
 }

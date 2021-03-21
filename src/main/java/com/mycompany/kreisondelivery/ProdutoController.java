@@ -44,25 +44,25 @@ public class ProdutoController implements Initializable, Windows{
 
     public void composVazios() throws SQLException, ClassNotFoundException {
         boolean validate = false;
-        if(nomeProduto.getText().isBlank()){
-            nomeProduto.setStyle("-fx-border-color: red;");
+        if(getNomeProduto().getText().isBlank()){
+            getNomeProduto().setStyle("-fx-border-color: red;");
         }else{
             validate = true;
-            nomeProduto.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getNomeProduto().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
-        if(quantidadeProduto.getText().isBlank()){
+        if(getQuantidadeProduto().getText().isBlank()){
             validate = false;
-            quantidadeProduto.setStyle("-fx-border-color: red;");
+            getQuantidadeProduto().setStyle("-fx-border-color: red;");
         }else{
             validate = true;
-            quantidadeProduto.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getQuantidadeProduto().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
-        if(precoProduto.getText().isBlank()){
+        if(getPrecoProduto().getText().isBlank()){
             validate = false;
-            precoProduto.setStyle("-fx-border-color: red;");
+            getPrecoProduto().setStyle("-fx-border-color: red;");
         }else{
             validate = true;
-            precoProduto.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getPrecoProduto().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
 
         if(validate){
@@ -72,13 +72,13 @@ public class ProdutoController implements Initializable, Windows{
 
 
     public void insertProdutoDB() throws SQLException, ClassNotFoundException {
-        ReturnConnection returnConnection = new ReturnConnection();
-        Produto produto = new Produto(nomeProduto.getText(),Float.parseFloat(precoProduto.getText()),Integer.parseInt(quantidadeProduto.getText()));
+        ReturnConnection connection = new ReturnConnection();
+        Produto produto = new Produto(getNomeProduto().getText(),Float.parseFloat(getPrecoProduto().getText()),Integer.parseInt(getQuantidadeProduto().getText()));
         PreparedStatement preparedStatement = null;
 
         try {
 
-            preparedStatement = returnConnection.getConnection().prepareStatement("INSERT INTO db_produto(nome, preco, quantidade,venda)  VALUES (?,?,?,?)");
+            preparedStatement = connection.getConnection().prepareStatement("INSERT INTO db_produto(nome, preco, quantidade,venda)  VALUES (?,?,?,?)");
             preparedStatement.setString(1,produto.getNome());
             preparedStatement.setFloat(2,produto.getPreco());
             preparedStatement.setInt(3,produto.getQuantidade());
@@ -99,18 +99,50 @@ public class ProdutoController implements Initializable, Windows{
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
-            returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
+            connection.closeConnection(connection.getConnection(),preparedStatement);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        isTextFormatterString(nomeProduto);
-            addTextLimiter(nomeProduto,200);
-        isTextFormatterNumber(quantidadeProduto);
-            addTextLimiter(quantidadeProduto,5);
-        isTextFormatterFloat(precoProduto);
-            addTextLimiter(precoProduto,5);
+        isTextFormatterString(getNomeProduto());
+            addTextLimiter(getNomeProduto(),200);
+        isTextFormatterNumber(getQuantidadeProduto());
+            addTextLimiter(getQuantidadeProduto(),5);
+        isTextFormatterFloat(getPrecoProduto());
+            addTextLimiter(getPrecoProduto(),5);
+    }
+
+    public boolean isCheck() {
+        return check;
+    }
+
+    public void setCheck(boolean check) {
+        this.check = check;
+    }
+
+    public TextField getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(TextField nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public TextField getQuantidadeProduto() {
+        return quantidadeProduto;
+    }
+
+    public void setQuantidadeProduto(TextField quantidadeProduto) {
+        this.quantidadeProduto = quantidadeProduto;
+    }
+
+    public TextField getPrecoProduto() {
+        return precoProduto;
+    }
+
+    public void setPrecoProduto(TextField precoProduto) {
+        this.precoProduto = precoProduto;
     }
 }

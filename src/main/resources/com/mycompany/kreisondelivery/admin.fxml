@@ -47,7 +47,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Deletar funcionário" textFill="#fdfdfd">
+                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#deletaFuncionario" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Deletar funcionário" textFill="#fdfdfd">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
                      </font>

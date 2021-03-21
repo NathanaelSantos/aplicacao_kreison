@@ -9,10 +9,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
@@ -25,16 +22,14 @@ import model.AlertDialog;
 import model.ReturnConnection;
 import model.Windows;
 
-import javax.xml.transform.Result;
-
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 import static model.TextFormatter.isTextFormatterString;
 
 public class NovaEntregaController implements Initializable, Windows {
 
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    AlertDialog alertDialog = new AlertDialog();
+    private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private AlertDialog alertDialog = new AlertDialog();
 
     @FXML
     private TableView<Produto> table_entegador;
@@ -70,19 +65,19 @@ public class NovaEntregaController implements Initializable, Windows {
     public boolean emptyTable(){
         boolean validate = false;
 
-        if(table_entegador.getSelectionModel().isEmpty()){
-            table_entegador.setStyle("-fx-border-color: red;");
+        if(getTable_entegador().getSelectionModel().isEmpty()){
+            getTable_entegador().setStyle("-fx-border-color: red;");
         }else{
-            table_entegador.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getTable_entegador().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
 
-        if(tb_nome_entregador.getSelectionModel().isEmpty()){
-            tb_nome_entregador.setStyle("-fx-border-color: red;");
+        if(getTb_nome_entregador().getSelectionModel().isEmpty()){
+            getTb_nome_entregador().setStyle("-fx-border-color: red;");
         }else{
-            tb_nome_entregador.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getTb_nome_entregador().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
 
-        if(table_entegador.getSelectionModel().isEmpty() || tb_nome_entregador.getSelectionModel().isEmpty()){
+        if(getTable_entegador().getSelectionModel().isEmpty() || getTb_nome_entregador().getSelectionModel().isEmpty()){
             validate = true;
         }
         return validate;
@@ -91,37 +86,37 @@ public class NovaEntregaController implements Initializable, Windows {
     public boolean composVazios() {
         boolean validate = false;
 
-        if(endereco_entrega.getText().isBlank())
-            endereco_entrega.setStyle("-fx-border-color: red;");
+        if(getEndereco_entrega().getText().isBlank())
+            getEndereco_entrega().setStyle("-fx-border-color: red;");
         else
-            endereco_entrega.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getEndereco_entrega().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(nome_cliente.getText().isBlank())
-            nome_cliente.setStyle("-fx-border-color: red;");
+        if(getNome_cliente().getText().isBlank())
+            getNome_cliente().setStyle("-fx-border-color: red;");
         else
-            nome_cliente.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getNome_cliente().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(bairro.getText().isBlank())
-            bairro.setStyle("-fx-border-color: red;");
+        if(getBairro().getText().isBlank())
+            getBairro().setStyle("-fx-border-color: red;");
         else
-            bairro.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getBairro().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(cep.getText().isBlank())
-            cep.setStyle("-fx-border-color: red;");
+        if(getCep().getText().isBlank())
+            getCep().setStyle("-fx-border-color: red;");
         else
-            cep.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getCep().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(numero.getText().isBlank())
-            numero.setStyle("-fx-border-color: red;");
+        if(getNumero().getText().isBlank())
+            getNumero().setStyle("-fx-border-color: red;");
         else
-            numero.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getNumero().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(quantidade.getText().isBlank())
-            quantidade.setStyle("-fx-border-color: red;");
+        if(getQuantidade().getText().isBlank())
+            getQuantidade().setStyle("-fx-border-color: red;");
         else
-            quantidade.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getQuantidade().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(endereco_entrega.getText().isBlank()|| nome_cliente.getText().isBlank() || bairro.getText().isBlank() || cep.getText().isBlank() || numero.getText().isBlank() || quantidade.getText().isBlank()){
+        if(getEndereco_entrega().getText().isBlank()|| getNome_cliente().getText().isBlank() || getBairro().getText().isBlank() || getCep().getText().isBlank() || getNumero().getText().isBlank() || getQuantidade().getText().isBlank()){
             validate = true;
         }
 
@@ -130,42 +125,41 @@ public class NovaEntregaController implements Initializable, Windows {
 
     private String getDateTime() {
         Date date = new Date(System.currentTimeMillis());
-        return (dateFormat.format(date));
+        return (getDateFormat().format(date));
     }
 
 
     public void cadastraEntrega() throws SQLException, ClassNotFoundException {
 
         if(emptyTable()){
-            alertDialog.alertDialog("É precisso selecionar um campo da tabela!!!");
+            getAlertDialog().alertDialog("É precisso selecionar um campo da tabela!!!");
         }else if(composVazios()){
-            alertDialog.alertDialog("Campos precisam estar preenchidos!");
+            getAlertDialog().alertDialog("Campos precisam estar preenchidos!");
         }else {
-            if(Integer.parseInt(quantidade.getText()) == 0){
-                alertDialog.alertDialog("Digite um valor válido para a quantidade!");
+            if(Integer.parseInt(getQuantidade().getText()) == 0){
+                getAlertDialog().alertDialog("Digite um valor válido para a quantidade!");
             }else {
 
-                if (Integer.parseInt(quantidade.getText()) <= table_entegador.getSelectionModel().getSelectedItem().getQuantidade()) {
+                if (Integer.parseInt(getQuantidade().getText()) <= getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade()) {
 
-                    ReturnConnection returnConnection = new ReturnConnection();
-                    PreparedStatement pstment = null;
-                    ObservableList<Produto> oblist = FXCollections.observableArrayList();
+                    ReturnConnection connection = new ReturnConnection();
+                    PreparedStatement preparedStatement = null;
 
                     try {
-                        pstment = returnConnection.getConnection().prepareStatement("INSERT INTO db_pedido(especiProduto,nomeEntregador,enderEntrega,nomeCliente,bairro,cep,numero,quantidade, data_entrega) VALUES (?,?,?,?,?,?,?,?,?)");
-                        pstment.setString(1, table_entegador.getSelectionModel().getSelectedItem().getNome());
-                        pstment.setString(2, tb_nome_entregador.getSelectionModel().getSelectedItem().getNome());
-                        pstment.setString(3, endereco_entrega.getText());
-                        pstment.setString(4, nome_cliente.getText());
-                        pstment.setString(5, bairro.getText());
-                        pstment.setInt(6, Integer.parseInt(cep.getText()));
-                        pstment.setInt(7, Integer.parseInt(numero.getText()));
-                        pstment.setInt(8, Integer.parseInt(quantidade.getText()));
-                        pstment.setString(9, getDateTime());
+                        preparedStatement = connection.getConnection().prepareStatement("INSERT INTO db_pedido(especiProduto,nomeEntregador,enderEntrega,nomeCliente,bairro,cep,numero,quantidade, data_entrega) VALUES (?,?,?,?,?,?,?,?,?)");
+                        preparedStatement.setString(1, getTable_entegador().getSelectionModel().getSelectedItem().getNome());
+                        preparedStatement.setString(2, getTb_nome_entregador().getSelectionModel().getSelectedItem().getNome());
+                        preparedStatement.setString(3, getEndereco_entrega().getText());
+                        preparedStatement.setString(4, getNome_cliente().getText());
+                        preparedStatement.setString(5, getBairro().getText());
+                        preparedStatement.setInt(6, Integer.parseInt(getCep().getText()));
+                        preparedStatement.setInt(7, Integer.parseInt(getNumero().getText()));
+                        preparedStatement.setInt(8, Integer.parseInt(getQuantidade().getText()));
+                        preparedStatement.setString(9, getDateTime());
 
-                        pstment.executeUpdate();
+                        preparedStatement.executeUpdate();
                         atualizaVenda();
-                        alertDialog.alertDialog("Pedido realizado com sucesso!");
+                        getAlertDialog().alertDialog("Pedido realizado com sucesso!");
 
                         try {
                             App.setRoot("home");
@@ -174,130 +168,130 @@ public class NovaEntregaController implements Initializable, Windows {
                         }
 
                     } finally {
-                        returnConnection.closeConnection(returnConnection.getConnection(), pstment);
+                        connection.closeConnection(connection.getConnection(), preparedStatement);
                     }
 
                 } else {
-                    alertDialog.alertDialog("Não há galões suficientes!\n\nGalões restantes: " + table_entegador.getSelectionModel().getSelectedItem().getQuantidade());
+                    getAlertDialog().alertDialog("Não há galões suficientes!\n\nGalões restantes: " + getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade());
                 }
             }
         }
     }
 
     public void atualizaVenda() throws SQLException {
-        ReturnConnection returnConnection = new ReturnConnection();
-        PreparedStatement pStatement = null;
-        ResultSet res = null;
+        ReturnConnection connection = new ReturnConnection();
+        PreparedStatement preparedStatement = null;
+        ResultSet resultSet = null;
 
         int valueVenda = 0;
 
         try {
 
-            pStatement = returnConnection.getConnection().prepareStatement("SELECT venda FROM db_produto WHERE id_produto = ?");
-            pStatement.setInt(1,table_entegador.getSelectionModel().getSelectedItem().getId_produto());
-            res = pStatement.executeQuery();
+            preparedStatement = connection.getConnection().prepareStatement("SELECT venda FROM db_produto WHERE id_produto = ?");
+            preparedStatement.setInt(1, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
+            resultSet = preparedStatement.executeQuery();
 
-            while (res.next()){
-                valueVenda = res.getInt("venda");
+            while (resultSet.next()){
+                valueVenda = resultSet.getInt("venda");
             }
 
-            pStatement = null;
-            pStatement = returnConnection.getConnection().prepareStatement("UPDATE db_produto SET venda = ? WHERE id_produto = ?");
-            pStatement.setInt(1,valueVenda + Integer.parseInt(quantidade.getText()));
-            pStatement.setInt(2,table_entegador.getSelectionModel().getSelectedItem().getId_produto());
+            preparedStatement = null;
+            preparedStatement = connection.getConnection().prepareStatement("UPDATE db_produto SET venda = ? WHERE id_produto = ?");
+            preparedStatement.setInt(1,valueVenda + Integer.parseInt(getQuantidade().getText()));
+            preparedStatement.setInt(2, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
 
-            pStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
-            pStatement = null;
-            pStatement = returnConnection.getConnection().prepareStatement("UPDATE db_produto SET quantidade = ? WHERE id_produto = ?");
-            pStatement.setInt(1,(table_entegador.getSelectionModel().getSelectedItem().getQuantidade() - Integer.parseInt(quantidade.getText())));
-            pStatement.setInt(2,table_entegador.getSelectionModel().getSelectedItem().getId_produto());
+            preparedStatement = null;
+            preparedStatement = connection.getConnection().prepareStatement("UPDATE db_produto SET quantidade = ? WHERE id_produto = ?");
+            preparedStatement.setInt(1,(getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade() - Integer.parseInt(getQuantidade().getText())));
+            preparedStatement.setInt(2, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
 
-            pStatement.executeUpdate();
+            preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
-            returnConnection.closeConnection(returnConnection.getConnection(),pStatement);
+            connection.closeConnection(connection.getConnection(),preparedStatement);
         }
     }
 
     public void getProdutoDB() throws SQLException, ClassNotFoundException {
 
-        ReturnConnection returnConnection = new ReturnConnection();
+        ReturnConnection connection = new ReturnConnection();
         PreparedStatement preparedStatement = null;
-        ResultSet res = null;
+        ResultSet resultSet = null;
 
         ObservableList<Produto> oblist = FXCollections.observableArrayList();
 
         try {
-            preparedStatement = returnConnection.getConnection().prepareStatement("SELECT nome, preco, quantidade, id_produto FROM db_produto");
-            res = preparedStatement.executeQuery();
+            preparedStatement = connection.getConnection().prepareStatement("SELECT nome, preco, quantidade, id_produto FROM db_produto");
+            resultSet = preparedStatement.executeQuery();
 
 
-            while (res.next()){
-                oblist.add(new Produto(res.getFloat("preco"),res.getString("nome"),res.getInt("quantidade"),res.getInt("id_produto")));
+            while (resultSet.next()){
+                oblist.add(new Produto(resultSet.getFloat("preco"),resultSet.getString("nome"),resultSet.getInt("quantidade"),resultSet.getInt("id_produto")));
             }
 
-            this.entregador.setCellValueFactory(new PropertyValueFactory<>("nome"));
-            this.precoProduto.setCellValueFactory(new PropertyValueFactory<>("preco"));
-            this.qtd_restante.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
-            this.idProduto.setCellValueFactory(new PropertyValueFactory<>("id_produto"));
+            this.getEntregador().setCellValueFactory(new PropertyValueFactory<>("nome"));
+            this.getPrecoProduto().setCellValueFactory(new PropertyValueFactory<>("preco"));
+            this.getQtd_restante().setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+            this.getIdProduto().setCellValueFactory(new PropertyValueFactory<>("id_produto"));
 
-            table_entegador.getItems().setAll(oblist);
+            getTable_entegador().getItems().setAll(oblist);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
-            returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
+            connection.closeConnection(connection.getConnection(),preparedStatement);
         }
     }
 
     public void getNomeEntregador() throws SQLException, ClassNotFoundException {
 
-        ReturnConnection returnConnection = new ReturnConnection();
+        ReturnConnection connection = new ReturnConnection();
         PreparedStatement preparedStatement = null;
-        ResultSet res = null;
+        ResultSet resultSet = null;
 
         ObservableList<Pessoa> oblist = FXCollections.observableArrayList();
 
         try {
 
             String query = "SELECT nome FROM db_usuario WHERE tipo_usuario = 2";
-            preparedStatement = returnConnection.getConnection().prepareStatement(query);
+            preparedStatement = connection.getConnection().prepareStatement(query);
 
-            res = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
 
-            while (res.next()){
-                oblist.add(new Pessoa(res.getString("nome")));
+            while (resultSet.next()){
+                oblist.add(new Pessoa(resultSet.getString("nome")));
             }
 
-            this.nome_entregador.setCellValueFactory(new PropertyValueFactory<>("nome"));
-            tb_nome_entregador.getItems().setAll(oblist);
+            this.getNome_entregador().setCellValueFactory(new PropertyValueFactory<>("nome"));
+            getTb_nome_entregador().getItems().setAll(oblist);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
-            returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
+            connection.closeConnection(connection.getConnection(),preparedStatement);
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        isTextFormatterString(endereco_entrega);
-            addTextLimiter(endereco_entrega,200);
-        isTextFormatterString(nome_cliente);
-            addTextLimiter(nome_cliente,200);
-        isTextFormatterString(bairro);
-            addTextLimiter(bairro,200);
-        isTextFormatterNumber(quantidade);
-            addTextLimiter(quantidade,3);
-        isTextFormatterNumber(numero);
-            addTextLimiter(numero,6);
-        isTextFormatterNumber(cep);
-            addTextLimiter(cep,8);
+        isTextFormatterString(getEndereco_entrega());
+            addTextLimiter(getEndereco_entrega(),200);
+        isTextFormatterString(getNome_cliente());
+            addTextLimiter(getNome_cliente(),200);
+        isTextFormatterString(getBairro());
+            addTextLimiter(getBairro(),200);
+        isTextFormatterNumber(getQuantidade());
+            addTextLimiter(getQuantidade(),3);
+        isTextFormatterNumber(getNumero());
+            addTextLimiter(getNumero(),6);
+        isTextFormatterNumber(getCep());
+            addTextLimiter(getCep(),8);
 
         try {
             getProdutoDB();
@@ -307,6 +301,125 @@ public class NovaEntregaController implements Initializable, Windows {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }    
-    
+    }
+
+    public DateFormat getDateFormat() {
+        return dateFormat;
+    }
+
+    public void setDateFormat(DateFormat dateFormat) {
+        this.dateFormat = dateFormat;
+    }
+
+    public AlertDialog getAlertDialog() {
+        return alertDialog;
+    }
+
+    public void setAlertDialog(AlertDialog alertDialog) {
+        this.alertDialog = alertDialog;
+    }
+
+    public TableView<Produto> getTable_entegador() {
+        return table_entegador;
+    }
+
+    public void setTable_entegador(TableView<Produto> table_entegador) {
+        this.table_entegador = table_entegador;
+    }
+
+    public TableView<Pessoa> getTb_nome_entregador() {
+        return tb_nome_entregador;
+    }
+
+    public void setTb_nome_entregador(TableView<Pessoa> tb_nome_entregador) {
+        this.tb_nome_entregador = tb_nome_entregador;
+    }
+
+    public TableColumn<Pessoa, String> getNome_entregador() {
+        return nome_entregador;
+    }
+
+    public void setNome_entregador(TableColumn<Pessoa, String> nome_entregador) {
+        this.nome_entregador = nome_entregador;
+    }
+
+    public TableColumn<Produto, String> getEntregador() {
+        return entregador;
+    }
+
+    public void setEntregador(TableColumn<Produto, String> entregador) {
+        this.entregador = entregador;
+    }
+
+    public TableColumn<Produto, Integer> getQtd_restante() {
+        return qtd_restante;
+    }
+
+    public void setQtd_restante(TableColumn<Produto, Integer> qtd_restante) {
+        this.qtd_restante = qtd_restante;
+    }
+
+    public TableColumn<Produto, String> getPrecoProduto() {
+        return precoProduto;
+    }
+
+    public void setPrecoProduto(TableColumn<Produto, String> precoProduto) {
+        this.precoProduto = precoProduto;
+    }
+
+    public TableColumn<Produto, Integer> getIdProduto() {
+        return idProduto;
+    }
+
+    public void setIdProduto(TableColumn<Produto, Integer> idProduto) {
+        this.idProduto = idProduto;
+    }
+
+    public TextField getEndereco_entrega() {
+        return endereco_entrega;
+    }
+
+    public void setEndereco_entrega(TextField endereco_entrega) {
+        this.endereco_entrega = endereco_entrega;
+    }
+
+    public TextField getNome_cliente() {
+        return nome_cliente;
+    }
+
+    public void setNome_cliente(TextField nome_cliente) {
+        this.nome_cliente = nome_cliente;
+    }
+
+    public TextField getBairro() {
+        return bairro;
+    }
+
+    public void setBairro(TextField bairro) {
+        this.bairro = bairro;
+    }
+
+    public TextField getCep() {
+        return cep;
+    }
+
+    public void setCep(TextField cep) {
+        this.cep = cep;
+    }
+
+    public TextField getNumero() {
+        return numero;
+    }
+
+    public void setNumero(TextField numero) {
+        this.numero = numero;
+    }
+
+    public TextField getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(TextField quantidade) {
+        this.quantidade = quantidade;
+    }
 }
