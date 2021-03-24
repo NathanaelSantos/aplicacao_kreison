@@ -10,7 +10,7 @@ public class Deserializer {
     public boolean isFullScreen;
 
     public void deserializer() throws FileNotFoundException, IOException, ClassNotFoundException {
-        FileInputStream fOut = new FileInputStream("C:\\Users\\natha\\Documents\\Projects\\aplicacao_kreison\\serializable.ser");
+        FileInputStream fOut = new FileInputStream("C:\\KreisonDelivery\\serializable.ser");
         ObjectInputStream oOut = new ObjectInputStream(fOut);
         FullScreen fullScreen = (FullScreen) oOut.readObject();
         oOut.close();

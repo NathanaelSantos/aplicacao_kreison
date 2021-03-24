@@ -1,0 +1,7 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Mar 10 18:16:39 BRT 2021
+javafx-graphics-13.pom>=
+javafx-graphics-13.jar>central=
+javafx-graphics-13.pom>central=
+javafx-graphics-13-sources.jar>central=
+javafx-graphics-13-win.jar>central=

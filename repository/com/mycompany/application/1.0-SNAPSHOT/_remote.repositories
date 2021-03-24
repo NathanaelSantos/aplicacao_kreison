@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Mar 17 05:39:44 BRT 2021
+application-1.0-SNAPSHOT.jar>=
+application-1.0-SNAPSHOT.pom>=
+application-1.0-SNAPSHOT-jar-with-dependencies.jar>=
