@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DeletaFuncionarioController implements Initializable {
-    AlertDialog alertDialog = new AlertDialog();
+    private AlertDialog alertDialog = new AlertDialog();
 
     @FXML
     private TableView<Pessoa> deletaFuncionarioTable;
@@ -56,11 +56,11 @@ public class DeletaFuncionarioController implements Initializable {
                 oblist.add(new Pessoa(resultSet.getString("cpf"),resultSet.getString("nome"),resultSet.getInt("id_usuario")));
             }
 
-            this.nomeFuncionario.setCellValueFactory(new PropertyValueFactory<>("nome"));
-            this.cpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
-            this.id.setCellValueFactory(new PropertyValueFactory<>("id_usuario"));
+            this.getNomeFuncionario().setCellValueFactory(new PropertyValueFactory<>("nome"));
+            this.getCpf().setCellValueFactory(new PropertyValueFactory<>("cpf"));
+            this.getId().setCellValueFactory(new PropertyValueFactory<>("id_usuario"));
 
-            deletaFuncionarioTable.getItems().setAll(oblist);
+            getDeletaFuncionarioTable().getItems().setAll(oblist);
 
             returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
 
@@ -68,8 +68,8 @@ public class DeletaFuncionarioController implements Initializable {
 
     public void deletaFuncionario()  {
 
-        if(deletaFuncionarioTable.getSelectionModel().isEmpty()){
-            alertDialog.alertDialog("Selecione uma linha da tabela!");
+        if(getDeletaFuncionarioTable().getSelectionModel().isEmpty()){
+            getAlertDialog().alertDialog("Selecione uma linha da tabela!");
         }else {
             Alert dialogoInfo = new Alert(Alert.AlertType.CONFIRMATION);
             dialogoInfo.setHeaderText("Deseja mesmo deletar o funcionário selecionado?");
@@ -80,13 +80,13 @@ public class DeletaFuncionarioController implements Initializable {
 
                 try {
                     preparedStatement = connection.getConnection().prepareStatement("DELETE FROM db_usuario WHERE id_usuario = ?");
-                    preparedStatement.setInt(1,deletaFuncionarioTable.getSelectionModel().getSelectedItem().getId_usuario());
+                    preparedStatement.setInt(1, getDeletaFuncionarioTable().getSelectionModel().getSelectedItem().getId_usuario());
                     preparedStatement.executeUpdate();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 }
 
-                alertDialog.alertDialog("Funcionário deletado com sucesso!");
+                getAlertDialog().alertDialog("Funcionário deletado com sucesso!");
 
                 try {
                     App.setRoot("deletaFuncionario");
@@ -108,5 +108,45 @@ public class DeletaFuncionarioController implements Initializable {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public AlertDialog getAlertDialog() {
+        return alertDialog;
+    }
+
+    public void setAlertDialog(AlertDialog alertDialog) {
+        this.alertDialog = alertDialog;
+    }
+
+    public TableView<Pessoa> getDeletaFuncionarioTable() {
+        return deletaFuncionarioTable;
+    }
+
+    public void setDeletaFuncionarioTable(TableView<Pessoa> deletaFuncionarioTable) {
+        this.deletaFuncionarioTable = deletaFuncionarioTable;
+    }
+
+    public TableColumn<Pessoa, String> getNomeFuncionario() {
+        return nomeFuncionario;
+    }
+
+    public void setNomeFuncionario(TableColumn<Pessoa, String> nomeFuncionario) {
+        this.nomeFuncionario = nomeFuncionario;
+    }
+
+    public TableColumn<Pessoa, String> getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(TableColumn<Pessoa, String> cpf) {
+        this.cpf = cpf;
+    }
+
+    public TableColumn<Pessoa, Integer> getId() {
+        return id;
+    }
+
+    public void setId(TableColumn<Pessoa, Integer> id) {
+        this.id = id;
     }
 }
