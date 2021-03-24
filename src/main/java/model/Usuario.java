@@ -1,8 +1,8 @@
 package model;
 
 public class Usuario extends Cliente{
-    public String password;
-    public int userType;
+    private String password;
+    private int userType;
 
     public Usuario(String name, String password, String cpf, String birthDate, int userType) {
         super(cpf,name,birthDate);

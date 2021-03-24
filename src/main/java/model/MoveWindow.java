@@ -8,12 +8,28 @@ public class MoveWindow {
 
     public void moveWindow(javafx.scene.Scene scene, javafx.stage.Stage stage) {
         scene.setOnMousePressed(e -> {
-            posX = stage.getX() - e.getScreenX();
-            posY = stage.getY() - e.getScreenY();
+            setPosX(stage.getX() - e.getScreenX());
+            setPosY(stage.getY() - e.getScreenY());
         });
         scene.setOnMouseDragged(e -> {
-            stage.setX(e.getScreenX() + posX);
-            stage.setY(e.getScreenY() + posY);
+            stage.setX(e.getScreenX() + getPosX());
+            stage.setY(e.getScreenY() + getPosY());
         });
+    }
+
+    public double getPosX() {
+        return posX;
+    }
+
+    public void setPosX(double posX) {
+        this.posX = posX;
+    }
+
+    public double getPosY() {
+        return posY;
+    }
+
+    public void setPosY(double posY) {
+        this.posY = posY;
     }
 }
