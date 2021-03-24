@@ -25,7 +25,7 @@ import static model.TextFormatter.isTextFormatterString;
 
 public class CadastraController implements Initializable, Windows {
 
-    AlertDialog alertDialog = new AlertDialog();
+    private AlertDialog alertDialog = new AlertDialog();
 
     @FXML
     private TextField nome;
@@ -69,57 +69,57 @@ public class CadastraController implements Initializable, Windows {
 
     public boolean composVazios() {
 
-        if (nome.getText().isBlank())
-            nome.setStyle("-fx-border-color: red;");
+        if (getNome().getText().isBlank())
+            getNome().setStyle("-fx-border-color: red;");
         else
-            nome.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getNome().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if (senha.getText().isBlank())
-            senha.setStyle("-fx-border-color: red;");
+        if (getSenha().getText().isBlank())
+            getSenha().setStyle("-fx-border-color: red;");
         else
-            senha.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getSenha().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if (confirmaSenha.getText().isBlank())
-            confirmaSenha.setStyle("-fx-border-color: red;");
+        if (getConfirmaSenha().getText().isBlank())
+            getConfirmaSenha().setStyle("-fx-border-color: red;");
         else
-            confirmaSenha.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getConfirmaSenha().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if (cpf.getText().isBlank())
-            cpf.setStyle("-fx-border-color: red;");
+        if (getCpf().getText().isBlank())
+            getCpf().setStyle("-fx-border-color: red;");
         else
-            cpf.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getCpf().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if (dataNascimento.getValue() == null)
-            dataNascimento.setStyle("-fx-border-color: red;");
+        if (getDataNascimento().getValue() == null)
+            getDataNascimento().setStyle("-fx-border-color: red;");
         else
-            dataNascimento.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getDataNascimento().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if (selection.getSelectedToggle() == null)
-            tipoFuncionario.setStyle("-fx-border-color: red;");
+        if (getSelection().getSelectedToggle() == null)
+            getTipoFuncionario().setStyle("-fx-border-color: red;");
         else
-            tipoFuncionario.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getTipoFuncionario().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if (codAdmin.getText().isBlank())
-            codAdmin.setStyle("-fx-border-color: red;");
+        if (getCodAdmin().getText().isBlank())
+            getCodAdmin().setStyle("-fx-border-color: red;");
         else
-            codAdmin.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getCodAdmin().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        return ((nome.getText().isBlank() || senha.getText().isBlank() || confirmaSenha.getText().isBlank() || cpf.getText().isBlank() || codAdmin.getText().isBlank()) ||
-                (selection.getSelectedToggle() == null || dataNascimento.getValue() == null));
+        return ((getNome().getText().isBlank() || getSenha().getText().isBlank() || getConfirmaSenha().getText().isBlank() || getCpf().getText().isBlank() || getCodAdmin().getText().isBlank()) ||
+                (getSelection().getSelectedToggle() == null || getDataNascimento().getValue() == null));
     }
 
     public int tipoFuncionario() {
         int tipoFunc = -1;
-        if (entregador.isSelected()) {
+        if (getEntregador().isSelected()) {
             tipoFunc = 2;
-        } else if (gerente.isSelected()) {
+        } else if (getGerente().isSelected()) {
             tipoFunc = 1;
         }
         return tipoFunc;
     }
 
     public String dateNascimento() {
-        return dataNascimento.getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return getDataNascimento().getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
     public boolean verificaCodigoAdimin(String codAdmin) {
@@ -150,21 +150,21 @@ public class CadastraController implements Initializable, Windows {
     public void insertUsuarioDB() throws Exception {
 
         if (composVazios()) {
-            alerta.setVisible(true);
+            getAlerta().setVisible(true);
         } else {
-            alerta.setVisible(false);
-            if (senha.getText().equals(confirmaSenha.getText())) {
-                if (new ValidateCPF().validate(cpf.getText())) {
-                    if (new CheckCpfdatabase().checkCpfdatabase(cpf.getText())) {
-                        alertDialog.alertDialog("Cpf ja cadastrado!");
+            getAlerta().setVisible(false);
+            if (getSenha().getText().equals(getConfirmaSenha().getText())) {
+                if (new ValidateCPF().validate(getCpf().getText())) {
+                    if (new CheckCpfdatabase().checkCpfdatabase(getCpf().getText())) {
+                        getAlertDialog().alertDialog("Cpf ja cadastrado!");
                     } else {
-                        if (new CadastraController().verificaCodigoAdimin(codAdmin.getText())) {
+                        if (new CadastraController().verificaCodigoAdimin(getCodAdmin().getText())) {
 
                             if (tipoFuncionario() == 1) {
-                                codAdmin1.setVisible(true);
+                                getCodAdmin1().setVisible(true);
                             }
                             ReturnConnection returnConnection = new ReturnConnection();
-                            Usuario user = new Usuario(nome.getText(), new StringUtil().gerarHash(senha.getText()), cpf.getText(), dateNascimento(), tipoFuncionario());
+                            Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()), getCpf().getText(), dateNascimento(), tipoFuncionario());
                             PreparedStatement pstment = null;
 
                             try {
@@ -178,7 +178,7 @@ public class CadastraController implements Initializable, Windows {
 
                                 pstment.executeUpdate();
 
-                                alertDialog.alertDialog("Usuário cadastrado com sucesso!!!");
+                                getAlertDialog().alertDialog("Usuário cadastrado com sucesso!!!");
 
                                 try {
                                     App.setRoot("cadastra");
@@ -192,14 +192,14 @@ public class CadastraController implements Initializable, Windows {
                                 returnConnection.closeConnection(returnConnection.getConnection(), pstment);
                             }
                         } else {
-                            alertDialog.alertDialog("Código inválido!");
+                            getAlertDialog().alertDialog("Código inválido!");
                         }
                     }
                 } else {
-                    alertDialog.alertDialog("Cpf inválido!");
+                    getAlertDialog().alertDialog("Cpf inválido!");
                 }
             } else {
-                alertDialog.alertDialog("Senhas diferentes!");
+                getAlertDialog().alertDialog("Senhas diferentes!");
             }
         }
     }
@@ -207,17 +207,120 @@ public class CadastraController implements Initializable, Windows {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        alerta.setVisible(false);
-        isTextFormatterString(nome);
-        addTextLimiter(nome, 200);
-        isTextFormatterNumber(cpf);
-        addTextLimiter(cpf, 11);
-        isTextFormatterNumber(senha);
-        addTextLimiter(senha, 6);
-        isTextFormatterNumber(confirmaSenha);
-        addTextLimiter(confirmaSenha, 6);
-        isTextFormatterNumber(codAdmin);
-        addTextLimiter(codAdmin, 6);
+        getAlerta().setVisible(false);
+        isTextFormatterString(getNome());
+        addTextLimiter(getNome(), 200);
+        isTextFormatterNumber(getCpf());
+        addTextLimiter(getCpf(), 11);
+        isTextFormatterNumber(getSenha());
+        addTextLimiter(getSenha(), 6);
+        isTextFormatterNumber(getConfirmaSenha());
+        addTextLimiter(getConfirmaSenha(), 6);
+        isTextFormatterNumber(getCodAdmin());
+        addTextLimiter(getCodAdmin(), 6);
     }
 
+    public AlertDialog getAlertDialog() {
+        return alertDialog;
+    }
+
+    public void setAlertDialog(AlertDialog alertDialog) {
+        this.alertDialog = alertDialog;
+    }
+
+    public TextField getNome() {
+        return nome;
+    }
+
+    public void setNome(TextField nome) {
+        this.nome = nome;
+    }
+
+    public PasswordField getSenha() {
+        return senha;
+    }
+
+    public void setSenha(PasswordField senha) {
+        this.senha = senha;
+    }
+
+    public PasswordField getConfirmaSenha() {
+        return confirmaSenha;
+    }
+
+    public void setConfirmaSenha(PasswordField confirmaSenha) {
+        this.confirmaSenha = confirmaSenha;
+    }
+
+    public TextField getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(TextField cpf) {
+        this.cpf = cpf;
+    }
+
+    public DatePicker getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(DatePicker dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public MenuButton getTipoFuncionario() {
+        return tipoFuncionario;
+    }
+
+    public void setTipoFuncionario(MenuButton tipoFuncionario) {
+        this.tipoFuncionario = tipoFuncionario;
+    }
+
+    public RadioMenuItem getEntregador() {
+        return entregador;
+    }
+
+    public void setEntregador(RadioMenuItem entregador) {
+        this.entregador = entregador;
+    }
+
+    public ToggleGroup getSelection() {
+        return selection;
+    }
+
+    public void setSelection(ToggleGroup selection) {
+        this.selection = selection;
+    }
+
+    public RadioMenuItem getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(RadioMenuItem gerente) {
+        this.gerente = gerente;
+    }
+
+    public TextField getCodAdmin() {
+        return codAdmin;
+    }
+
+    public void setCodAdmin(TextField codAdmin) {
+        this.codAdmin = codAdmin;
+    }
+
+    public TextField getCodAdmin1() {
+        return codAdmin1;
+    }
+
+    public void setCodAdmin1(TextField codAdmin1) {
+        this.codAdmin1 = codAdmin1;
+    }
+
+    public Label getAlerta() {
+        return alerta;
+    }
+
+    public void setAlerta(Label alerta) {
+        this.alerta = alerta;
+    }
 }

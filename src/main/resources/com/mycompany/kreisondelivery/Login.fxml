@@ -29,11 +29,11 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="login" focusTraversable="false" prefHeight="32.0" prefWidth="360.0" promptText="Cpf" style="-fx-background-radius: 2em;-fx-text-fill:  #00b4d8" text="07765328557">
+                  <TextField fx:id="login" focusTraversable="false" prefHeight="32.0" prefWidth="360.0" promptText="Cpf" style="-fx-background-radius: 2em;-fx-text-fill:  #00b4d8">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font></TextField>
-                  <PasswordField fx:id="senha" focusTraversable="false" prefHeight="32.0" prefWidth="360.0" promptText="Senha" style="-fx-background-radius: 2em;-fx-text-fill:  #00b4d8" text="111111" />
+                  <PasswordField fx:id="senha" focusTraversable="false" prefHeight="32.0" prefWidth="360.0" promptText="Senha" style="-fx-background-radius: 2em;-fx-text-fill:  #00b4d8" />
                   <HBox alignment="CENTER_RIGHT" fillHeight="false" layoutX="10.0" prefHeight="16.0" prefWidth="354.0" spacing="18.0">
                      <children>
                         <Label fx:id="txtCadastra" alignment="CENTER" onMouseClicked="#cadastrar" onMouseEntered="#mouseEnteredTxtCad" onMouseExited="#mouseExitedTxtCad" text="Cadastrar" textFill="WHITE">
@@ -70,7 +70,7 @@
             </VBox>
          </children>
       </StackPane>
-      <Label layoutX="776.0" layoutY="462.0" text="v0.1" textFill="#ffffffa6" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="4.0">
+      <Label layoutX="776.0" layoutY="462.0" text="v0.2.0" textFill="#ffffffa6" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="4.0">
          <font>
             <Font size="11.0" />
          </font>
