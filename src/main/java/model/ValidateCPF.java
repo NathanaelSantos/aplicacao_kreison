@@ -9,9 +9,6 @@ public class ValidateCPF {
     private int first = 10;
     private int second = 11;
 
-    private boolean check = Boolean.FALSE;
-
-   
     public boolean validate(String userCPF) {
 
         char[] arrayChar = userCPF.toCharArray();
@@ -34,53 +31,57 @@ public class ValidateCPF {
                 || userCPF.equals("99999999999")
                 || (userCPF.length() != 11)) {
 
-                return check;
+                return false;
         } else {
 
             // Calculating the First Digit Checker
             for (int i = 0; i < 9; i++) {
-                digitChecker1 += arrayInt[i] * first;
+                setDigitChecker1(getDigitChecker1() + arrayInt[i] * first);
                 arrayCPF[i] = arrayInt[i];
                 first--;
             }
-            digitChecker1 = digitChecker1 % 11;
-            digitChecker1 = (11 - digitChecker1);
+            setDigitChecker1(getDigitChecker1() % 11);
+            setDigitChecker1((11 - getDigitChecker1()));
 
-            if (digitChecker1 > 9) {
-                digitChecker1 = 0;
+            if (getDigitChecker1() > 9) {
+                setDigitChecker1(0);
                 arrayCPF[9] = 0;
             } else {
-                arrayCPF[9] = digitChecker1;
+                arrayCPF[9] = getDigitChecker1();
             }
 
             // Calculating the second Digit Checker
             for (int i = 0; i < 10; i++) {
-                digitChecker2 += arrayCPF[i] * second;
+                setDigitChecker2(getDigitChecker2() + arrayCPF[i] * second);
                 second--;
             }
-            digitChecker2 = digitChecker2 % 11;
-            digitChecker2 = (11 - digitChecker2);
+            setDigitChecker2(getDigitChecker2() % 11);
+            setDigitChecker2((11 - getDigitChecker2()));
 
-            if (digitChecker2 > 9) {
-                digitChecker2 = 0;
+            if (getDigitChecker2() > 9) {
+                setDigitChecker2(0);
                 arrayCPF[10] = 0;
             } else {
-                arrayCPF[10] = digitChecker2;
+                arrayCPF[10] = getDigitChecker2();
             }
 
-            check = arraysEquals(arrayCPF, arrayInt);
+            return Arrays.equals(arrayCPF, arrayInt);
         }
-        return check;
     }
 
-    public boolean arraysEquals(int[] arrayCPF, int[] arrayInt) {
+    public int getDigitChecker1() {
+        return digitChecker1;
+    }
 
-        boolean checkEquals = Boolean.FALSE;
+    public void setDigitChecker1(int digitChecker1) {
+        this.digitChecker1 = digitChecker1;
+    }
 
-        if (Arrays.equals(arrayCPF, arrayInt)) {
-            checkEquals = Boolean.TRUE;
-        }
+    public int getDigitChecker2() {
+        return digitChecker2;
+    }
 
-        return checkEquals;
+    public void setDigitChecker2(int digitChecker2) {
+        this.digitChecker2 = digitChecker2;
     }
 }
