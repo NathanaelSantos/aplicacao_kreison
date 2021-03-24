@@ -20,7 +20,7 @@ public class Serializer {
         FullScreen fullScreen = new FullScreen();
         fullScreen.setFullScreen(b);
        
-        FileOutputStream fOut = new FileOutputStream("C:\\Users\\natha\\Documents\\Projects\\aplicacao_kreison\\serializable.ser");
+        FileOutputStream fOut = new FileOutputStream("C:\\KreisonDelivery\\serializable.ser");
         ObjectOutputStream oOut = new ObjectOutputStream(fOut);
         oOut.writeObject(fullScreen);
         oOut.close();
