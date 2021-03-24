@@ -75,5 +75,15 @@
             <Font size="11.0" />
          </font>
       </Label>
+      <Label alignment="CENTER" layoutX="712.0" layoutY="461.0" onMouseClicked="#setVisibleImgDonate" prefHeight="18.0" prefWidth="52.0" style="-fx-background-color: #ffffff; -fx-background-radius: 2em;" text="Donate" textFill="#00b4d8" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="36.0">
+         <font>
+            <Font name="Arial Bold" size="11.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="imgDonate" fitHeight="200.0" fitWidth="170.0" layoutX="646.8807830810547" layoutY="268.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="31.0" AnchorPane.rightAnchor="4.0">
+         <image>
+            <Image url="@../../../images/donate.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

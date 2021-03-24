@@ -8,6 +8,7 @@ package com.mycompany.kreisondelivery;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.ImageView;
 import model.*;
 
 import java.io.IOException;
@@ -18,6 +19,8 @@ import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 
 public class LoginController implements Initializable, Windows{
+
+    private static boolean setVisibleImgDonate = false;
 
     @FXML
     private TextField login;
@@ -32,8 +35,23 @@ public class LoginController implements Initializable, Windows{
     @FXML
     private Label recoverPassword;
     @FXML
+    private ImageView imgDonate;
+
+
+    @FXML
     private void recoverPassword() throws IOException {
         App.setRoot("recoverPassword");
+    }
+
+    @FXML
+    private void setVisibleImgDonate() throws IOException {
+        if(!setVisibleImgDonate){
+            imgDonate.setVisible(true);
+            setVisibleImgDonate = true;
+        }else {
+            imgDonate.setVisible(false);
+            setVisibleImgDonate = false;
+        }
     }
 
     @FXML
@@ -79,6 +97,7 @@ public class LoginController implements Initializable, Windows{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        imgDonate.setVisible(false);
         getAlerta().setVisible(false);
         getAlertaCpf().setVisible(false);
 
