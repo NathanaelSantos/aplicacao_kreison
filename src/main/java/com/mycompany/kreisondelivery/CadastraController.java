@@ -23,7 +23,7 @@ import static model.TextFormatter.isTextFormatterNumber;
 import static model.TextFormatter.isTextFormatterString;
 
 
-public class CadastraController implements Initializable, Windows {
+public class CadastraController implements Initializable {
 
     private AlertDialog alertDialog = new AlertDialog();
 

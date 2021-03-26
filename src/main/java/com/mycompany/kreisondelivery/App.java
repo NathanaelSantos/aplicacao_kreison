@@ -32,7 +32,7 @@ public class App extends Application {
         stage.setScene(scene);
 
         deserializer.deserializer();
-        if(deserializer.isFullScreen){
+        if(deserializer.isFullScreen()){
             stage.setMaximized(true);
         }else{
             stage.setMaximized(false);

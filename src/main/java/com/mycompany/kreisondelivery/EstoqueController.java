@@ -14,7 +14,6 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import model.ReturnConnection;
-import model.Windows;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,7 +27,7 @@ import java.util.ResourceBundle;
  *
  * @author natha
  */
-public class EstoqueController implements Initializable, Windows {
+public class EstoqueController implements Initializable {
 
     private Integer valueEstoque = 0;
     private Integer valueVenda = 0;

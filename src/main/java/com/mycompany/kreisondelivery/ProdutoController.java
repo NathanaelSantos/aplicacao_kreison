@@ -10,7 +10,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import model.ReturnConnection;
-import model.Windows;
 
 import java.io.IOException;
 import java.net.URL;
@@ -23,7 +22,7 @@ import static model.TextFormatter.*;
 
 
 
-public class ProdutoController implements Initializable, Windows{
+public class ProdutoController implements Initializable {
 
     private boolean check = false;
 

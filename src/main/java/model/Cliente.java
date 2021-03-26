@@ -1,9 +1,6 @@
 package model;
 
 import com.mycompany.kreisondelivery.Pessoa;
-import javafx.scene.control.DatePicker;
-
-import java.time.LocalDate;
 
 public class Cliente extends Pessoa {
     private String endereco;

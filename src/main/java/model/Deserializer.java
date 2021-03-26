@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 public class Deserializer {
-    public boolean isFullScreen;
+    private boolean isFullScreen;
 
     public void deserializer() throws FileNotFoundException, IOException, ClassNotFoundException {
         FileInputStream fOut = new FileInputStream("C:\\KreisonDelivery\\serializable.ser");
