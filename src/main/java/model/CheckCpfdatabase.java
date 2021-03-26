@@ -5,31 +5,39 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class CheckCpfdatabase {
-    ReturnConnection returnConnection = new ReturnConnection();
+    private ReturnConnection returnConnection = new ReturnConnection();
 
     public boolean checkCpfdatabase(String cpfUser) throws SQLException, ClassNotFoundException {
 
         PreparedStatement preparedStatement = null;
-        ResultSet res = null;
+        ResultSet resultSet = null;
         boolean check = false;
 
         try {
 
-            preparedStatement = returnConnection.getConnection().prepareStatement("SELECT (1) FROM db_usuario WHERE cpf = ?");
+            preparedStatement = getReturnConnection().getConnection().prepareStatement("SELECT (1) FROM db_usuario WHERE cpf = ?");
             preparedStatement.setString(1,cpfUser);
-            res = preparedStatement.executeQuery();
+            resultSet = preparedStatement.executeQuery();
 
-            while (res.next()) {
-                if(res.getRow() > 0)
+            while (resultSet.next()) {
+                if(resultSet.getRow() > 0)
                     check = true;
             }
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }finally {
-            returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
+            getReturnConnection().closeConnection(getReturnConnection().getConnection(),preparedStatement);
         }
 
         return check;
+    }
+
+    public ReturnConnection getReturnConnection() {
+        return returnConnection;
+    }
+
+    public void setReturnConnection(ReturnConnection returnConnection) {
+        this.returnConnection = returnConnection;
     }
 }

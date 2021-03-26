@@ -1,0 +1,10 @@
+.progress-bar > .bar {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ProgressBarSkin";
+    -fx-background-color: #00c3e5;
+    -fx-background-insets: 0, 1, 2;
+    -fx-indeterminate-bar-length: 60;
+    -fx-indeterminate-bar-escape: true;
+    -fx-indeterminate-bar-flip: true;
+    -fx-indeterminate-bar-animation-time: 2;
+
+}

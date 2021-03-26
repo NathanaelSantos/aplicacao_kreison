@@ -13,12 +13,14 @@ import model.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 
-public class LoginController implements Initializable, Windows{
+public class LoginController implements Initializable {
 
     private static boolean setVisibleImgDonate = false;
 
@@ -36,6 +38,8 @@ public class LoginController implements Initializable, Windows{
     private Label recoverPassword;
     @FXML
     private ImageView imgDonate;
+    @FXML
+    private ProgressBar progressBar;
 
 
     @FXML
@@ -56,7 +60,9 @@ public class LoginController implements Initializable, Windows{
 
     @FXML
     private void switchToPrimary() throws Exception {
+
         ReturnConnection returnConnection = new ReturnConnection();
+        AtomicReference<Connection> con = null;
 
         if(getLogin().getText().isBlank() || getSenha().getText().isBlank()){
             getAlerta().setVisible(true);
@@ -65,16 +71,18 @@ public class LoginController implements Initializable, Windows{
             if (new ValidateCPF().validate(getLogin().getText())) {
                 getAlertaCpf().setVisible(false);
 
-                if (returnConnection.getConnection() != null) {
-
-                    if (new StringUtil().gerarHash(getSenha().getText()).equals(new LoginConnection().loginConection(getLogin().getText(),"senha")))
-                        App.setRoot("home");
-                    else
-                        new AlertDialog().alertDialog("Erro ao fazer login!");
-                } else
-                    new AlertDialog().alertDialog("Erro de conexao!");
-            } else {
-                getAlertaCpf().setVisible(true);
+                    if ( returnConnection.getConnection() != null) {
+                        try {
+                            if (new StringUtil().gerarHash(getSenha().getText()).equals(new LoginConnection().loginConection(getLogin().getText(),"senha")))
+                                App.setRoot("home");
+                            else
+                                new AlertDialog().alertDialog("Erro ao fazer login!");
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }else{
+                        new AlertDialog().alertDialog("Erro de conexao!");
+                    }
             }
         }
     }
@@ -92,7 +100,6 @@ public class LoginController implements Initializable, Windows{
     private void cadastrar() throws IOException {
         App.setRoot("cadastra");
     }
-
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

@@ -19,14 +19,15 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.AlertDialog;
+import model.LoginConnection;
 import model.ReturnConnection;
-import model.Windows;
+import model.StringUtil;
 
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 import static model.TextFormatter.isTextFormatterString;
 
-public class NovaEntregaController implements Initializable, Windows {
+public class NovaEntregaController implements Initializable {
 
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private AlertDialog alertDialog = new AlertDialog();

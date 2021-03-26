@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 
-public class HomeController implements Initializable, Windows {
+public class HomeController implements Initializable {
 
     private static boolean onScreenLogin = false;
 
