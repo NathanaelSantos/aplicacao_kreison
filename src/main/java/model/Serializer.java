@@ -10,10 +10,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
-/**
- *
- * @author natha
- */
 public class Serializer {
 
     public void Serializer(boolean b) throws FileNotFoundException, IOException {

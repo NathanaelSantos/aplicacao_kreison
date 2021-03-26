@@ -1,28 +1,25 @@
 package model;
 
-import javafx.scene.control.Alert;
-
 import java.sql.*;
 
-
 public class LoginConnection {
-    ReturnConnection returnConnection = new ReturnConnection();
+    ReturnConnection connection = new ReturnConnection();
     PreparedStatement preparedStatement = null;
-    ResultSet res;
+    ResultSet resultSet;
 
     public String loginConection(String parameterValue, String columnName)  {
 
         String returnStr = null;
 
             try {
-                preparedStatement = returnConnection.getConnection().prepareStatement("SELECT " + columnName + " FROM db_usuario WHERE cpf = ?");
+                preparedStatement = connection.getConnection().prepareStatement("SELECT " + columnName + " FROM db_usuario WHERE cpf = ?");
 
                 if(preparedStatement!= null){
                     preparedStatement.setString(1, parameterValue);
-                    res = preparedStatement.executeQuery();
+                    resultSet = preparedStatement.executeQuery();
 
-                    while (res.next()) {
-                        returnStr = res.getString(columnName);
+                    while (resultSet.next()) {
+                        returnStr = resultSet.getString(columnName);
                     }
                 }else{
                     new AlertDialog().alertDialog("Erro de conexao!");
@@ -31,7 +28,7 @@ public class LoginConnection {
                 ex.printStackTrace();
             }finally {
                 if(preparedStatement != null)
-                    returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
+                    connection.closeConnection(connection.getConnection(),preparedStatement);
             }
 
         return returnStr;
