@@ -25,6 +25,8 @@ public class LoginController implements Initializable {
     private static boolean setVisibleImgDonate = false;
 
     @FXML
+    private Button btnLogin;
+    @FXML
     private TextField login;
     @FXML
     private PasswordField senha;
@@ -39,7 +41,7 @@ public class LoginController implements Initializable {
     @FXML
     private ImageView imgDonate;
     @FXML
-    private ProgressBar progressBar;
+    private Label donate;
 
 
     @FXML
@@ -62,7 +64,7 @@ public class LoginController implements Initializable {
     private void switchToPrimary() throws Exception {
 
         ReturnConnection returnConnection = new ReturnConnection();
-        AtomicReference<Connection> con = null;
+        AlertDialog alertDialog = new AlertDialog();
 
         if(getLogin().getText().isBlank() || getSenha().getText().isBlank()){
             getAlerta().setVisible(true);
@@ -83,6 +85,8 @@ public class LoginController implements Initializable {
                     }else{
                         new AlertDialog().alertDialog("Erro de conexao!");
                     }
+            }else{
+                alertDialog.alertDialog("CPF fornecido não é válido!");
             }
         }
     }
@@ -95,6 +99,19 @@ public class LoginController implements Initializable {
     private void mouseEnteredRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill:  #038ca9"); }
     @FXML
     private void mouseExitedRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill-color:  #ffffff"); }
+    @FXML
+    private void buttonLoginEntered(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color:  #e0e0e0"); }
+    @FXML
+    private void setButtonLoginExited(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
+    @FXML
+    private void mousePressedButtonLogin(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color:  #d6d6d6"); }
+    @FXML
+    private void mouseReleaseButtonLogin(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
+    @FXML
+    private void donateEntered(){ donate.setStyle("-fx-background-radius: 3em; -fx-background-color:  #0185a2"); }
+    @FXML
+    private void donateExited(){ donate.setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
+
 
     @FXML
     private void cadastrar() throws IOException {

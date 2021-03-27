@@ -28,6 +28,9 @@ public class CadastraController implements Initializable {
     private AlertDialog alertDialog = new AlertDialog();
 
     @FXML
+    private Button buttonCadastrar;
+
+    @FXML
     private TextField nome;
 
     @FXML
@@ -56,11 +59,18 @@ public class CadastraController implements Initializable {
 
     @FXML
     private TextField codAdmin;
-    @FXML
-    private TextField codAdmin1;
 
     @FXML
     private Label alerta;
+
+    @FXML
+    private void buttonCadastrarEntered(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML
+    private void buttonCadastrarExited(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    @FXML
+    private void mousePressedButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML
+    private void mouseReleaseButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
     @FXML
     private void screenLogin() throws IOException {
@@ -160,9 +170,6 @@ public class CadastraController implements Initializable {
                     } else {
                         if (new CadastraController().verificaCodigoAdimin(getCodAdmin().getText())) {
 
-                            if (tipoFuncionario() == 1) {
-                                getCodAdmin1().setVisible(true);
-                            }
                             ReturnConnection returnConnection = new ReturnConnection();
                             Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()), getCpf().getText(), dateNascimento(), tipoFuncionario());
                             PreparedStatement pstment = null;
@@ -308,19 +315,19 @@ public class CadastraController implements Initializable {
         this.codAdmin = codAdmin;
     }
 
-    public TextField getCodAdmin1() {
-        return codAdmin1;
-    }
-
-    public void setCodAdmin1(TextField codAdmin1) {
-        this.codAdmin1 = codAdmin1;
-    }
-
     public Label getAlerta() {
         return alerta;
     }
 
     public void setAlerta(Label alerta) {
         this.alerta = alerta;
+    }
+
+    public Button getButtonCadastrar() {
+        return buttonCadastrar;
+    }
+
+    public void setButtonCadastrar(Button buttonCadastrar) {
+        this.buttonCadastrar = buttonCadastrar;
     }
 }
