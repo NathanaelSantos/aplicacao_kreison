@@ -47,7 +47,7 @@
                <children>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="469.0" spacing="20.0">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#estoqueScreen" prefHeight="98.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Consultar estoque" textFill="#fdfdfd">
+                        <Button fx:id="buttonConsultaEstoque" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#estoqueScreen" onMouseEntered="#mouseEnteredButtonConsultaEstoque" onMouseExited="#mouseExitedButtonConsultaEstoque" prefHeight="98.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Consultar estoque" textFill="#fdfdfd">
                            <font>
                               <Font name="Arial Bold" size="12.0" />
                            </font>
@@ -59,7 +59,7 @@
                               </ImageView>
                            </graphic>
                         </Button>
-                        <Button id="botao" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#novaEntrega" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Nova entrega" textAlignment="CENTER" textFill="#fdfdfd">
+                        <Button id="botao" fx:id="buttonNovaEntrega" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#novaEntrega" onMouseEntered="#mouseEnteredButtonNovaEntrega" onMouseExited="#mouseExitedButtonNovaEntrega" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Nova entrega" textAlignment="CENTER" textFill="#fdfdfd">
                            <font>
                               <Font name="Arial Bold" size="12.0" />
                            </font>
@@ -105,7 +105,7 @@
                               <Font name="Arial Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Button id="buttonLogin" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="32.0" prefWidth="234.0" style="-fx-background-radius: 3em; -fx-background-color: #ffffff;" text="Fazer login" textFill="#1b48ab">
+                        <Button id="buttonLogin" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToPrimary" onMouseEntered="#buttonLoginEntered" onMouseExited="#setButtonLoginExited" onMousePressed="#mousePressedButtonLogin" onMouseReleased="#mouseReleaseButtonLogin" prefHeight="32.0" prefWidth="234.0" style="-fx-background-radius: 3em; -fx-background-color: #ffffff;" text="Fazer login" textFill="#00b4d8">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

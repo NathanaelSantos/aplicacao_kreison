@@ -35,6 +35,13 @@ public class HomeController implements Initializable {
     private Button buttonAdmin;
     @FXML
     private TextField codAdmin;
+    @FXML
+    private Button buttonConsultaEstoque;
+    @FXML
+    private Button buttonNovaEntrega;
+    @FXML
+    private Button btnLogin;
+
 
     public static boolean isOnScreenLogin() {
         return onScreenLogin;
@@ -64,16 +71,29 @@ public class HomeController implements Initializable {
     private void adminScreen() throws IOException {
         App.setRoot("admin");
     }
-
     @FXML
-    private void mouseExitedBtnAdmin() throws IOException {
-        getButtonAdmin().setStyle("-fx-background-color: #00b4d8");
-    }
-
+    private void buttonLoginEntered(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color:  #e0e0e0"); }
     @FXML
-    private void mouseEnteredBtnAdmin() throws IOException {
-        getButtonAdmin().setStyle("-fx-background-color: #038ca9");
-    }
+    private void setButtonLoginExited(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
+    @FXML
+    private void mousePressedButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color:  #d6d6d6"); }
+    @FXML
+    private void mouseReleaseButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
+    @FXML
+    private void mouseExitedBtnAdmin() throws IOException { getButtonAdmin().setStyle("-fx-background-color: #00b4d8"); }
+    @FXML
+    private void mouseEnteredBtnAdmin() throws IOException { getButtonAdmin().setStyle("-fx-background-color: #038ca9"); }
+    @FXML
+    private void mouseEnteredButtonConsultaEstoque() throws IOException { getButtonConsultaEstoque().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc"); }
+    @FXML
+    private void mouseExitedButtonConsultaEstoque() throws IOException { getButtonConsultaEstoque().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8"); }
+    @FXML
+    private void mouseEnteredButtonNovaEntrega() throws IOException { getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc"); }
+    @FXML
+    private void mouseExitedButtonNovaEntrega() throws IOException { getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8"); }
+
+
+
 
     @FXML
     private void telaLogin() throws IOException {
@@ -226,5 +246,29 @@ public class HomeController implements Initializable {
 
     public void setCodAdmin(TextField codAdmin) {
         this.codAdmin = codAdmin;
+    }
+
+    public Button getButtonConsultaEstoque() {
+        return buttonConsultaEstoque;
+    }
+
+    public void setButtonConsultaEstoque(Button buttonConsultaEstoque) {
+        this.buttonConsultaEstoque = buttonConsultaEstoque;
+    }
+
+    public Button getButtonNovaEntrega() {
+        return buttonNovaEntrega;
+    }
+
+    public void setButtonNovaEntrega(Button buttonNovaEntrega) {
+        this.buttonNovaEntrega = buttonNovaEntrega;
+    }
+
+    public Button getBtnLogin() {
+        return btnLogin;
+    }
+
+    public void setBtnLogin(Button btnLogin) {
+        this.btnLogin = btnLogin;
     }
 }

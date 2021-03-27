@@ -59,6 +59,18 @@ public class NovaEntregaController implements Initializable {
     @FXML
     private TextField quantidade;
     @FXML
+    private Button cadastraEntrega;
+
+    @FXML
+    private void buttonCadastraEntregaEntered(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML
+    private void buttonCadastraEntregaExited(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    @FXML
+    private void mousePressedButtonCadastraEntrega(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML
+    private void mouseReleaseButtonCadastraEntrega(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+
+    @FXML
     private void homeScreen() throws IOException {
         App.setRoot("home");
     }
@@ -422,5 +434,13 @@ public class NovaEntregaController implements Initializable {
 
     public void setQuantidade(TextField quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public Button getCadastraEntrega() {
+        return cadastraEntrega;
+    }
+
+    public void setCadastraEntrega(Button cadastraEntrega) {
+        this.cadastraEntrega = cadastraEntrega;
     }
 }
