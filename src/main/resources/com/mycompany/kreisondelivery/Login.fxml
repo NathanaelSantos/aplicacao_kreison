@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -31,7 +32,7 @@
                   </Label>
                   <TextField fx:id="login" focusTraversable="false" prefHeight="32.0" prefWidth="360.0" promptText="Cpf" style="-fx-background-radius: 2em;-fx-text-fill:  #00b4d8">
                      <font>
-                        <Font name="Arial" size="12.0" />
+                        <Font name="Arial Bold" size="12.0" />
                      </font></TextField>
                   <PasswordField fx:id="senha" focusTraversable="false" prefHeight="32.0" prefWidth="360.0" promptText="Senha" style="-fx-background-radius: 2em;-fx-text-fill:  #00b4d8" />
                   <HBox alignment="CENTER_RIGHT" fillHeight="false" layoutX="10.0" prefHeight="16.0" prefWidth="354.0" spacing="18.0">
@@ -58,10 +59,13 @@
                         <Font name="Arial Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Button id="buttonLogin" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToPrimary" prefHeight="32.0" prefWidth="360.0" style="-fx-background-radius: 3em; -fx-background-color: #ffffff;" text="Fazer login" textFill="#00b4d8">
+                  <Button id="buttonLogin" fx:id="btnLogin" mnemonicParsing="false" onAction="#switchToPrimary" onMouseEntered="#buttonLoginEntered" onMouseExited="#setButtonLoginExited" onMousePressed="#mousePressedButtonLogin" onMouseReleased="#mouseReleaseButtonLogin" prefHeight="32.0" prefWidth="360.0" style="-fx-background-radius: 3em; -fx-background-color: #ffffff;" text="Fazer login" textFill="#00b4d8">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
+                     <effect>
+                        <DropShadow color="#029db8" />
+                     </effect>
                   </Button>
                </children>
                <padding>
@@ -70,12 +74,12 @@
             </VBox>
          </children>
       </StackPane>
-      <Label layoutX="776.0" layoutY="462.0" text="v0.2.0" textFill="#ffffffa6" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="4.0">
+      <Label layoutX="776.0" layoutY="462.0" text="v1.2.1" textFill="#ffffffa6" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="4.0">
          <font>
             <Font size="11.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="712.0" layoutY="461.0" onMouseClicked="#setVisibleImgDonate" prefHeight="18.0" prefWidth="52.0" style="-fx-background-color: #ffffff; -fx-background-radius: 2em;" text="Donate" textFill="#00b4d8" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="36.0">
+      <Label fx:id="donate" alignment="CENTER" layoutX="712.0" layoutY="461.0" onMouseClicked="#setVisibleImgDonate" onMouseEntered="#donateEntered" onMouseExited="#donateExited" prefHeight="18.0" prefWidth="52.0" style="-fx-background-color: #ffffff; -fx-background-radius: 2em;" text="Donate" textFill="#00b4d8" AnchorPane.bottomAnchor="6.0" AnchorPane.rightAnchor="36.0">
          <font>
             <Font name="Arial Bold" size="11.0" />
          </font>

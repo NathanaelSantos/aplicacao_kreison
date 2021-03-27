@@ -23,7 +23,7 @@
          <children>
             <HBox alignment="TOP_CENTER" prefHeight="314.0" prefWidth="618.0" spacing="15.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#cadastraProduto" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Cadastrar produto" textFill="#fdfdfd">
+                  <Button fx:id="buttonCadastraProduto" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#cadastraProduto" onMouseEntered="#mouseEnteredButtonCadastraProduto" onMouseExited="#mouseExitedButtonCadastraProduto" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Cadastrar produto" textFill="#fdfdfd">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
                      </font>
@@ -35,7 +35,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#editOrDeleteProduct" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Deletar ou editar produto" textFill="#fdfdfd">
+                  <Button fx:id="buttonDeletaEditaProduto" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#editOrDeleteProduct" onMouseEntered="#mouseEnteredButtonDeletaEditaProduto" onMouseExited="#mouseExitedButtonDeletaEditaProduto" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Deletar ou editar produto" textFill="#fdfdfd">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
                      </font>
@@ -47,7 +47,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#deletaFuncionario" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Deletar funcionário" textFill="#fdfdfd">
+                  <Button fx:id="buttonDeletaFuncionario" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#deletaFuncionario" onMouseEntered="#mouseEnteredButtonDeletaFuncionario" onMouseExited="#mouseExitedButtonDeletaFuncionario" prefHeight="100.0" prefWidth="160.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Deletar funcionário" textFill="#fdfdfd">
                      <font>
                         <Font name="Arial Bold" size="12.0" />
                      </font>

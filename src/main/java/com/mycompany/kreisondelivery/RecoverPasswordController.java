@@ -56,15 +56,26 @@ public class RecoverPasswordController implements Initializable {
     private AnchorPane paneCode;
     @FXML
     private Label alertaCode;
+    @FXML
+    private Button btnCadastrar;
 
-    public static String getEmailPattern() {
-        return EMAIL_PATTERN;
-    }
+    @FXML
+    private void buttonBtnCadastrarEntered(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML
+    private void buttonBtnCadastrarExited(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    @FXML
+    private void mousePressedBtnCadastrar(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML
+    private void mouseReleaseBtnCadastrar(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
-    public static Pattern getPattern() {
-        return pattern;
-    }
-
+    @FXML
+    private void buttonCadastrarNovaSenhaEntered(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML
+    private void buttonCadastrarNovaSenhaExited(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    @FXML
+    private void mousePressedCadastrarNovaSenha(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML
+    private void mouseReleaseCadastrarNovaSenha(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
     @FXML
     private void screenLogin() throws IOException, ClassNotFoundException {
@@ -85,8 +96,7 @@ public class RecoverPasswordController implements Initializable {
                     setRandomCode(Integer.parseInt(value));
 
                     if(new EmailValidation().emailValidation(getEmail().getText())){
-                        new EmailClient(getEmail().getText(),"nathanaelsantos15@gmail.com","Recupera senha", getRandomCode()).sendSimpleMessage();
-
+                        new EmailClient(getEmail().getText(),"nathanaelsantos15@gmail.com","Recuperação de senha", getRandomCode()).sendSimpleMessage();
                         getStackPaneLogin().setVisible(false);
                         getStackPaneCode().setVisible(true);
                     }else{
@@ -125,6 +135,14 @@ public class RecoverPasswordController implements Initializable {
         }else{
             getAlertaCode().setVisible(true);
         }
+    }
+
+    public static String getEmailPattern() {
+        return EMAIL_PATTERN;
+    }
+
+    public static Pattern getPattern() {
+        return pattern;
     }
 
     public boolean composVazios() {
@@ -295,5 +313,13 @@ public class RecoverPasswordController implements Initializable {
 
     public void setRandom(Random random) {
         this.random = random;
+    }
+
+    public Button getBtnCadastrar() {
+        return btnCadastrar;
+    }
+
+    public void setBtnCadastrar(Button btnCadastrar) {
+        this.btnCadastrar = btnCadastrar;
     }
 }
