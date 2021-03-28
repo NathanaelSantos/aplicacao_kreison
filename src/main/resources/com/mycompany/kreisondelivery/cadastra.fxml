@@ -13,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -58,9 +59,9 @@
                   </TextField>
                </children>
             </VBox>
-            <HBox layoutX="14.0" layoutY="184.0" prefHeight="32.0" prefWidth="515.0" spacing="5.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="91.0">
+            <HBox alignment="CENTER" layoutX="14.0" layoutY="184.0" prefHeight="32.0" prefWidth="424.0" spacing="5.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="182.0">
                <children>
-                  <DatePicker fx:id="dataNascimento" editable="false" focusTraversable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="118.0" showWeekNumbers="true" style="-fx-background-color: #00b4d8;" />
+                  <DatePicker fx:id="dataNascimento" editable="false" focusTraversable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="159.0" promptText="Data de nascimento" showWeekNumbers="true" style="-fx-background-color: #00b4d8;" />
                   <MenuButton fx:id="tipoFuncionario" focusTraversable="false" lineSpacing="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #00b4d8; -fx-border-radius: 2em;" text="Tipo de funcionário" textFill="WHITE">
                     <items>
                         <RadioMenuItem fx:id="entregador" mnemonicParsing="false" text="Entregador">
@@ -74,18 +75,19 @@
                         <Font name="Arial" size="12.0" />
                      </font>
                   </MenuButton>
-                  <TextField fx:id="codAdmin" alignment="CENTER" focusTraversable="false" prefHeight="30.0" prefWidth="90.0" promptText="Código admin">
-                     <font>
-                        <Font name="Arial" size="12.0" />
-                     </font>
-                  </TextField>
+                  <StackPane prefHeight="32.0" prefWidth="93.0">
+                     <children>
+                        <PasswordField fx:id="codeAdmin" alignment="CENTER" focusTraversable="false" layoutX="10.0" layoutY="11.0" prefHeight="30.0" prefWidth="91.0" promptText="Código admin" />
+                        <TextField fx:id="txtCodeAdmin" alignment="CENTER" editable="false" prefHeight="30.0" prefWidth="91.0" promptText="Código admin" />
+                     </children>
+                  </StackPane>
+                  <ImageView fitHeight="59.0" fitWidth="17.0" onMousePressed="#mousePressedSetVisibleCode" onMouseReleased="#mouseReleaseSetVisibleCode" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/olho.png" />
+                     </image>
+                  </ImageView>
                </children>
             </HBox>
-            <Label layoutX="13.0" layoutY="168.0" text="Data de nascimento" textFill="#1b48ab">
-               <font>
-                  <Font name="Arial" size="12.0" />
-               </font>
-            </Label>
             <Label fx:id="alerta" layoutX="13.0" layoutY="228.0" prefHeight="15.0" prefWidth="210.0" text="*Campos precisam ser preenchidos!" textFill="RED" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="397.0">
                <font>
                   <Font name="Arial Bold" size="12.0" />
