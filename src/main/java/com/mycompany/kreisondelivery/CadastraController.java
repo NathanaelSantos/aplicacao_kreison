@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
+import static java.sql.Types.NULL;
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 import static model.TextFormatter.isTextFormatterString;
@@ -58,7 +59,9 @@ public class CadastraController implements Initializable {
     private RadioMenuItem gerente;
 
     @FXML
-    private TextField codAdmin;
+    private PasswordField codeAdmin;
+    @FXML
+    private TextField txtCodeAdmin;
 
     @FXML
     private Label alerta;
@@ -75,6 +78,15 @@ public class CadastraController implements Initializable {
     @FXML
     private void screenLogin() throws IOException {
         App.setRoot("Login");
+    }
+    @FXML
+    private void mousePressedSetVisibleCode(){
+        txtCodeAdmin.setVisible(true);
+        txtCodeAdmin.setText(getCodeAdmin().getText());
+    }
+    @FXML
+    private void mouseReleaseSetVisibleCode(){
+        txtCodeAdmin.setVisible(false);
     }
 
     public boolean composVazios() {
@@ -109,12 +121,12 @@ public class CadastraController implements Initializable {
         else
             getTipoFuncionario().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if (getCodAdmin().getText().isBlank())
-            getCodAdmin().setStyle("-fx-border-color: red;");
+        if (getCodeAdmin().getText().isBlank())
+            getCodeAdmin().setStyle("-fx-border-color: red;");
         else
-            getCodAdmin().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getCodeAdmin().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        return ((getNome().getText().isBlank() || getSenha().getText().isBlank() || getConfirmaSenha().getText().isBlank() || getCpf().getText().isBlank() || getCodAdmin().getText().isBlank()) ||
+        return ((getNome().getText().isBlank() || getSenha().getText().isBlank() || getConfirmaSenha().getText().isBlank() || getCpf().getText().isBlank() || getCodeAdmin().getText().isBlank()) ||
                 (getSelection().getSelectedToggle() == null || getDataNascimento().getValue() == null));
     }
 
@@ -168,20 +180,26 @@ public class CadastraController implements Initializable {
                     if (new CheckCpfdatabase().checkCpfdatabase(getCpf().getText())) {
                         getAlertDialog().alertDialog("Cpf ja cadastrado!");
                     } else {
-                        if (new CadastraController().verificaCodigoAdimin(getCodAdmin().getText())) {
+                        if (new CadastraController().verificaCodigoAdimin(getCodeAdmin().getText())) {
 
                             ReturnConnection returnConnection = new ReturnConnection();
                             Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()), getCpf().getText(), dateNascimento(), tipoFuncionario());
                             PreparedStatement pstment = null;
 
                             try {
-                                pstment = returnConnection.getConnection().prepareStatement("INSERT INTO db_usuario(nome, cpf, data_nasc, senha,tipo_usuario)  VALUES (?,?,?,?,?)");
+                                pstment = returnConnection.getConnection().prepareStatement("INSERT INTO db_usuario(nome, cpf, data_nasc, senha,tipo_usuario,codAdmin)  VALUES (?,?,?,?,?,?)");
 
                                 pstment.setString(1, user.getNome());
                                 pstment.setString(2, user.getCpf());
                                 pstment.setString(3, user.getData_nasc());
                                 pstment.setString(4, user.getPassword());
                                 pstment.setInt(5, user.getUserType());
+
+                                if(tipoFuncionario() == 1){
+                                    pstment.setInt(6, Integer.parseInt(getCodeAdmin().getText()));
+                                }else{
+                                    pstment.setNull(6, NULL);
+                                }
 
                                 pstment.executeUpdate();
 
@@ -214,6 +232,7 @@ public class CadastraController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        txtCodeAdmin.setVisible(false);
         getAlerta().setVisible(false);
         isTextFormatterString(getNome());
         addTextLimiter(getNome(), 200);
@@ -223,8 +242,12 @@ public class CadastraController implements Initializable {
         addTextLimiter(getSenha(), 6);
         isTextFormatterNumber(getConfirmaSenha());
         addTextLimiter(getConfirmaSenha(), 6);
-        isTextFormatterNumber(getCodAdmin());
-        addTextLimiter(getCodAdmin(), 6);
+        isTextFormatterNumber(getCodeAdmin());
+        addTextLimiter(getCodeAdmin(), 6);
+        isTextFormatterNumber(txtCodeAdmin);
+        addTextLimiter(txtCodeAdmin, 6);
+
+
     }
 
     public AlertDialog getAlertDialog() {
@@ -307,14 +330,6 @@ public class CadastraController implements Initializable {
         this.gerente = gerente;
     }
 
-    public TextField getCodAdmin() {
-        return codAdmin;
-    }
-
-    public void setCodAdmin(TextField codAdmin) {
-        this.codAdmin = codAdmin;
-    }
-
     public Label getAlerta() {
         return alerta;
     }
@@ -329,5 +344,13 @@ public class CadastraController implements Initializable {
 
     public void setButtonCadastrar(Button buttonCadastrar) {
         this.buttonCadastrar = buttonCadastrar;
+    }
+
+    public PasswordField getCodeAdmin() {
+        return codeAdmin;
+    }
+
+    public void setCodeAdmin(PasswordField codeAdmin) {
+        this.codeAdmin = codeAdmin;
     }
 }
