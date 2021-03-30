@@ -19,35 +19,20 @@ import java.util.ResourceBundle;
 public class DeletaFuncionarioController implements Initializable {
     private AlertDialog alertDialog = new AlertDialog();
 
-    @FXML
-    private TableView<Pessoa> deletaFuncionarioTable;
+    @FXML private TableView<Pessoa> deletaFuncionarioTable;
+    @FXML private TableColumn<Pessoa, String> nomeFuncionario;
+    @FXML private TableColumn<Pessoa, String> cpf;
+    @FXML private TableColumn<Pessoa, Integer> id;
+
+    @FXML private Button deletaFuncionario;
+    @FXML private void buttonDeleteEntered(){ getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636"); }
+    @FXML private void buttonDeleteExited(){ getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848"); }
+    @FXML private void mousePressedButtonDelete(){ getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636"); }
+    @FXML private void mouseReleaseButtonDelete(){ getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848");}
 
     @FXML
-    private TableColumn<Pessoa, String> nomeFuncionario;
+    void adminScreen() throws IOException { App.setRoot("admin"); }
 
-    @FXML
-    private TableColumn<Pessoa, String> cpf;
-
-    @FXML
-    private TableColumn<Pessoa, Integer> id;
-
-    @FXML
-    private Button deletaFuncionario;
-
-    @FXML
-    private void buttonDeleteEntered(){ deletaFuncionario.setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636"); }
-    @FXML
-    private void buttonDeleteExited(){ deletaFuncionario.setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848"); }
-    @FXML
-    private void mousePressedButtonDelete(){ deletaFuncionario.setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636"); }
-    @FXML
-    private void mouseReleaseButtonDelete(){ deletaFuncionario.setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848");}
-
-
-    @FXML
-    void adminScreen() throws IOException {
-        App.setRoot("admin");
-    }
 
     public void getUserDB() throws SQLException, ClassNotFoundException {
 
@@ -157,5 +142,13 @@ public class DeletaFuncionarioController implements Initializable {
 
     public void setId(TableColumn<Pessoa, Integer> id) {
         this.id = id;
+    }
+
+    public Button getDeletaFuncionario() {
+        return deletaFuncionario;
+    }
+
+    public void setDeletaFuncionario(Button deletaFuncionario) {
+        this.deletaFuncionario = deletaFuncionario;
     }
 }

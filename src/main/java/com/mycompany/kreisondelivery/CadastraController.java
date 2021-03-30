@@ -28,66 +28,33 @@ public class CadastraController implements Initializable {
 
     private AlertDialog alertDialog = new AlertDialog();
 
-    @FXML
-    private Button buttonCadastrar;
+    @FXML private Button buttonCadastrar;
+    @FXML private TextField nome;
+    @FXML private PasswordField senha;
+    @FXML private PasswordField confirmaSenha;
+    @FXML private TextField cpf;
+    @FXML private DatePicker dataNascimento;
+    @FXML private MenuButton tipoFuncionario;
+    @FXML private RadioMenuItem entregador;
+    @FXML private ToggleGroup selection;
+    @FXML private RadioMenuItem gerente;
+    @FXML private PasswordField codeAdmin;
+    @FXML private TextField txtCodeAdmin;
+    @FXML private Label alerta;
 
-    @FXML
-    private TextField nome;
-
-    @FXML
-    private PasswordField senha;
-
-    @FXML
-    private PasswordField confirmaSenha;
-
-    @FXML
-    private TextField cpf;
-
-    @FXML
-    private DatePicker dataNascimento;
-
-    @FXML
-    private MenuButton tipoFuncionario;
-
-    @FXML
-    private RadioMenuItem entregador;
-
-    @FXML
-    private ToggleGroup selection;
-
-    @FXML
-    private RadioMenuItem gerente;
-
-    @FXML
-    private PasswordField codeAdmin;
-
-    @FXML
-    private TextField txtCodeAdmin;
-
-    @FXML
-    private Label alerta;
-
-    @FXML
-    private void buttonCadastrarEntered(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
-    @FXML
-    private void buttonCadastrarExited(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
-    @FXML
-    private void mousePressedButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
-    @FXML
-    private void mouseReleaseButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
-
-    @FXML
-    private void screenLogin() throws IOException {
-        App.setRoot("Login");
+    @FXML private void buttonCadastrarEntered(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
+    @FXML private void buttonCadastrarExited(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    @FXML private void mousePressedButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
+    @FXML private void mouseReleaseButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML private void mouseReleaseSetVisibleCode(){
+        getTxtCodeAdmin().setVisible(false);
     }
-    @FXML
-    private void mousePressedSetVisibleCode(){
-        txtCodeAdmin.setVisible(true);
-        txtCodeAdmin.setText(getCodeAdmin().getText());
-    }
-    @FXML
-    private void mouseReleaseSetVisibleCode(){
-        txtCodeAdmin.setVisible(false);
+
+    @FXML private void screenLogin() throws IOException { App.setRoot("Login"); }
+
+    @FXML private void mousePressedSetVisibleCode(){
+        getTxtCodeAdmin().setVisible(true);
+        getTxtCodeAdmin().setText(getCodeAdmin().getText());
     }
 
     public boolean composVazios() {
@@ -141,9 +108,7 @@ public class CadastraController implements Initializable {
         return tipoFunc;
     }
 
-    public String dateNascimento() {
-        return getDataNascimento().getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    }
+    public String dateNascimento() { return getDataNascimento().getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); }
 
     public boolean verificaCodigoAdimin(String codAdmin) {
 
@@ -233,7 +198,7 @@ public class CadastraController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        txtCodeAdmin.setVisible(false);
+        getTxtCodeAdmin().setVisible(false);
         getAlerta().setVisible(false);
         isTextFormatterString(getNome());
         addTextLimiter(getNome(), 200);
@@ -245,9 +210,8 @@ public class CadastraController implements Initializable {
         addTextLimiter(getConfirmaSenha(), 6);
         isTextFormatterNumber(getCodeAdmin());
         addTextLimiter(getCodeAdmin(), 6);
-        isTextFormatterNumber(txtCodeAdmin);
-        addTextLimiter(txtCodeAdmin, 6);
-
+        isTextFormatterNumber(getTxtCodeAdmin());
+        addTextLimiter(getTxtCodeAdmin(), 6);
 
     }
 
@@ -353,5 +317,13 @@ public class CadastraController implements Initializable {
 
     public void setCodeAdmin(PasswordField codeAdmin) {
         this.codeAdmin = codeAdmin;
+    }
+
+    public TextField getTxtCodeAdmin() {
+        return txtCodeAdmin;
+    }
+
+    public void setTxtCodeAdmin(TextField txtCodeAdmin) {
+        this.txtCodeAdmin = txtCodeAdmin;
     }
 }

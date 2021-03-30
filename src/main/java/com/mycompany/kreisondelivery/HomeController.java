@@ -21,27 +21,16 @@ public class HomeController implements Initializable {
 
     private static boolean onScreenLogin = false;
 
-    @FXML
-    private AnchorPane telaLogin;
-    @FXML
-    private TextField login;
-    @FXML
-    private PasswordField senha;
-    @FXML
-    private Label alerta;
-    @FXML
-    private Label alertaCpf;
-    @FXML
-    private Button buttonAdmin;
-    @FXML
-    private TextField codAdmin;
-    @FXML
-    private Button buttonConsultaEstoque;
-    @FXML
-    private Button buttonNovaEntrega;
-    @FXML
-    private Button btnLogin;
-
+    @FXML private AnchorPane telaLogin;
+    @FXML private TextField login;
+    @FXML private PasswordField senha;
+    @FXML private Label alerta;
+    @FXML private Label alertaCpf;
+    @FXML private Button buttonAdmin;
+    @FXML private TextField codAdmin;
+    @FXML private Button buttonConsultaEstoque;
+    @FXML private Button buttonNovaEntrega;
+    @FXML private Button btnLogin;
 
     public static boolean isOnScreenLogin() {
         return onScreenLogin;
@@ -51,26 +40,14 @@ public class HomeController implements Initializable {
         HomeController.onScreenLogin = onScreenLogin;
     }
 
-
-    @FXML
-    private void screenLogin() throws IOException {
-        App.setRoot("Login");
-    }
+    @FXML private void screenLogin() throws IOException { App.setRoot("Login"); }
     
-    @FXML
-    private void novaEntrega() throws IOException {
-        App.setRoot("novaEntrega");
-    }
+    @FXML private void novaEntrega() throws IOException { App.setRoot("novaEntrega"); }
     
-    @FXML
-    private void estoqueScreen() throws IOException {
-        App.setRoot("estoque");
-    }
+    @FXML private void estoqueScreen() throws IOException { App.setRoot("estoque"); }
 
-    @FXML
-    private void adminScreen() throws IOException {
-        App.setRoot("admin");
-    }
+    @FXML private void adminScreen() throws IOException { App.setRoot("admin"); }
+
     @FXML
     private void buttonLoginEntered(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color:  #009cba; -fx-text-fill: #ffffff"); }
     @FXML
@@ -91,8 +68,6 @@ public class HomeController implements Initializable {
     private void mouseEnteredButtonNovaEntrega() throws IOException { getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc"); }
     @FXML
     private void mouseExitedButtonNovaEntrega() throws IOException { getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8"); }
-
-
 
 
     @FXML

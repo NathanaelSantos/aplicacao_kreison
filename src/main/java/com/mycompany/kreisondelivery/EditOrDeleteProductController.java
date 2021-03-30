@@ -28,44 +28,23 @@ public class EditOrDeleteProductController implements Initializable {
 
     private AlertDialog alertDialog = new AlertDialog();
 
-    @FXML
-    private TableView<Produto> deliveryTable;
+    @FXML private TableView<Produto> deliveryTable;
+    @FXML private TableColumn<Produto, String> deliveryMan;
+    @FXML private TableColumn<Produto, String> priceProduct;
+    @FXML private TableColumn<Produto, Integer> remainingQuantity;
+    @FXML private TableColumn<Produto, Integer> idProduct;
 
-    @FXML
-    private TableColumn<Produto, String> deliveryMan;
+    @FXML private TextField newNameProduct;
+    @FXML private TextField newPrice;
+    @FXML private TextField quantidade;
 
-    @FXML
-    private TableColumn<Produto, String> priceProduct;
+    @FXML private StackPane alertModificaProduto;
 
-    @FXML
-    private TableColumn<Produto, Integer> remainingQuantity;
-
-    @FXML
-    private TableColumn<Produto, Integer> idProduct;
-
-    @FXML
-    private TextField newNameProduct;
-
-    @FXML
-    private TextField newPrice;
-
-    @FXML
-    private TextField quantidade;
-
-    @FXML
-    private StackPane alertModificaProduto;
-
-    @FXML
-    private Button btnEditar;
-
-    @FXML
-    private Button btnDeletar;
+    @FXML private Button btnEditar;
+    @FXML private Button btnDeletar;
 
 
-    @FXML
-    private void adminScreen() throws IOException, ClassNotFoundException {
-        App.setRoot("admin");
-    }
+    @FXML private void adminScreen() throws IOException, ClassNotFoundException { App.setRoot("admin"); }
 
     @FXML
     public void editProduct(){

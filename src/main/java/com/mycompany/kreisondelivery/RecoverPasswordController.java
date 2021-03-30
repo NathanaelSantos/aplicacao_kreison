@@ -30,57 +30,38 @@ public class RecoverPasswordController implements Initializable {
     private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final Pattern pattern = Pattern.compile(getEmailPattern(), Pattern.CASE_INSENSITIVE);
 
-    @FXML
-    private StackPane stackPaneLogin;
-    @FXML
-    private StackPane stackPaneCode;
-    @FXML
-    private AnchorPane paneLogin;
-    @FXML
-    private TextField cpf;
-    @FXML
-    private TextField email;
-    @FXML
-    private PasswordField newPassword;
-    @FXML
-    private PasswordField confPassword;
-    @FXML
-    private TextField codeEmail;
-    @FXML
-    private Label alerta;
-    @FXML
-    private Label alertaCpf;
-    @FXML
-    private Button btnCadastrarNovaSenha;
-    @FXML
-    private AnchorPane paneCode;
-    @FXML
-    private Label alertaCode;
-    @FXML
-    private Button btnCadastrar;
+    @FXML private StackPane stackPaneLogin;
+    @FXML private StackPane stackPaneCode;
+    @FXML private AnchorPane paneLogin;
+    @FXML private AnchorPane paneCode;
 
-    @FXML
-    private void buttonBtnCadastrarEntered(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
-    @FXML
-    private void buttonBtnCadastrarExited(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
-    @FXML
-    private void mousePressedBtnCadastrar(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
-    @FXML
-    private void mouseReleaseBtnCadastrar(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML private TextField cpf;
+    @FXML private TextField email;
+    @FXML private TextField codeEmail;
 
-    @FXML
-    private void buttonCadastrarNovaSenhaEntered(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
-    @FXML
-    private void buttonCadastrarNovaSenhaExited(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
-    @FXML
-    private void mousePressedCadastrarNovaSenha(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
-    @FXML
-    private void mouseReleaseCadastrarNovaSenha(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML private PasswordField newPassword;
+    @FXML private PasswordField confPassword;
 
-    @FXML
-    private void screenLogin() throws IOException, ClassNotFoundException {
-        App.setRoot("Login");
-    }
+    @FXML private Label alerta;
+    @FXML private Label alertaCpf;
+    @FXML private Label alertaCode;
+
+    @FXML private Button btnCadastrarNovaSenha;
+    @FXML private Button btnCadastrar;
+
+
+    @FXML private void buttonBtnCadastrarEntered(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML private void buttonBtnCadastrarExited(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    @FXML private void mousePressedBtnCadastrar(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML private void mouseReleaseBtnCadastrar(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+
+    @FXML private void buttonCadastrarNovaSenhaEntered(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML private void buttonCadastrarNovaSenhaExited(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    @FXML private void mousePressedCadastrarNovaSenha(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    @FXML private void mouseReleaseCadastrarNovaSenha(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+
+    @FXML private void screenLogin() throws IOException, ClassNotFoundException { App.setRoot("Login"); }
+    
     @FXML
     private void btnSendCodeEmail() throws UnirestException {
         if(composVazios()){

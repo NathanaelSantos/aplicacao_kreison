@@ -22,38 +22,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-/**
- * FXML Controller class
- *
- * @author natha
- */
 public class EstoqueController implements Initializable {
 
     private Integer valueEstoque = 0;
     private Integer valueVenda = 0;
-    @FXML
-    private PieChart pieChart;
+
+    @FXML private PieChart pieChart;
+    @FXML private TableView<Produto> table_estoque;
+    @FXML private TableColumn<Produto, String> especproduto;
+    @FXML private TableColumn<Produto, Integer> qtd_restante;
+    @FXML private TableColumn<Produto, Float> precoProduto;
+    @FXML private TableColumn<Produto, Integer> total_vendas;
 
     @FXML
-    private TableView<Produto> table_estoque;
-
-    @FXML
-    private TableColumn<Produto, String> especproduto;
-
-    @FXML
-    private TableColumn<Produto, Integer> qtd_restante;
-
-    @FXML
-    private TableColumn<Produto, Float> precoProduto;
-
-    @FXML
-    private TableColumn<Produto, Integer> total_vendas;
-
-
-    @FXML
-    private void homeScreen() throws IOException {
-        App.setRoot("home");
-    }
+    private void homeScreen() throws IOException { App.setRoot("home"); }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

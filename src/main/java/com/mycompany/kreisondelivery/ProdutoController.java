@@ -21,38 +21,22 @@ import java.util.ResourceBundle;
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.*;
 
-
-
 public class ProdutoController implements Initializable {
 
     private boolean check = false;
 
-    @FXML
-    private TextField nomeProduto;
-    @FXML
-    private TextField quantidadeProduto;
-    @FXML
-    private TextField precoProduto;
-    @FXML
-    private Button buttonCadastrarProduto;
+    @FXML private TextField nomeProduto;
+    @FXML private TextField quantidadeProduto;
+    @FXML private TextField precoProduto;
+    @FXML private Button buttonCadastrarProduto;
 
-    @FXML
-    private void homeScreen() throws IOException {
-        App.setRoot("home");
-    }
-    @FXML
-    private void adminScreen() throws IOException {
-        App.setRoot("admin");
-    }
+    @FXML private void homeScreen() throws IOException { App.setRoot("home"); }
+    @FXML private void adminScreen() throws IOException { App.setRoot("admin"); }
 
-    @FXML
-    private void buttonCadastrarProdutoEntered(){ buttonCadastrarProduto.setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
-    @FXML
-    private void buttonCadastrarProdutoExited(){ buttonCadastrarProduto.setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
-    @FXML
-    private void mousePressedButtonCadastrarProduto(){ buttonCadastrarProduto.setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
-    @FXML
-    private void mouseReleaseButtonCadastrarProduto(){ buttonCadastrarProduto.setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML private void buttonCadastrarProdutoEntered(){ getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
+    @FXML private void buttonCadastrarProdutoExited(){ getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    @FXML private void mousePressedButtonCadastrarProduto(){ getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
+    @FXML private void mouseReleaseButtonCadastrarProduto(){ getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
     public void composVazios() throws SQLException, ClassNotFoundException {
         boolean validate = false;
@@ -156,5 +140,13 @@ public class ProdutoController implements Initializable {
 
     public void setPrecoProduto(TextField precoProduto) {
         this.precoProduto = precoProduto;
+    }
+
+    public Button getButtonCadastrarProduto() {
+        return buttonCadastrarProduto;
+    }
+
+    public void setButtonCadastrarProduto(Button buttonCadastrarProduto) {
+        this.buttonCadastrarProduto = buttonCadastrarProduto;
     }
 }

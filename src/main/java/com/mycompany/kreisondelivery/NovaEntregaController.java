@@ -5,23 +5,27 @@
  */
 package com.mycompany.kreisondelivery;
 
-import java.io.IOException;
-import java.net.URL;
-import java.sql.*;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.AlertDialog;
-import model.LoginConnection;
 import model.ReturnConnection;
-import model.StringUtil;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ResourceBundle;
 
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
@@ -32,34 +36,21 @@ public class NovaEntregaController implements Initializable {
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private AlertDialog alertDialog = new AlertDialog();
 
-    @FXML
-    private TableView<Produto> table_entegador;
-    @FXML
-    private TableView<Pessoa> tb_nome_entregador;
-    @FXML
-    private TableColumn<Pessoa, String> nome_entregador;
-    @FXML
-    private TableColumn<Produto, String> entregador;
-    @FXML
-    private TableColumn<Produto, Integer> qtd_restante;
-    @FXML
-    private TableColumn<Produto, String> precoProduto;
-    @FXML
-    private TableColumn<Produto, Integer> idProduto;
-    @FXML
-    private TextField endereco_entrega;
-    @FXML
-    private TextField nome_cliente;
-    @FXML
-    private TextField bairro;
-    @FXML
-    private TextField cep;
-    @FXML
-    private TextField numero;
-    @FXML
-    private TextField quantidade;
-    @FXML
-    private Button cadastraEntrega;
+    @FXML private TableView<Produto> table_entegador;
+    @FXML private TableView<Pessoa> tb_nome_entregador;
+    @FXML private TableColumn<Pessoa, String> nome_entregador;
+    @FXML private TableColumn<Produto, String> entregador;
+    @FXML private TableColumn<Produto, Integer> qtd_restante;
+    @FXML private TableColumn<Produto, String> precoProduto;
+    @FXML private TableColumn<Produto, Integer> idProduto;
+
+    @FXML private TextField endereco_entrega;
+    @FXML private TextField nome_cliente;
+    @FXML private TextField bairro;
+    @FXML private TextField cep;
+    @FXML private TextField numero;
+    @FXML private TextField quantidade;
+    @FXML private Button cadastraEntrega;
 
     @FXML
     private void buttonCadastraEntregaEntered(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
@@ -70,10 +61,7 @@ public class NovaEntregaController implements Initializable {
     @FXML
     private void mouseReleaseButtonCadastraEntrega(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
-    @FXML
-    private void homeScreen() throws IOException {
-        App.setRoot("home");
-    }
+    @FXML private void homeScreen() throws IOException { App.setRoot("home"); }
 
     public boolean emptyTable(){
         boolean validate = false;

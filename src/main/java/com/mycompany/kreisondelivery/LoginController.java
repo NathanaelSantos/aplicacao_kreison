@@ -8,40 +8,27 @@ package com.mycompany.kreisondelivery;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import model.*;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.util.ResourceBundle;
-import java.util.concurrent.atomic.AtomicReference;
 
 import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 
 public class LoginController implements Initializable {
 
-    @FXML
-    private Button btnLogin;
-    @FXML
-    private TextField login;
-    @FXML
-    private PasswordField senha;
-    @FXML
-    private Label alerta;
-    @FXML
-    private Label alertaCpf;
-    @FXML
-    private Label txtCadastra;
-    @FXML
-    private Label recoverPassword;
+    @FXML private Button btnLogin;
+    @FXML private TextField login;
+    @FXML private PasswordField senha;
 
+    @FXML private Label alerta;
+    @FXML private Label alertaCpf;
+    @FXML private Label txtCadastra;
+    @FXML private Label recoverPassword;
 
-    @FXML
-    private void recoverPassword() throws IOException {
-        App.setRoot("recoverPassword");
-    }
+    @FXML private void recoverPassword() throws IOException {App.setRoot("recoverPassword"); }
 
     @FXML
     private void switchToPrimary() throws Exception {
@@ -74,27 +61,17 @@ public class LoginController implements Initializable {
         }
     }
 
-    @FXML
-    private void mouseEnteredTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill: #019AB8");}
-    @FXML
-    private void mouseExitedTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill-color: #019ab8");}
-    @FXML
-    private void mouseEnteredRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill: #019ab8"); }
-    @FXML
-    private void mouseExitedRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill-color: #00b4d8"); }
-    @FXML
-    private void buttonLoginEntered(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8"); }
-    @FXML
-    private void setButtonLoginExited(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
-    @FXML
-    private void mousePressedButtonLogin(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8"); }
-    @FXML
-    private void mouseReleaseButtonLogin(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML private void mouseEnteredTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill: #019AB8");}
+    @FXML private void mouseExitedTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill-color: #019ab8");}
+    @FXML private void mouseEnteredRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill: #019ab8"); }
+    @FXML private void mouseExitedRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill-color: #00b4d8"); }
+    @FXML private void buttonLoginEntered(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8"); }
+    @FXML private void setButtonLoginExited(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML private void mousePressedButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8"); }
+    @FXML private void mouseReleaseButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
     @FXML
-    private void cadastrar() throws IOException {
-        App.setRoot("cadastra");
-    }
+    private void cadastrar() throws IOException { App.setRoot("cadastra"); }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -154,5 +131,13 @@ public class LoginController implements Initializable {
 
     public void setRecoverPassword(Label recoverPassword) {
         this.recoverPassword = recoverPassword;
+    }
+
+    public Button getBtnLogin() {
+        return btnLogin;
+    }
+
+    public void setBtnLogin(Button btnLogin) {
+        this.btnLogin = btnLogin;
     }
 }
