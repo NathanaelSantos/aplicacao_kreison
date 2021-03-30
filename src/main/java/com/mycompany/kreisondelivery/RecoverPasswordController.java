@@ -61,7 +61,7 @@ public class RecoverPasswordController implements Initializable {
     @FXML private void mouseReleaseCadastrarNovaSenha(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
     @FXML private void screenLogin() throws IOException, ClassNotFoundException { App.setRoot("Login"); }
-    
+
     @FXML
     private void btnSendCodeEmail() throws UnirestException {
         if(composVazios()){
