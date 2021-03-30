@@ -114,26 +114,31 @@ public class RecoverPasswordController implements Initializable {
     @FXML
     private void cadastraNovaSenha() throws Exception {
 
-        if(Integer.parseInt(getCodeEmail().getText()) == getRandomCode()){
-            getAlertaCode().setVisible(false);
-            ReturnConnection connection = new ReturnConnection();
-            PreparedStatement preparedStatement = null;
-            try {
-                preparedStatement = connection.getConnection().prepareStatement("UPDATE db_usuario SET senha = ? WHERE cpf = ?");
-                preparedStatement.setString(1,new StringUtil().gerarHash(getNewPassword().getText()));
-                preparedStatement.setString(2, getCpf().getText());
-                preparedStatement.executeUpdate();
-
-                getAlertDialog().alertDialog("Senha alterada com sucesso!");
-                screenLogin();
-
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            } finally {
-                connection.closeConnection(connection.getConnection(),preparedStatement);
-            }
+        if(getCodeEmail().getText().isBlank()){
+            getCodeEmail().setStyle("-fx-border-color: red;");
         }else{
-            getAlertaCode().setVisible(true);
+            getCodeEmail().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);");
+            if(Integer.parseInt(getCodeEmail().getText()) == getRandomCode()){
+                getAlertaCode().setVisible(false);
+                ReturnConnection connection = new ReturnConnection();
+                PreparedStatement preparedStatement = null;
+                try {
+                    preparedStatement = connection.getConnection().prepareStatement("UPDATE db_usuario SET senha = ? WHERE cpf = ?");
+                    preparedStatement.setString(1,new StringUtil().gerarHash(getNewPassword().getText()));
+                    preparedStatement.setString(2, getCpf().getText());
+                    preparedStatement.executeUpdate();
+
+                    getAlertDialog().alertDialog("Senha alterada com sucesso!");
+                    screenLogin();
+
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                } finally {
+                    connection.closeConnection(connection.getConnection(),preparedStatement);
+                }
+            }else{
+                getAlertaCode().setVisible(true);
+            }
         }
     }
 

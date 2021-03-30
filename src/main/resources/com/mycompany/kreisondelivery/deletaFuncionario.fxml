@@ -34,7 +34,7 @@
       </StackPane>
       <VBox alignment="CENTER" fillWidth="false" layoutY="431.0" prefHeight="69.0" prefWidth="800.0" spacing="10.0" style="-fx-background-color: #00b4d8;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#deletaFuncionario" prefHeight="30.0" prefWidth="468.0" style="-fx-background-color: #ff4848; -fx-background-radius: 1em;" text="Deletar funcionário" textFill="WHITE">
+            <Button fx:id="deletaFuncionario" mnemonicParsing="false" onAction="#deletaFuncionario" onMouseEntered="#buttonDeleteEntered" onMouseExited="#buttonDeleteExited" onMousePressed="#mousePressedButtonDelete" onMouseReleased="#mouseReleaseButtonDelete" prefHeight="30.0" prefWidth="468.0" style="-fx-background-color: #ff4848; -fx-background-radius: 1em;" text="Deletar funcionário" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="12.0" />
                </font></Button>

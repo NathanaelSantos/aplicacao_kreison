@@ -72,11 +72,11 @@ public class HomeController implements Initializable {
         App.setRoot("admin");
     }
     @FXML
-    private void buttonLoginEntered(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color:  #e0e0e0"); }
+    private void buttonLoginEntered(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color:  #009cba; -fx-text-fill: #ffffff"); }
     @FXML
     private void setButtonLoginExited(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
     @FXML
-    private void mousePressedButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color:  #d6d6d6"); }
+    private void mousePressedButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #038ca9"); }
     @FXML
     private void mouseReleaseButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
     @FXML

@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.AlertDialog;
 import model.ReturnConnection;
@@ -33,6 +30,18 @@ public class DeletaFuncionarioController implements Initializable {
 
     @FXML
     private TableColumn<Pessoa, Integer> id;
+
+    @FXML
+    private Button deletaFuncionario;
+
+    @FXML
+    private void buttonDeleteEntered(){ deletaFuncionario.setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636"); }
+    @FXML
+    private void buttonDeleteExited(){ deletaFuncionario.setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848"); }
+    @FXML
+    private void mousePressedButtonDelete(){ deletaFuncionario.setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636"); }
+    @FXML
+    private void mouseReleaseButtonDelete(){ deletaFuncionario.setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848");}
 
 
     @FXML
