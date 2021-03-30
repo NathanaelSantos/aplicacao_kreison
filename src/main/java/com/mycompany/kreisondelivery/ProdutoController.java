@@ -8,6 +8,7 @@ package com.mycompany.kreisondelivery;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import model.ReturnConnection;
 
@@ -33,6 +34,9 @@ public class ProdutoController implements Initializable {
     @FXML
     private TextField precoProduto;
     @FXML
+    private Button buttonCadastrarProduto;
+
+    @FXML
     private void homeScreen() throws IOException {
         App.setRoot("home");
     }
@@ -40,6 +44,15 @@ public class ProdutoController implements Initializable {
     private void adminScreen() throws IOException {
         App.setRoot("admin");
     }
+
+    @FXML
+    private void buttonCadastrarProdutoEntered(){ buttonCadastrarProduto.setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
+    @FXML
+    private void buttonCadastrarProdutoExited(){ buttonCadastrarProduto.setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    @FXML
+    private void mousePressedButtonCadastrarProduto(){ buttonCadastrarProduto.setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
+    @FXML
+    private void mouseReleaseButtonCadastrarProduto(){ buttonCadastrarProduto.setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
     public void composVazios() throws SQLException, ClassNotFoundException {
         boolean validate = false;

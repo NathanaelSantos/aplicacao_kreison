@@ -22,8 +22,6 @@ import static model.TextFormatter.isTextFormatterNumber;
 
 public class LoginController implements Initializable {
 
-    private static boolean setVisibleImgDonate = false;
-
     @FXML
     private Button btnLogin;
     @FXML
@@ -38,26 +36,11 @@ public class LoginController implements Initializable {
     private Label txtCadastra;
     @FXML
     private Label recoverPassword;
-    @FXML
-    private ImageView imgDonate;
-    @FXML
-    private Label donate;
 
 
     @FXML
     private void recoverPassword() throws IOException {
         App.setRoot("recoverPassword");
-    }
-
-    @FXML
-    private void setVisibleImgDonate() throws IOException {
-        if(!setVisibleImgDonate){
-            imgDonate.setVisible(true);
-            setVisibleImgDonate = true;
-        }else {
-            imgDonate.setVisible(false);
-            setVisibleImgDonate = false;
-        }
     }
 
     @FXML
@@ -92,26 +75,21 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void mouseEnteredTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill:  #037f99");}
+    private void mouseEnteredTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill: #019AB8");}
     @FXML
-    private void mouseExitedTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill-color:  #ffffff");}
+    private void mouseExitedTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill-color: #019ab8");}
     @FXML
-    private void mouseEnteredRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill:  #038ca9"); }
+    private void mouseEnteredRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill: #019ab8"); }
     @FXML
-    private void mouseExitedRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill-color:  #ffffff"); }
+    private void mouseExitedRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill-color: #00b4d8"); }
     @FXML
-    private void buttonLoginEntered(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color:  #e0e0e0"); }
+    private void buttonLoginEntered(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8"); }
     @FXML
-    private void setButtonLoginExited(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
+    private void setButtonLoginExited(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
     @FXML
-    private void mousePressedButtonLogin(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color:  #d6d6d6"); }
+    private void mousePressedButtonLogin(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8"); }
     @FXML
-    private void mouseReleaseButtonLogin(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
-    @FXML
-    private void donateEntered(){ donate.setStyle("-fx-background-radius: 3em; -fx-background-color:  #0185a2"); }
-    @FXML
-    private void donateExited(){ donate.setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
-
+    private void mouseReleaseButtonLogin(){ btnLogin.setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
     @FXML
     private void cadastrar() throws IOException {
@@ -121,7 +99,6 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        imgDonate.setVisible(false);
         getAlerta().setVisible(false);
         getAlertaCpf().setVisible(false);
 

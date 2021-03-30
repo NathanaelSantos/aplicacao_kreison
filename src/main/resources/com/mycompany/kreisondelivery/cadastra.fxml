@@ -81,7 +81,7 @@
                         <TextField fx:id="txtCodeAdmin" alignment="CENTER" editable="false" prefHeight="30.0" prefWidth="91.0" promptText="Código admin" />
                      </children>
                   </StackPane>
-                  <ImageView fitHeight="59.0" fitWidth="17.0" onMousePressed="#mousePressedSetVisibleCode" onMouseReleased="#mouseReleaseSetVisibleCode" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="iconVisible" fitHeight="20.0" fitWidth="15.0" onMousePressed="#mousePressedSetVisibleCode" onMouseReleased="#mouseReleaseSetVisibleCode" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../images/olho.png" />
                      </image>

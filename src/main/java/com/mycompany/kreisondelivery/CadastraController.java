@@ -60,6 +60,7 @@ public class CadastraController implements Initializable {
 
     @FXML
     private PasswordField codeAdmin;
+
     @FXML
     private TextField txtCodeAdmin;
 
@@ -67,11 +68,11 @@ public class CadastraController implements Initializable {
     private Label alerta;
 
     @FXML
-    private void buttonCadastrarEntered(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    private void buttonCadastrarEntered(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
     @FXML
     private void buttonCadastrarExited(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
     @FXML
-    private void mousePressedButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    private void mousePressedButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
     @FXML
     private void mouseReleaseButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
 
@@ -99,7 +100,7 @@ public class CadastraController implements Initializable {
         if (getSenha().getText().isBlank())
             getSenha().setStyle("-fx-border-color: red;");
         else
-            getSenha().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getSenha().setStyle("-fx-border-color: rgba(27,72,171,0.4)");
 
         if (getConfirmaSenha().getText().isBlank())
             getConfirmaSenha().setStyle("-fx-border-color: red;");
