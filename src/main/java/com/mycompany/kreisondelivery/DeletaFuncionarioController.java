@@ -19,20 +19,42 @@ import java.util.ResourceBundle;
 public class DeletaFuncionarioController implements Initializable {
     private AlertDialog alertDialog = new AlertDialog();
 
-    @FXML private TableView<Pessoa> deletaFuncionarioTable;
-    @FXML private TableColumn<Pessoa, String> nomeFuncionario;
-    @FXML private TableColumn<Pessoa, String> cpf;
-    @FXML private TableColumn<Pessoa, Integer> id;
-
-    @FXML private Button deletaFuncionario;
-    @FXML private void buttonDeleteEntered(){ getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636"); }
-    @FXML private void buttonDeleteExited(){ getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848"); }
-    @FXML private void mousePressedButtonDelete(){ getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636"); }
-    @FXML private void mouseReleaseButtonDelete(){ getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848");}
+    @FXML
+    private TableView<Pessoa> deletaFuncionarioTable;
+    @FXML
+    private TableColumn<Pessoa, String> nomeFuncionario;
+    @FXML
+    private TableColumn<Pessoa, String> cpf;
+    @FXML
+    private TableColumn<Pessoa, Integer> id;
 
     @FXML
-    void adminScreen() throws IOException { App.setRoot("admin"); }
+    private Button deletaFuncionario;
 
+    @FXML
+    private void buttonDeleteEntered() {
+        getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636");
+    }
+
+    @FXML
+    private void buttonDeleteExited() {
+        getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848");
+    }
+
+    @FXML
+    private void mousePressedButtonDelete() {
+        getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #d93636");
+    }
+
+    @FXML
+    private void mouseReleaseButtonDelete() {
+        getDeletaFuncionario().setStyle("-fx-background-radius: 3em; -fx-background-color: #ff4848");
+    }
+
+    @FXML
+    void adminScreen() throws IOException {
+        App.setRoot("admin");
+    }
 
     public void getUserDB() throws SQLException, ClassNotFoundException {
 
@@ -42,29 +64,30 @@ public class DeletaFuncionarioController implements Initializable {
 
         ObservableList<Pessoa> oblist = FXCollections.observableArrayList();
 
+        preparedStatement = returnConnection.getConnection()
+                .prepareStatement("SELECT nome,cpf, id_usuario FROM db_usuario");
+        resultSet = preparedStatement.executeQuery();
 
-            preparedStatement = returnConnection.getConnection().prepareStatement("SELECT nome,cpf, id_usuario FROM db_usuario");
-            resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            oblist.add(new Pessoa(resultSet.getString("cpf"), resultSet.getString("nome"),
+                    resultSet.getInt("id_usuario")));
+        }
 
-            while (resultSet.next()){
-                oblist.add(new Pessoa(resultSet.getString("cpf"),resultSet.getString("nome"),resultSet.getInt("id_usuario")));
-            }
+        this.getNomeFuncionario().setCellValueFactory(new PropertyValueFactory<>("nome"));
+        this.getCpf().setCellValueFactory(new PropertyValueFactory<>("cpf"));
+        this.getId().setCellValueFactory(new PropertyValueFactory<>("id_usuario"));
 
-            this.getNomeFuncionario().setCellValueFactory(new PropertyValueFactory<>("nome"));
-            this.getCpf().setCellValueFactory(new PropertyValueFactory<>("cpf"));
-            this.getId().setCellValueFactory(new PropertyValueFactory<>("id_usuario"));
+        getDeletaFuncionarioTable().getItems().setAll(oblist);
 
-            getDeletaFuncionarioTable().getItems().setAll(oblist);
-
-            returnConnection.closeConnection(returnConnection.getConnection(),preparedStatement);
+        returnConnection.closeConnection(returnConnection.getConnection(), preparedStatement);
 
     }
 
-    public void deletaFuncionario()  {
+    public void deletaFuncionario() {
 
-        if(getDeletaFuncionarioTable().getSelectionModel().isEmpty()){
+        if (getDeletaFuncionarioTable().getSelectionModel().isEmpty()) {
             getAlertDialog().alertDialog("Selecione uma linha da tabela!");
-        }else {
+        } else {
             Alert dialogoInfo = new Alert(Alert.AlertType.CONFIRMATION);
             dialogoInfo.setHeaderText("Deseja mesmo deletar o funcionário selecionado?");
 
@@ -73,8 +96,10 @@ public class DeletaFuncionarioController implements Initializable {
                 PreparedStatement preparedStatement = null;
 
                 try {
-                    preparedStatement = connection.getConnection().prepareStatement("DELETE FROM db_usuario WHERE id_usuario = ?");
-                    preparedStatement.setInt(1, getDeletaFuncionarioTable().getSelectionModel().getSelectedItem().getId_usuario());
+                    preparedStatement = connection.getConnection()
+                            .prepareStatement("DELETE FROM db_usuario WHERE id_usuario = ?");
+                    preparedStatement.setInt(1,
+                            getDeletaFuncionarioTable().getSelectionModel().getSelectedItem().getId_usuario());
                     preparedStatement.executeUpdate();
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();

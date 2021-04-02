@@ -6,8 +6,9 @@ public class Pessoa {
     private int id_usuario;
     private String data_nasc;
 
+    public Pessoa() {
+    }
 
-    public Pessoa() { }
     public Pessoa(String nome) {
         this.setNome(nome);
     }
@@ -39,7 +40,6 @@ public class Pessoa {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
 
     public String getData_nasc() {
         return data_nasc;

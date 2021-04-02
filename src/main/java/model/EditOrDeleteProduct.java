@@ -11,16 +11,17 @@ import java.sql.SQLException;
 public class EditOrDeleteProduct {
     AlertDialog alertDialog = new AlertDialog();
 
-    public void editProduct(String newNameProduct, float priceProduct, int quantidade, int idProduct){
+    public void editProduct(String newNameProduct, float priceProduct, int quantidade, int idProduct) {
         ReturnConnection returnConnection = new ReturnConnection();
         PreparedStatement pstment = null;
 
         try {
-            pstment = returnConnection.getConnection().prepareStatement("UPDATE db_produto SET nome = ?,preco = ?,quantidade =? WHERE id_produto = ?");
-            pstment.setString(1,newNameProduct);
+            pstment = returnConnection.getConnection()
+                    .prepareStatement("UPDATE db_produto SET nome = ?,preco = ?,quantidade =? WHERE id_produto = ?");
+            pstment.setString(1, newNameProduct);
             pstment.setFloat(2, priceProduct);
-            pstment.setInt(3,quantidade);
-            pstment.setInt(4,idProduct);
+            pstment.setInt(3, quantidade);
+            pstment.setInt(4, idProduct);
             pstment.executeUpdate();
 
             alertDialog.alertDialog("Produto alterado com sucesso!!!");
@@ -31,7 +32,7 @@ public class EditOrDeleteProduct {
         }
     }
 
-    public void deleteProduct(int idProduct){
+    public void deleteProduct(int idProduct) {
 
         Alert dialogoInfo = new Alert(Alert.AlertType.CONFIRMATION);
         dialogoInfo.setHeaderText("Deseja mesmo excluir o produto selecionada?");
@@ -43,8 +44,9 @@ public class EditOrDeleteProduct {
 
             try {
 
-                pstment = returnConnection.getConnection().prepareStatement("DELETE FROM db_produto WHERE id_produto = ?");
-                pstment.setInt(1,idProduct);
+                pstment = returnConnection.getConnection()
+                        .prepareStatement("DELETE FROM db_produto WHERE id_produto = ?");
+                pstment.setInt(1, idProduct);
                 pstment.executeUpdate();
 
                 try {
@@ -56,8 +58,8 @@ public class EditOrDeleteProduct {
 
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-            }finally {
-                returnConnection.closeConnection(returnConnection.getConnection(),pstment);
+            } finally {
+                returnConnection.closeConnection(returnConnection.getConnection(), pstment);
             }
         });
     }

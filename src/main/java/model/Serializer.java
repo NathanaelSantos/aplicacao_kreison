@@ -15,12 +15,12 @@ public class Serializer {
     public void Serializer(boolean b) throws FileNotFoundException, IOException {
         FullScreen fullScreen = new FullScreen();
         fullScreen.setFullScreen(b);
-       
+
         FileOutputStream fOut = new FileOutputStream("C:\\KreisonDelivery\\serializable.ser");
         ObjectOutputStream oOut = new ObjectOutputStream(fOut);
         oOut.writeObject(fullScreen);
         oOut.close();
-       
+
     }
 
 }

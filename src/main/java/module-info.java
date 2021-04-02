@@ -7,8 +7,7 @@ module com.mycompany.kreisondelivery {
     requires unirest.java;
     requires javafx.controls;
 
-
     opens com.mycompany.kreisondelivery to javafx.controls, javafx.fxml;
+
     exports com.mycompany.kreisondelivery;
 }
-    

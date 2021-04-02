@@ -1,11 +1,11 @@
 package model;
 
-public class Usuario extends Cliente{
+public class Usuario extends Cliente {
     private String password;
     private int userType;
 
     public Usuario(String name, String password, String cpf, String birthDate, int userType) {
-        super(cpf,name,birthDate);
+        super(cpf, name, birthDate);
         this.setPassword(password);
         this.setUserType(userType);
     }

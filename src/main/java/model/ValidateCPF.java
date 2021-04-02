@@ -19,19 +19,12 @@ public class ValidateCPF {
             arrayInt[i] = Integer.parseInt(String.valueOf(arrayChar[i]));
         }
 
-        if (userCPF.equals("00000000000")
-                || userCPF.equals("11111111111")
-                || userCPF.equals("22222222222")
-                || userCPF.equals("33333333333")
-                || userCPF.equals("44444444444")
-                || userCPF.equals("55555555555")
-                || userCPF.equals("66666666666")
-                || userCPF.equals("77777777777")
-                || userCPF.equals("88888888888")
-                || userCPF.equals("99999999999")
-                || (userCPF.length() != 11)) {
+        if (userCPF.equals("00000000000") || userCPF.equals("11111111111") || userCPF.equals("22222222222")
+                || userCPF.equals("33333333333") || userCPF.equals("44444444444") || userCPF.equals("55555555555")
+                || userCPF.equals("66666666666") || userCPF.equals("77777777777") || userCPF.equals("88888888888")
+                || userCPF.equals("99999999999") || (userCPF.length() != 11)) {
 
-                return false;
+            return false;
         } else {
 
             // Calculating the First Digit Checker
