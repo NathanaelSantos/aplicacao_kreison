@@ -15,6 +15,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -110,7 +111,7 @@ public class CadastraController implements Initializable {
 
     public String dateNascimento() { return getDataNascimento().getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); }
 
-    public boolean verificaCodigoAdimin(String codAdmin) {
+    public boolean verificaCodigoAdimin(String codAdmin) throws SQLException {
 
         int valueCodAdmin = 0;
 
@@ -123,9 +124,10 @@ public class CadastraController implements Initializable {
             preparedStatement = returnConnection.getConnection().prepareStatement("SELECT codAdmin FROM db_usuario WHERE tipo_usuario = 1");
             res = preparedStatement.executeQuery();
 
-            while (res.next())
+            while (res.next()){
                 valueCodAdmin = res.getInt("codAdmin");
-
+                break;
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
@@ -143,15 +145,15 @@ public class CadastraController implements Initializable {
             getAlerta().setVisible(false);
             if (getSenha().getText().equals(getConfirmaSenha().getText())) {
                 if (new ValidateCPF().validate(getCpf().getText())) {
-                    if (new CheckCpfdatabase().checkCpfdatabase(getCpf().getText())) {
-                        getAlertDialog().alertDialog("Cpf ja cadastrado!");
-                    } else {
-                        if (new CadastraController().verificaCodigoAdimin(getCodeAdmin().getText())) {
 
-                            ReturnConnection returnConnection = new ReturnConnection();
-                            Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()), getCpf().getText(), dateNascimento(), tipoFuncionario());
-                            PreparedStatement pstment = null;
+                    ReturnConnection returnConnection = new ReturnConnection();
+                    Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()), getCpf().getText(), dateNascimento(), tipoFuncionario());
+                    PreparedStatement pstment = null;
 
+                    if(new CadastraController().verificaCodigoAdimin(getCodeAdmin().getText())){
+                        if (new CheckCpfdatabase().checkCpfdatabase(getCpf().getText())) {
+                            getAlertDialog().alertDialog("Cpf ja cadastrado!");
+                        } else {
                             try {
                                 pstment = returnConnection.getConnection().prepareStatement("INSERT INTO db_usuario(nome, cpf, data_nasc, senha,tipo_usuario,codAdmin)  VALUES (?,?,?,?,?,?)");
 
@@ -169,27 +171,27 @@ public class CadastraController implements Initializable {
 
                                 pstment.executeUpdate();
 
-                                getAlertDialog().alertDialog("Usuário cadastrado com sucesso!!!");
-
-                                try {
-                                    App.setRoot("cadastra");
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                                if (tipoFuncionario() == 1){
+                                    getAlertDialog().alertDialog("Gerente cadastrado com sucesso!!!");
+                                } else if (tipoFuncionario() == 2){
+                                    getAlertDialog().alertDialog("Entregador cadastrado com sucesso!!!");
                                 }
+
+                                try { App.setRoot("cadastra"); } catch (IOException e) { e.printStackTrace(); }
 
                             } catch (SQLException throwables) {
                                 throwables.printStackTrace();
                             } finally {
                                 returnConnection.closeConnection(returnConnection.getConnection(), pstment);
                             }
-                        } else {
-                            getAlertDialog().alertDialog("Código inválido!");
                         }
+                    }else{
+                        getAlertDialog().alertDialog("Código inválido!");
                     }
                 } else {
                     getAlertDialog().alertDialog("Cpf inválido!");
                 }
-            } else {
+            } else{
                 getAlertDialog().alertDialog("Senhas diferentes!");
             }
         }
@@ -326,4 +328,5 @@ public class CadastraController implements Initializable {
     public void setTxtCodeAdmin(TextField txtCodeAdmin) {
         this.txtCodeAdmin = txtCodeAdmin;
     }
+
 }

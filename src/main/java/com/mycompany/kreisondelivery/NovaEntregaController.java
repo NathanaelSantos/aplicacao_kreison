@@ -25,6 +25,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 import static model.AddTextLimiter.addTextLimiter;
@@ -125,8 +128,7 @@ public class NovaEntregaController implements Initializable {
     }
 
     private String getDateTime() {
-        Date date = new Date(System.currentTimeMillis());
-        return (getDateFormat().format(date));
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
 

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.kreisondelivery;
 
 import javafx.beans.binding.Bindings;
@@ -20,12 +16,23 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+
+import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
 public class EstoqueController implements Initializable {
 
-    private Integer valueEstoque = 0;
-    private Integer valueVenda = 0;
+    private Integer stockQuantity = 0;
+    private Integer salesAmount = 0;
+    private LocalDate startingDayOfMonth;
+    private LocalDate endDayOfMonth;
+
+    private ReturnConnection connection = new ReturnConnection();
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
 
     @FXML private PieChart pieChart;
     @FXML private TableView<Produto> table_estoque;
@@ -37,70 +44,104 @@ public class EstoqueController implements Initializable {
     @FXML
     private void homeScreen() throws IOException { App.setRoot("home"); }
 
+    public void stockQuantity() throws SQLException, ClassNotFoundException {
+
+        try{
+            setPreparedStatement(getConnection().getConnection().prepareStatement("SELECT quantidade FROM db_produto"));
+            setResultSet(getPreparedStatement().executeQuery());
+
+            while (getResultSet().next()){
+                setStockQuantity(getStockQuantity() + getResultSet().getInt("quantidade"));
+            }
+        }finally {
+            getConnection().closeConnection(getConnection().getConnection(), getPreparedStatement());
+            getResultSet().close();
+        }
+    }
+
+    public void salesQuantity() throws SQLException {
+
+        LocalDate initial = LocalDate.now();
+        setStartingDayOfMonth(initial.with(firstDayOfMonth()));
+        setEndDayOfMonth(initial.with(lastDayOfMonth()));
+
+        String startDay = getStartingDayOfMonth().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String endDay = getEndDayOfMonth().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+        try{
+            setPreparedStatement(getConnection().getConnection().prepareStatement("SELECT quantidade FROM db_pedido WHERE data_entrega >= '"+ startDay +"' and  data_entrega <= '"+ endDay +"'"));
+            setResultSet(getPreparedStatement().executeQuery());
+
+            while (getResultSet().next()){
+                setSalesAmount(getSalesAmount() + getResultSet().getInt("quantidade"));
+            }
+        } finally {
+            getConnection().closeConnection(getConnection().getConnection(), getPreparedStatement());
+            getResultSet().close();
+        }
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         try {
-            getQuantidadeEstoqueDB();
-        } catch (SQLException throwables) {
+            stockQuantity();
+            salesQuantity();
+        } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
+
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("", this.getValueEstoque()),
-                new PieChart.Data("", this.getValueVenda())
+                new PieChart.Data("", getStockQuantity()),
+                new PieChart.Data("", getSalesAmount())
         );
-       
+
         pieChartData.forEach((PieChart.Data data) -> {
-            data.nameProperty().bind(
-                    Bindings.concat(
-                            data.getName(), " ", (int) data.getPieValue()
-                    )
-            );
+            data.nameProperty().bind(Bindings.concat(data.getName(), " ", (int) data.getPieValue()));
         });
         getPieChart().setData(pieChartData);
     }
 
-    public void getQuantidadeEstoqueDB() throws SQLException, ClassNotFoundException {
 
-        ReturnConnection connection = new ReturnConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
-        try {
-
-            String query = "SELECT quantidade,venda FROM db_produto";
-            preparedStatement = connection.getConnection().prepareStatement(query);
-
-            resultSet = preparedStatement.executeQuery();
-
-
-            while (resultSet.next()){
-                setValueEstoque(getValueEstoque() + resultSet.getInt("quantidade"));
-                setValueVenda(getValueVenda() + resultSet.getInt("venda"));
-            }
-
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }finally {
-            connection.closeConnection(connection.getConnection(),preparedStatement);
-        }
+    public Integer getStockQuantity() {
+        return stockQuantity;
     }
 
-    public Integer getValueEstoque() {
-        return valueEstoque;
+    public void setStockQuantity(Integer stockQuantity) {
+        this.stockQuantity = stockQuantity;
     }
 
-    public void setValueEstoque(Integer valueEstoque) {
-        this.valueEstoque = valueEstoque;
+    public Integer getSalesAmount() {
+        return salesAmount;
     }
 
-    public Integer getValueVenda() {
-        return valueVenda;
+    public void setSalesAmount(Integer salesAmount) {
+        this.salesAmount = salesAmount;
     }
 
-    public void setValueVenda(Integer valueVenda) {
-        this.valueVenda = valueVenda;
+    public ReturnConnection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(ReturnConnection connection) {
+        this.connection = connection;
+    }
+
+    public PreparedStatement getPreparedStatement() {
+        return preparedStatement;
+    }
+
+    public void setPreparedStatement(PreparedStatement preparedStatement) {
+        this.preparedStatement = preparedStatement;
+    }
+
+    public ResultSet getResultSet() {
+        return resultSet;
+    }
+
+    public void setResultSet(ResultSet resultSet) {
+        this.resultSet = resultSet;
     }
 
     public PieChart getPieChart() {
@@ -149,5 +190,21 @@ public class EstoqueController implements Initializable {
 
     public void setTotal_vendas(TableColumn<Produto, Integer> total_vendas) {
         this.total_vendas = total_vendas;
+    }
+
+    public LocalDate getStartingDayOfMonth() {
+        return startingDayOfMonth;
+    }
+
+    public void setStartingDayOfMonth(LocalDate startingDayOfMonth) {
+        this.startingDayOfMonth = startingDayOfMonth;
+    }
+
+    public LocalDate getEndDayOfMonth() {
+        return endDayOfMonth;
+    }
+
+    public void setEndDayOfMonth(LocalDate endDayOfMonth) {
+        this.endDayOfMonth = endDayOfMonth;
     }
 }
