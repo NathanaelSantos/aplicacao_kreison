@@ -5,6 +5,21 @@
  */
 package com.mycompany.kreisondelivery;
 
+import static model.AddTextLimiter.addTextLimiter;
+import static model.TextFormatter.isTextFormatterNumber;
+import static model.TextFormatter.isTextFormatterString;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,23 +31,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.AlertDialog;
 import model.ReturnConnection;
-
-import java.io.IOException;
-import java.net.URL;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ResourceBundle;
-
-import static model.AddTextLimiter.addTextLimiter;
-import static model.TextFormatter.isTextFormatterNumber;
-import static model.TextFormatter.isTextFormatterString;
 
 public class NovaEntregaController implements Initializable {
 

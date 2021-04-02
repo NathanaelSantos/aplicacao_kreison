@@ -6,6 +6,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 
+import com.mycompany.kreisondelivery.App;
+
+import javafx.stage.Stage;
+
 public class Deserializer {
     private boolean isFullScreen;
 
@@ -23,5 +27,9 @@ public class Deserializer {
 
     public void setFullScreen(boolean fullScreen) {
         isFullScreen = fullScreen;
+    }
+
+    public Stage getStage() {
+        return App.stage;
     }
 }

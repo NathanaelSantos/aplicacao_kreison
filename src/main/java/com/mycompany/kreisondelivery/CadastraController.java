@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.kreisondelivery;
 
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import model.*;
+import static java.sql.Types.NULL;
+import static model.AddTextLimiter.addTextLimiter;
+import static model.TextFormatter.isTextFormatterNumber;
+import static model.TextFormatter.isTextFormatterString;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,10 +14,22 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import static java.sql.Types.NULL;
-import static model.AddTextLimiter.addTextLimiter;
-import static model.TextFormatter.isTextFormatterNumber;
-import static model.TextFormatter.isTextFormatterString;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import model.AlertDialog;
+import model.CheckCpfdatabase;
+import model.ReturnConnection;
+import model.StringUtil;
+import model.Usuario;
+import model.ValidateCPF;
 
 public class CadastraController implements Initializable {
 

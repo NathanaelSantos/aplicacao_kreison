@@ -1,15 +1,7 @@
 package com.mycompany.kreisondelivery;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import model.*;
+import static model.AddTextLimiter.addTextLimiter;
+import static model.TextFormatter.isTextFormatterNumber;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,8 +11,22 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-import static model.AddTextLimiter.addTextLimiter;
-import static model.TextFormatter.isTextFormatterNumber;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import model.AlertDialog;
+import model.EmailClient;
+import model.EmailValidation;
+import model.ReturnConnection;
+import model.StringUtil;
+import model.ValidateCPF;
 
 public class RecoverPasswordController implements Initializable {
 

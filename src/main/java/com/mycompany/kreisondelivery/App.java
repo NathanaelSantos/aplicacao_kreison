@@ -1,5 +1,7 @@
 package com.mycompany.kreisondelivery;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,12 +11,10 @@ import javafx.stage.Stage;
 import model.Deserializer;
 import model.Serializer;
 
-import java.io.IOException;
-
 public class App extends Application {
 
     private static Scene scene;
-    private static Stage stage;
+    public static Stage stage;
     Deserializer deserializer = new Deserializer();
 
     public static void main(String[] args) throws IOException, ClassNotFoundException {
@@ -48,10 +48,6 @@ public class App extends Application {
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
-    }
-
-    public Stage getStage() {
-        return stage;
     }
 
 }
