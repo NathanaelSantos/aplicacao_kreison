@@ -11,16 +11,16 @@ public class ReturnConnection {
 
     public Connection getConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://34.95.228.172:3306/db_kreison_delivery?useSSL=false", "root", "1uCelvjuIChNpF0C");
+            connection = DriverManager.getConnection("jdbc:mysql://34.95.228.172:3306/db_kreison_delivery?useSSL=false",
+                    "root", "1uCelvjuIChNpF0C");
         } catch (SQLException throwables) {
-              throwables.printStackTrace();
+            throwables.printStackTrace();
         }
 
         return connection;
     }
 
-
-    public  void closeConnection(Connection connection,PreparedStatement preparedStatement)  {
+    public void closeConnection(Connection connection, PreparedStatement preparedStatement) {
         try {
             connection.close();
             preparedStatement.close();

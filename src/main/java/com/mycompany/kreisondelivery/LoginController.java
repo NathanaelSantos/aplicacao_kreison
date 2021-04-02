@@ -19,16 +19,26 @@ import static model.TextFormatter.isTextFormatterNumber;
 
 public class LoginController implements Initializable {
 
-    @FXML private Button btnLogin;
-    @FXML private TextField login;
-    @FXML private PasswordField senha;
+    @FXML
+    private Button btnLogin;
+    @FXML
+    private TextField login;
+    @FXML
+    private PasswordField senha;
 
-    @FXML private Label alerta;
-    @FXML private Label alertaCpf;
-    @FXML private Label txtCadastra;
-    @FXML private Label recoverPassword;
+    @FXML
+    private Label alerta;
+    @FXML
+    private Label alertaCpf;
+    @FXML
+    private Label txtCadastra;
+    @FXML
+    private Label recoverPassword;
 
-    @FXML private void recoverPassword() throws IOException {App.setRoot("recoverPassword"); }
+    @FXML
+    private void recoverPassword() throws IOException {
+        App.setRoot("recoverPassword");
+    }
 
     @FXML
     private void switchToPrimary() throws Exception {
@@ -36,42 +46,76 @@ public class LoginController implements Initializable {
         ReturnConnection returnConnection = new ReturnConnection();
         AlertDialog alertDialog = new AlertDialog();
 
-        if(getLogin().getText().isBlank() || getSenha().getText().isBlank()){
+        if (getLogin().getText().isBlank() || getSenha().getText().isBlank()) {
             getAlerta().setVisible(true);
-        }else {
+        } else {
             getAlerta().setVisible(false);
             if (new ValidateCPF().validate(getLogin().getText())) {
                 getAlertaCpf().setVisible(false);
 
-                    if ( returnConnection.getConnection() != null) {
-                        try {
-                            if (new StringUtil().gerarHash(getSenha().getText()).equals(new LoginConnection().loginConection(getLogin().getText(),"senha")))
-                                App.setRoot("home");
-                            else
-                                new AlertDialog().alertDialog("Erro ao fazer login!");
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }else{
-                        new AlertDialog().alertDialog("Erro de conexao!");
+                if (returnConnection.getConnection() != null) {
+                    try {
+                        if (new StringUtil().gerarHash(getSenha().getText())
+                                .equals(new LoginConnection().loginConection(getLogin().getText(), "senha")))
+                            App.setRoot("home");
+                        else
+                            new AlertDialog().alertDialog("Erro ao fazer login!");
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-            }else{
+                } else {
+                    new AlertDialog().alertDialog("Erro de conexao!");
+                }
+            } else {
                 alertDialog.alertDialog("CPF fornecido não é válido!");
             }
         }
     }
 
-    @FXML private void mouseEnteredTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill: #019AB8");}
-    @FXML private void mouseExitedTxtCad(){ getTxtCadastra().setStyle("-fx-text-fill-color: #019ab8");}
-    @FXML private void mouseEnteredRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill: #019ab8"); }
-    @FXML private void mouseExitedRecoverPassword(){ getRecoverPassword().setStyle("-fx-text-fill-color: #00b4d8"); }
-    @FXML private void buttonLoginEntered(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8"); }
-    @FXML private void setButtonLoginExited(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
-    @FXML private void mousePressedButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8"); }
-    @FXML private void mouseReleaseButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML
+    private void mouseEnteredTxtCad() {
+        getTxtCadastra().setStyle("-fx-text-fill: #019AB8");
+    }
 
     @FXML
-    private void cadastrar() throws IOException { App.setRoot("cadastra"); }
+    private void mouseExitedTxtCad() {
+        getTxtCadastra().setStyle("-fx-text-fill-color: #019ab8");
+    }
+
+    @FXML
+    private void mouseEnteredRecoverPassword() {
+        getRecoverPassword().setStyle("-fx-text-fill: #019ab8");
+    }
+
+    @FXML
+    private void mouseExitedRecoverPassword() {
+        getRecoverPassword().setStyle("-fx-text-fill-color: #00b4d8");
+    }
+
+    @FXML
+    private void buttonLoginEntered() {
+        getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8");
+    }
+
+    @FXML
+    private void setButtonLoginExited() {
+        getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8");
+    }
+
+    @FXML
+    private void mousePressedButtonLogin() {
+        getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #019ab8");
+    }
+
+    @FXML
+    private void mouseReleaseButtonLogin() {
+        getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8");
+    }
+
+    @FXML
+    private void cadastrar() throws IOException {
+        App.setRoot("cadastra");
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -80,9 +124,9 @@ public class LoginController implements Initializable {
         getAlertaCpf().setVisible(false);
 
         isTextFormatterNumber(getLogin());
-            addTextLimiter(getLogin(),11);
+        addTextLimiter(getLogin(), 11);
         isTextFormatterNumber(getSenha());
-            addTextLimiter(getSenha(),6);
+        addTextLimiter(getSenha(), 6);
     }
 
     public TextField getLogin() {

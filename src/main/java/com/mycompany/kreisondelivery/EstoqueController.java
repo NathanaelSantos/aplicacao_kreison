@@ -34,26 +34,34 @@ public class EstoqueController implements Initializable {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
-    @FXML private PieChart pieChart;
-    @FXML private TableView<Produto> table_estoque;
-    @FXML private TableColumn<Produto, String> especproduto;
-    @FXML private TableColumn<Produto, Integer> qtd_restante;
-    @FXML private TableColumn<Produto, Float> precoProduto;
-    @FXML private TableColumn<Produto, Integer> total_vendas;
+    @FXML
+    private PieChart pieChart;
+    @FXML
+    private TableView<Produto> table_estoque;
+    @FXML
+    private TableColumn<Produto, String> especproduto;
+    @FXML
+    private TableColumn<Produto, Integer> qtd_restante;
+    @FXML
+    private TableColumn<Produto, Float> precoProduto;
+    @FXML
+    private TableColumn<Produto, Integer> total_vendas;
 
     @FXML
-    private void homeScreen() throws IOException { App.setRoot("home"); }
+    private void homeScreen() throws IOException {
+        App.setRoot("home");
+    }
 
     public void stockQuantity() throws SQLException, ClassNotFoundException {
 
-        try{
+        try {
             setPreparedStatement(getConnection().getConnection().prepareStatement("SELECT quantidade FROM db_produto"));
             setResultSet(getPreparedStatement().executeQuery());
 
-            while (getResultSet().next()){
+            while (getResultSet().next()) {
                 setStockQuantity(getStockQuantity() + getResultSet().getInt("quantidade"));
             }
-        }finally {
+        } finally {
             getConnection().closeConnection(getConnection().getConnection(), getPreparedStatement());
             getResultSet().close();
         }
@@ -68,11 +76,13 @@ public class EstoqueController implements Initializable {
         String startDay = getStartingDayOfMonth().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         String endDay = getEndDayOfMonth().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-        try{
-            setPreparedStatement(getConnection().getConnection().prepareStatement("SELECT quantidade FROM db_pedido WHERE data_entrega >= '"+ startDay +"' and  data_entrega <= '"+ endDay +"'"));
+        try {
+            setPreparedStatement(getConnection().getConnection()
+                    .prepareStatement("SELECT quantidade FROM db_pedido WHERE data_entrega >= '" + startDay
+                            + "' and  data_entrega <= '" + endDay + "'"));
             setResultSet(getPreparedStatement().executeQuery());
 
-            while (getResultSet().next()){
+            while (getResultSet().next()) {
                 setSalesAmount(getSalesAmount() + getResultSet().getInt("quantidade"));
             }
         } finally {
@@ -93,16 +103,13 @@ public class EstoqueController implements Initializable {
         }
 
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                new PieChart.Data("", getStockQuantity()),
-                new PieChart.Data("", getSalesAmount())
-        );
+                new PieChart.Data("", getStockQuantity()), new PieChart.Data("", getSalesAmount()));
 
         pieChartData.forEach((PieChart.Data data) -> {
             data.nameProperty().bind(Bindings.concat(data.getName(), " ", (int) data.getPieValue()));
         });
         getPieChart().setData(pieChartData);
     }
-
 
     public Integer getStockQuantity() {
         return stockQuantity;

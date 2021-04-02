@@ -10,16 +10,13 @@ import model.Deserializer;
 import model.Serializer;
 
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class App extends Application {
 
     private static Scene scene;
     private static Stage stage;
     Deserializer deserializer = new Deserializer();
-    
+
     public static void main(String[] args) throws IOException, ClassNotFoundException {
         Application.launch(App.class, args);
         new Serializer().Serializer(stage.isMaximized());
@@ -35,9 +32,9 @@ public class App extends Application {
         stage.setScene(scene);
 
         deserializer.deserializer();
-        if(deserializer.isFullScreen()){
+        if (deserializer.isFullScreen()) {
             stage.setMaximized(true);
-        }else{
+        } else {
             stage.setMaximized(false);
         }
 

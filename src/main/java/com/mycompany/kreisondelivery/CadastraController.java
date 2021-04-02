@@ -15,7 +15,6 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -24,36 +23,69 @@ import static model.AddTextLimiter.addTextLimiter;
 import static model.TextFormatter.isTextFormatterNumber;
 import static model.TextFormatter.isTextFormatterString;
 
-
 public class CadastraController implements Initializable {
 
     private AlertDialog alertDialog = new AlertDialog();
 
-    @FXML private Button buttonCadastrar;
-    @FXML private TextField nome;
-    @FXML private PasswordField senha;
-    @FXML private PasswordField confirmaSenha;
-    @FXML private TextField cpf;
-    @FXML private DatePicker dataNascimento;
-    @FXML private MenuButton tipoFuncionario;
-    @FXML private RadioMenuItem entregador;
-    @FXML private ToggleGroup selection;
-    @FXML private RadioMenuItem gerente;
-    @FXML private PasswordField codeAdmin;
-    @FXML private TextField txtCodeAdmin;
-    @FXML private Label alerta;
+    @FXML
+    private Button buttonCadastrar;
+    @FXML
+    private TextField nome;
+    @FXML
+    private PasswordField senha;
+    @FXML
+    private PasswordField confirmaSenha;
+    @FXML
+    private TextField cpf;
+    @FXML
+    private DatePicker dataNascimento;
+    @FXML
+    private MenuButton tipoFuncionario;
+    @FXML
+    private RadioMenuItem entregador;
+    @FXML
+    private ToggleGroup selection;
+    @FXML
+    private RadioMenuItem gerente;
+    @FXML
+    private PasswordField codeAdmin;
+    @FXML
+    private TextField txtCodeAdmin;
+    @FXML
+    private Label alerta;
 
-    @FXML private void buttonCadastrarEntered(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
-    @FXML private void buttonCadastrarExited(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
-    @FXML private void mousePressedButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
-    @FXML private void mouseReleaseButtonCadastrar(){ getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
-    @FXML private void mouseReleaseSetVisibleCode(){
+    @FXML
+    private void buttonCadastrarEntered() {
+        getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8");
+    }
+
+    @FXML
+    private void buttonCadastrarExited() {
+        getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8");
+    }
+
+    @FXML
+    private void mousePressedButtonCadastrar() {
+        getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8");
+    }
+
+    @FXML
+    private void mouseReleaseButtonCadastrar() {
+        getButtonCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8");
+    }
+
+    @FXML
+    private void mouseReleaseSetVisibleCode() {
         getTxtCodeAdmin().setVisible(false);
     }
 
-    @FXML private void screenLogin() throws IOException { App.setRoot("Login"); }
+    @FXML
+    private void screenLogin() throws IOException {
+        App.setRoot("Login");
+    }
 
-    @FXML private void mousePressedSetVisibleCode(){
+    @FXML
+    private void mousePressedSetVisibleCode() {
         getTxtCodeAdmin().setVisible(true);
         getTxtCodeAdmin().setText(getCodeAdmin().getText());
     }
@@ -95,8 +127,10 @@ public class CadastraController implements Initializable {
         else
             getCodeAdmin().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        return ((getNome().getText().isBlank() || getSenha().getText().isBlank() || getConfirmaSenha().getText().isBlank() || getCpf().getText().isBlank() || getCodeAdmin().getText().isBlank()) ||
-                (getSelection().getSelectedToggle() == null || getDataNascimento().getValue() == null));
+        return ((getNome().getText().isBlank() || getSenha().getText().isBlank()
+                || getConfirmaSenha().getText().isBlank() || getCpf().getText().isBlank()
+                || getCodeAdmin().getText().isBlank())
+                || (getSelection().getSelectedToggle() == null || getDataNascimento().getValue() == null));
     }
 
     public int tipoFuncionario() {
@@ -109,7 +143,9 @@ public class CadastraController implements Initializable {
         return tipoFunc;
     }
 
-    public String dateNascimento() { return getDataNascimento().getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")); }
+    public String dateNascimento() {
+        return getDataNascimento().getValue().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    }
 
     public boolean verificaCodigoAdimin(String codAdmin) throws SQLException {
 
@@ -121,10 +157,11 @@ public class CadastraController implements Initializable {
 
         try {
 
-            preparedStatement = returnConnection.getConnection().prepareStatement("SELECT codAdmin FROM db_usuario WHERE tipo_usuario = 1");
+            preparedStatement = returnConnection.getConnection()
+                    .prepareStatement("SELECT codAdmin FROM db_usuario WHERE tipo_usuario = 1");
             res = preparedStatement.executeQuery();
 
-            while (res.next()){
+            while (res.next()) {
                 valueCodAdmin = res.getInt("codAdmin");
                 break;
             }
@@ -147,15 +184,17 @@ public class CadastraController implements Initializable {
                 if (new ValidateCPF().validate(getCpf().getText())) {
 
                     ReturnConnection returnConnection = new ReturnConnection();
-                    Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()), getCpf().getText(), dateNascimento(), tipoFuncionario());
+                    Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()),
+                            getCpf().getText(), dateNascimento(), tipoFuncionario());
                     PreparedStatement pstment = null;
 
-                    if(new CadastraController().verificaCodigoAdimin(getCodeAdmin().getText())){
+                    if (new CadastraController().verificaCodigoAdimin(getCodeAdmin().getText())) {
                         if (new CheckCpfdatabase().checkCpfdatabase(getCpf().getText())) {
                             getAlertDialog().alertDialog("Cpf ja cadastrado!");
                         } else {
                             try {
-                                pstment = returnConnection.getConnection().prepareStatement("INSERT INTO db_usuario(nome, cpf, data_nasc, senha,tipo_usuario,codAdmin)  VALUES (?,?,?,?,?,?)");
+                                pstment = returnConnection.getConnection().prepareStatement(
+                                        "INSERT INTO db_usuario(nome, cpf, data_nasc, senha,tipo_usuario,codAdmin)  VALUES (?,?,?,?,?,?)");
 
                                 pstment.setString(1, user.getNome());
                                 pstment.setString(2, user.getCpf());
@@ -163,21 +202,25 @@ public class CadastraController implements Initializable {
                                 pstment.setString(4, user.getPassword());
                                 pstment.setInt(5, user.getUserType());
 
-                                if(tipoFuncionario() == 1){
+                                if (tipoFuncionario() == 1) {
                                     pstment.setInt(6, Integer.parseInt(getCodeAdmin().getText()));
-                                }else{
+                                } else {
                                     pstment.setNull(6, NULL);
                                 }
 
                                 pstment.executeUpdate();
 
-                                if (tipoFuncionario() == 1){
+                                if (tipoFuncionario() == 1) {
                                     getAlertDialog().alertDialog("Gerente cadastrado com sucesso!!!");
-                                } else if (tipoFuncionario() == 2){
+                                } else if (tipoFuncionario() == 2) {
                                     getAlertDialog().alertDialog("Entregador cadastrado com sucesso!!!");
                                 }
 
-                                try { App.setRoot("cadastra"); } catch (IOException e) { e.printStackTrace(); }
+                                try {
+                                    App.setRoot("cadastra");
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
 
                             } catch (SQLException throwables) {
                                 throwables.printStackTrace();
@@ -185,13 +228,13 @@ public class CadastraController implements Initializable {
                                 returnConnection.closeConnection(returnConnection.getConnection(), pstment);
                             }
                         }
-                    }else{
+                    } else {
                         getAlertDialog().alertDialog("Código inválido!");
                     }
                 } else {
                     getAlertDialog().alertDialog("Cpf inválido!");
                 }
-            } else{
+            } else {
                 getAlertDialog().alertDialog("Senhas diferentes!");
             }
         }

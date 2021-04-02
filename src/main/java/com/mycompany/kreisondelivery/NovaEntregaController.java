@@ -39,49 +39,78 @@ public class NovaEntregaController implements Initializable {
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private AlertDialog alertDialog = new AlertDialog();
 
-    @FXML private TableView<Produto> table_entegador;
-    @FXML private TableView<Pessoa> tb_nome_entregador;
-    @FXML private TableColumn<Pessoa, String> nome_entregador;
-    @FXML private TableColumn<Produto, String> entregador;
-    @FXML private TableColumn<Produto, Integer> qtd_restante;
-    @FXML private TableColumn<Produto, String> precoProduto;
-    @FXML private TableColumn<Produto, Integer> idProduto;
-
-    @FXML private TextField endereco_entrega;
-    @FXML private TextField nome_cliente;
-    @FXML private TextField bairro;
-    @FXML private TextField cep;
-    @FXML private TextField numero;
-    @FXML private TextField quantidade;
-    @FXML private Button cadastraEntrega;
+    @FXML
+    private TableView<Produto> table_entegador;
+    @FXML
+    private TableView<Pessoa> tb_nome_entregador;
+    @FXML
+    private TableColumn<Pessoa, String> nome_entregador;
+    @FXML
+    private TableColumn<Produto, String> entregador;
+    @FXML
+    private TableColumn<Produto, Integer> qtd_restante;
+    @FXML
+    private TableColumn<Produto, String> precoProduto;
+    @FXML
+    private TableColumn<Produto, Integer> idProduto;
 
     @FXML
-    private void buttonCadastraEntregaEntered(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    private TextField endereco_entrega;
     @FXML
-    private void buttonCadastraEntregaExited(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
+    private TextField nome_cliente;
     @FXML
-    private void mousePressedButtonCadastraEntrega(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
+    private TextField bairro;
     @FXML
-    private void mouseReleaseButtonCadastraEntrega(){ getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    private TextField cep;
+    @FXML
+    private TextField numero;
+    @FXML
+    private TextField quantidade;
+    @FXML
+    private Button cadastraEntrega;
 
-    @FXML private void homeScreen() throws IOException { App.setRoot("home"); }
+    @FXML
+    private void buttonCadastraEntregaEntered() {
+        getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae");
+    }
 
-    public boolean emptyTable(){
+    @FXML
+    private void buttonCadastraEntregaExited() {
+        getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8");
+    }
+
+    @FXML
+    private void mousePressedButtonCadastraEntrega() {
+        getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae");
+    }
+
+    @FXML
+    private void mouseReleaseButtonCadastraEntrega() {
+        getCadastraEntrega().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8");
+    }
+
+    @FXML
+    private void homeScreen() throws IOException {
+        App.setRoot("home");
+    }
+
+    public boolean emptyTable() {
         boolean validate = false;
 
-        if(getTable_entegador().getSelectionModel().isEmpty()){
+        if (getTable_entegador().getSelectionModel().isEmpty()) {
             getTable_entegador().setStyle("-fx-border-color: red;");
-        }else{
+        } else {
             getTable_entegador().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
 
-        if(getTb_nome_entregador().getSelectionModel().isEmpty()){
+        if (getTb_nome_entregador().getSelectionModel().isEmpty()) {
             getTb_nome_entregador().setStyle("-fx-border-color: red;");
-        }else{
+        } else {
             getTb_nome_entregador().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
 
-        if(getTable_entegador().getSelectionModel().isEmpty() || getTb_nome_entregador().getSelectionModel().isEmpty()){
+        if (getTable_entegador().getSelectionModel().isEmpty()
+                || getTb_nome_entregador().getSelectionModel().isEmpty()) {
             validate = true;
         }
         return validate;
@@ -90,37 +119,39 @@ public class NovaEntregaController implements Initializable {
     public boolean composVazios() {
         boolean validate = false;
 
-        if(getEndereco_entrega().getText().isBlank())
+        if (getEndereco_entrega().getText().isBlank())
             getEndereco_entrega().setStyle("-fx-border-color: red;");
         else
             getEndereco_entrega().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(getNome_cliente().getText().isBlank())
+        if (getNome_cliente().getText().isBlank())
             getNome_cliente().setStyle("-fx-border-color: red;");
         else
             getNome_cliente().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(getBairro().getText().isBlank())
+        if (getBairro().getText().isBlank())
             getBairro().setStyle("-fx-border-color: red;");
         else
             getBairro().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(getCep().getText().isBlank())
+        if (getCep().getText().isBlank())
             getCep().setStyle("-fx-border-color: red;");
         else
             getCep().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(getNumero().getText().isBlank())
+        if (getNumero().getText().isBlank())
             getNumero().setStyle("-fx-border-color: red;");
         else
             getNumero().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(getQuantidade().getText().isBlank())
+        if (getQuantidade().getText().isBlank())
             getQuantidade().setStyle("-fx-border-color: red;");
         else
             getQuantidade().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(getEndereco_entrega().getText().isBlank()|| getNome_cliente().getText().isBlank() || getBairro().getText().isBlank() || getCep().getText().isBlank() || getNumero().getText().isBlank() || getQuantidade().getText().isBlank()){
+        if (getEndereco_entrega().getText().isBlank() || getNome_cliente().getText().isBlank()
+                || getBairro().getText().isBlank() || getCep().getText().isBlank() || getNumero().getText().isBlank()
+                || getQuantidade().getText().isBlank()) {
             validate = true;
         }
 
@@ -131,27 +162,30 @@ public class NovaEntregaController implements Initializable {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
-
     public void cadastraEntrega() throws SQLException, ClassNotFoundException {
 
-        if(emptyTable()){
+        if (emptyTable()) {
             getAlertDialog().alertDialog("É precisso selecionar um campo da tabela!!!");
-        }else if(composVazios()){
+        } else if (composVazios()) {
             getAlertDialog().alertDialog("Campos precisam estar preenchidos!");
-        }else {
-            if(Integer.parseInt(getQuantidade().getText()) == 0){
+        } else {
+            if (Integer.parseInt(getQuantidade().getText()) == 0) {
                 getAlertDialog().alertDialog("Digite um valor válido para a quantidade!");
-            }else {
+            } else {
 
-                if (Integer.parseInt(getQuantidade().getText()) <= getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade()) {
+                if (Integer.parseInt(getQuantidade().getText()) <= getTable_entegador().getSelectionModel()
+                        .getSelectedItem().getQuantidade()) {
 
                     ReturnConnection connection = new ReturnConnection();
                     PreparedStatement preparedStatement = null;
 
                     try {
-                        preparedStatement = connection.getConnection().prepareStatement("INSERT INTO db_pedido(especiProduto,nomeEntregador,enderEntrega,nomeCliente,bairro,cep,numero,quantidade, data_entrega) VALUES (?,?,?,?,?,?,?,?,?)");
-                        preparedStatement.setString(1, getTable_entegador().getSelectionModel().getSelectedItem().getNome());
-                        preparedStatement.setString(2, getTb_nome_entregador().getSelectionModel().getSelectedItem().getNome());
+                        preparedStatement = connection.getConnection().prepareStatement(
+                                "INSERT INTO db_pedido(especiProduto,nomeEntregador,enderEntrega,nomeCliente,bairro,cep,numero,quantidade, data_entrega) VALUES (?,?,?,?,?,?,?,?,?)");
+                        preparedStatement.setString(1,
+                                getTable_entegador().getSelectionModel().getSelectedItem().getNome());
+                        preparedStatement.setString(2,
+                                getTb_nome_entregador().getSelectionModel().getSelectedItem().getNome());
                         preparedStatement.setString(3, getEndereco_entrega().getText());
                         preparedStatement.setString(4, getNome_cliente().getText());
                         preparedStatement.setString(5, getBairro().getText());
@@ -175,7 +209,8 @@ public class NovaEntregaController implements Initializable {
                     }
 
                 } else {
-                    getAlertDialog().alertDialog("Não há galões suficientes!\n\nGalões restantes: " + getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade());
+                    getAlertDialog().alertDialog("Não há galões suficientes!\n\nGalões restantes: "
+                            + getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade());
                 }
             }
         }
@@ -190,32 +225,36 @@ public class NovaEntregaController implements Initializable {
 
         try {
 
-            preparedStatement = connection.getConnection().prepareStatement("SELECT venda FROM db_produto WHERE id_produto = ?");
+            preparedStatement = connection.getConnection()
+                    .prepareStatement("SELECT venda FROM db_produto WHERE id_produto = ?");
             preparedStatement.setInt(1, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
             resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 valueVenda = resultSet.getInt("venda");
             }
 
             preparedStatement = null;
-            preparedStatement = connection.getConnection().prepareStatement("UPDATE db_produto SET venda = ? WHERE id_produto = ?");
-            preparedStatement.setInt(1,valueVenda + Integer.parseInt(getQuantidade().getText()));
+            preparedStatement = connection.getConnection()
+                    .prepareStatement("UPDATE db_produto SET venda = ? WHERE id_produto = ?");
+            preparedStatement.setInt(1, valueVenda + Integer.parseInt(getQuantidade().getText()));
             preparedStatement.setInt(2, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
 
             preparedStatement.executeUpdate();
 
             preparedStatement = null;
-            preparedStatement = connection.getConnection().prepareStatement("UPDATE db_produto SET quantidade = ? WHERE id_produto = ?");
-            preparedStatement.setInt(1,(getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade() - Integer.parseInt(getQuantidade().getText())));
+            preparedStatement = connection.getConnection()
+                    .prepareStatement("UPDATE db_produto SET quantidade = ? WHERE id_produto = ?");
+            preparedStatement.setInt(1, (getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade()
+                    - Integer.parseInt(getQuantidade().getText())));
             preparedStatement.setInt(2, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
 
             preparedStatement.executeUpdate();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }finally {
-            connection.closeConnection(connection.getConnection(),preparedStatement);
+        } finally {
+            connection.closeConnection(connection.getConnection(), preparedStatement);
         }
     }
 
@@ -228,12 +267,13 @@ public class NovaEntregaController implements Initializable {
         ObservableList<Produto> oblist = FXCollections.observableArrayList();
 
         try {
-            preparedStatement = connection.getConnection().prepareStatement("SELECT nome, preco, quantidade, id_produto FROM db_produto");
+            preparedStatement = connection.getConnection()
+                    .prepareStatement("SELECT nome, preco, quantidade, id_produto FROM db_produto");
             resultSet = preparedStatement.executeQuery();
 
-
-            while (resultSet.next()){
-                oblist.add(new Produto(resultSet.getFloat("preco"),resultSet.getString("nome"),resultSet.getInt("quantidade"),resultSet.getInt("id_produto")));
+            while (resultSet.next()) {
+                oblist.add(new Produto(resultSet.getFloat("preco"), resultSet.getString("nome"),
+                        resultSet.getInt("quantidade"), resultSet.getInt("id_produto")));
             }
 
             this.getEntregador().setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -245,8 +285,8 @@ public class NovaEntregaController implements Initializable {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }finally {
-            connection.closeConnection(connection.getConnection(),preparedStatement);
+        } finally {
+            connection.closeConnection(connection.getConnection(), preparedStatement);
         }
     }
 
@@ -265,8 +305,7 @@ public class NovaEntregaController implements Initializable {
 
             resultSet = preparedStatement.executeQuery();
 
-
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 oblist.add(new Pessoa(resultSet.getString("nome")));
             }
 
@@ -275,8 +314,8 @@ public class NovaEntregaController implements Initializable {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }finally {
-            connection.closeConnection(connection.getConnection(),preparedStatement);
+        } finally {
+            connection.closeConnection(connection.getConnection(), preparedStatement);
         }
     }
 
@@ -284,17 +323,17 @@ public class NovaEntregaController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         isTextFormatterString(getEndereco_entrega());
-            addTextLimiter(getEndereco_entrega(),200);
+        addTextLimiter(getEndereco_entrega(), 200);
         isTextFormatterString(getNome_cliente());
-            addTextLimiter(getNome_cliente(),200);
+        addTextLimiter(getNome_cliente(), 200);
         isTextFormatterString(getBairro());
-            addTextLimiter(getBairro(),200);
+        addTextLimiter(getBairro(), 200);
         isTextFormatterNumber(getQuantidade());
-            addTextLimiter(getQuantidade(),3);
+        addTextLimiter(getQuantidade(), 3);
         isTextFormatterNumber(getNumero());
-            addTextLimiter(getNumero(),6);
+        addTextLimiter(getNumero(), 6);
         isTextFormatterNumber(getCep());
-            addTextLimiter(getCep(),8);
+        addTextLimiter(getCep(), 8);
 
         try {
             getProdutoDB();

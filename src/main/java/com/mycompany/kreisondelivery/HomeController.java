@@ -21,16 +21,26 @@ public class HomeController implements Initializable {
 
     private static boolean onScreenLogin = false;
 
-    @FXML private AnchorPane telaLogin;
-    @FXML private TextField login;
-    @FXML private PasswordField senha;
-    @FXML private Label alerta;
-    @FXML private Label alertaCpf;
-    @FXML private Button buttonAdmin;
-    @FXML private TextField codAdmin;
-    @FXML private Button buttonConsultaEstoque;
-    @FXML private Button buttonNovaEntrega;
-    @FXML private Button btnLogin;
+    @FXML
+    private AnchorPane telaLogin;
+    @FXML
+    private TextField login;
+    @FXML
+    private PasswordField senha;
+    @FXML
+    private Label alerta;
+    @FXML
+    private Label alertaCpf;
+    @FXML
+    private Button buttonAdmin;
+    @FXML
+    private TextField codAdmin;
+    @FXML
+    private Button buttonConsultaEstoque;
+    @FXML
+    private Button buttonNovaEntrega;
+    @FXML
+    private Button btnLogin;
 
     public static boolean isOnScreenLogin() {
         return onScreenLogin;
@@ -40,42 +50,82 @@ public class HomeController implements Initializable {
         HomeController.onScreenLogin = onScreenLogin;
     }
 
-    @FXML private void screenLogin() throws IOException { App.setRoot("Login"); }
-    
-    @FXML private void novaEntrega() throws IOException { App.setRoot("novaEntrega"); }
-    
-    @FXML private void estoqueScreen() throws IOException { App.setRoot("estoque"); }
-
-    @FXML private void adminScreen() throws IOException { App.setRoot("admin"); }
+    @FXML
+    private void screenLogin() throws IOException {
+        App.setRoot("Login");
+    }
 
     @FXML
-    private void buttonLoginEntered(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color:  #009cba; -fx-text-fill: #ffffff"); }
-    @FXML
-    private void setButtonLoginExited(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
-    @FXML
-    private void mousePressedButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #038ca9"); }
-    @FXML
-    private void mouseReleaseButtonLogin(){ getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff"); }
-    @FXML
-    private void mouseExitedBtnAdmin() throws IOException { getButtonAdmin().setStyle("-fx-background-color: #00b4d8"); }
-    @FXML
-    private void mouseEnteredBtnAdmin() throws IOException { getButtonAdmin().setStyle("-fx-background-color: #038ca9"); }
-    @FXML
-    private void mouseEnteredButtonConsultaEstoque() throws IOException { getButtonConsultaEstoque().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc"); }
-    @FXML
-    private void mouseExitedButtonConsultaEstoque() throws IOException { getButtonConsultaEstoque().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8"); }
-    @FXML
-    private void mouseEnteredButtonNovaEntrega() throws IOException { getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc"); }
-    @FXML
-    private void mouseExitedButtonNovaEntrega() throws IOException { getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8"); }
+    private void novaEntrega() throws IOException {
+        App.setRoot("novaEntrega");
+    }
 
+    @FXML
+    private void estoqueScreen() throws IOException {
+        App.setRoot("estoque");
+    }
+
+    @FXML
+    private void adminScreen() throws IOException {
+        App.setRoot("admin");
+    }
+
+    @FXML
+    private void buttonLoginEntered() {
+        getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color:  #009cba; -fx-text-fill: #ffffff");
+    }
+
+    @FXML
+    private void setButtonLoginExited() {
+        getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff");
+    }
+
+    @FXML
+    private void mousePressedButtonLogin() {
+        getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #038ca9");
+    }
+
+    @FXML
+    private void mouseReleaseButtonLogin() {
+        getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color: #ffffff");
+    }
+
+    @FXML
+    private void mouseExitedBtnAdmin() throws IOException {
+        getButtonAdmin().setStyle("-fx-background-color: #00b4d8");
+    }
+
+    @FXML
+    private void mouseEnteredBtnAdmin() throws IOException {
+        getButtonAdmin().setStyle("-fx-background-color: #038ca9");
+    }
+
+    @FXML
+    private void mouseEnteredButtonConsultaEstoque() throws IOException {
+        getButtonConsultaEstoque().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc");
+    }
+
+    @FXML
+    private void mouseExitedButtonConsultaEstoque() throws IOException {
+        getButtonConsultaEstoque().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8");
+    }
+
+    @FXML
+    private void mouseEnteredButtonNovaEntrega() throws IOException {
+        getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc");
+    }
+
+    @FXML
+    private void mouseExitedButtonNovaEntrega() throws IOException {
+        getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8");
+    }
 
     @FXML
     private void telaLogin() throws IOException {
-        if(!isOnScreenLogin()){
+        if (!isOnScreenLogin()) {
             getTelaLogin().setVisible(true);
             setOnScreenLogin(true);
-        }else {
+        } else {
             getTelaLogin().setVisible(false);
             setOnScreenLogin(false);
         }
@@ -85,41 +135,29 @@ public class HomeController implements Initializable {
     public boolean emptyFields() throws SQLException, ClassNotFoundException {
         boolean validate = false;
 
-        if(getLogin().getText().isBlank())
+        if (getLogin().getText().isBlank())
 
-            getLogin().setStyle(" -fx-border-color: #ff3b3b;\n" +
-                    "        -fx-border-radius: 2em;\n" +
-                    "        -fx-background-color: #00b4d8;\n" +
-                    "        -fx-text-fill: #ffffff;");
+            getLogin().setStyle(" -fx-border-color: #ff3b3b;\n" + "        -fx-border-radius: 2em;\n"
+                    + "        -fx-background-color: #00b4d8;\n" + "        -fx-text-fill: #ffffff;");
         else
-            getLogin().setStyle(" -fx-border-color: #ffffff;\n" +
-                    "    -fx-border-radius: 2em;\n" +
-                    "    -fx-background-color: #00b4d8;\n" +
-                    "    -fx-text-fill: #ffffff;");
+            getLogin().setStyle(" -fx-border-color: #ffffff;\n" + "    -fx-border-radius: 2em;\n"
+                    + "    -fx-background-color: #00b4d8;\n" + "    -fx-text-fill: #ffffff;");
 
-        if(getSenha().getText().isBlank())
-            getSenha().setStyle(" -fx-border-color: #ff3b3b;\n" +
-                    "        -fx-border-radius: 2em;\n" +
-                    "        -fx-background-color: #00b4d8;\n" +
-                    "        -fx-text-fill: #ffffff;");
+        if (getSenha().getText().isBlank())
+            getSenha().setStyle(" -fx-border-color: #ff3b3b;\n" + "        -fx-border-radius: 2em;\n"
+                    + "        -fx-background-color: #00b4d8;\n" + "        -fx-text-fill: #ffffff;");
         else
-            getSenha().setStyle(" -fx-border-color: #ffffff;\n" +
-                    "    -fx-border-radius: 2em;\n" +
-                    "    -fx-background-color: #00b4d8;\n" +
-                    "    -fx-text-fill: #ffffff;");
+            getSenha().setStyle(" -fx-border-color: #ffffff;\n" + "    -fx-border-radius: 2em;\n"
+                    + "    -fx-background-color: #00b4d8;\n" + "    -fx-text-fill: #ffffff;");
 
-        if(getCodAdmin().getText().isBlank())
-            getCodAdmin().setStyle(" -fx-border-color: #ff3b3b;\n" +
-                    "        -fx-border-radius: 2em;\n" +
-                    "        -fx-background-color: #00b4d8;\n" +
-                    "        -fx-text-fill: #ffffff;");
+        if (getCodAdmin().getText().isBlank())
+            getCodAdmin().setStyle(" -fx-border-color: #ff3b3b;\n" + "        -fx-border-radius: 2em;\n"
+                    + "        -fx-background-color: #00b4d8;\n" + "        -fx-text-fill: #ffffff;");
         else
-            getCodAdmin().setStyle(" -fx-border-color: #ffffff;\n" +
-                    "    -fx-border-radius: 2em;\n" +
-                    "    -fx-background-color: #00b4d8;\n" +
-                    "    -fx-text-fill: #ffffff;");
+            getCodAdmin().setStyle(" -fx-border-color: #ffffff;\n" + "    -fx-border-radius: 2em;\n"
+                    + "    -fx-background-color: #00b4d8;\n" + "    -fx-text-fill: #ffffff;");
 
-        if(getLogin().getText().isBlank()|| getSenha().getText().isBlank() || getCodAdmin().getText().isBlank() ){
+        if (getLogin().getText().isBlank() || getSenha().getText().isBlank() || getCodAdmin().getText().isBlank()) {
             validate = true;
         }
 
@@ -130,16 +168,19 @@ public class HomeController implements Initializable {
     private void switchToPrimary() throws Exception {
         ReturnConnection returnConnection = new ReturnConnection();
 
-        if(emptyFields()){
+        if (emptyFields()) {
             getAlerta().setVisible(true);
-        }else {
+        } else {
 
             if (new ValidateCPF().validate(getLogin().getText())) {
                 getAlertaCpf().setVisible(false);
 
                 if (returnConnection.getConnection() != null) {
 
-                    if (new StringUtil().gerarHash(getSenha().getText()).equals(new LoginConnection().loginConection(getLogin().getText(),"senha")) && new LoginConnection().loginConection(getLogin().getText(),"codAdmin").equals(getCodAdmin().getText()))
+                    if (new StringUtil().gerarHash(getSenha().getText())
+                            .equals(new LoginConnection().loginConection(getLogin().getText(), "senha"))
+                            && new LoginConnection().loginConection(getLogin().getText(), "codAdmin")
+                                    .equals(getCodAdmin().getText()))
                         App.setRoot("admin");
                     else
                         new AlertDialog().alertDialog("Erro ao fazer login!");
@@ -151,7 +192,6 @@ public class HomeController implements Initializable {
         }
     }
 
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -160,11 +200,11 @@ public class HomeController implements Initializable {
         getAlertaCpf().setVisible(false);
 
         isTextFormatterNumber(getLogin());
-        addTextLimiter(getLogin(),11);
+        addTextLimiter(getLogin(), 11);
         isTextFormatterNumber(getSenha());
-        addTextLimiter(getSenha(),6);
+        addTextLimiter(getSenha(), 6);
         isTextFormatterNumber(getCodAdmin());
-        addTextLimiter(getCodAdmin(),6);
+        addTextLimiter(getCodAdmin(), 6);
     }
 
     public AnchorPane getTelaLogin() {

@@ -27,66 +27,114 @@ public class RecoverPasswordController implements Initializable {
     private static int randomCode;
     private AlertDialog alertDialog = new AlertDialog();
     private Random random = new Random();
-    private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final Pattern pattern = Pattern.compile(getEmailPattern(), Pattern.CASE_INSENSITIVE);
 
-    @FXML private StackPane stackPaneLogin;
-    @FXML private StackPane stackPaneCode;
-    @FXML private AnchorPane paneLogin;
-    @FXML private AnchorPane paneCode;
+    @FXML
+    private StackPane stackPaneLogin;
+    @FXML
+    private StackPane stackPaneCode;
+    @FXML
+    private AnchorPane paneLogin;
+    @FXML
+    private AnchorPane paneCode;
 
-    @FXML private TextField cpf;
-    @FXML private TextField email;
-    @FXML private TextField codeEmail;
+    @FXML
+    private TextField cpf;
+    @FXML
+    private TextField email;
+    @FXML
+    private TextField codeEmail;
 
-    @FXML private PasswordField newPassword;
-    @FXML private PasswordField confPassword;
+    @FXML
+    private PasswordField newPassword;
+    @FXML
+    private PasswordField confPassword;
 
-    @FXML private Label alerta;
-    @FXML private Label alertaCpf;
-    @FXML private Label alertaCode;
+    @FXML
+    private Label alerta;
+    @FXML
+    private Label alertaCpf;
+    @FXML
+    private Label alertaCode;
 
-    @FXML private Button btnCadastrarNovaSenha;
-    @FXML private Button btnCadastrar;
+    @FXML
+    private Button btnCadastrarNovaSenha;
+    @FXML
+    private Button btnCadastrar;
 
+    @FXML
+    private void buttonBtnCadastrarEntered() {
+        getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae");
+    }
 
-    @FXML private void buttonBtnCadastrarEntered(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
-    @FXML private void buttonBtnCadastrarExited(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
-    @FXML private void mousePressedBtnCadastrar(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
-    @FXML private void mouseReleaseBtnCadastrar(){ getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML
+    private void buttonBtnCadastrarExited() {
+        getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8");
+    }
 
-    @FXML private void buttonCadastrarNovaSenhaEntered(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
-    @FXML private void buttonCadastrarNovaSenhaExited(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
-    @FXML private void mousePressedCadastrarNovaSenha(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae"); }
-    @FXML private void mouseReleaseCadastrarNovaSenha(){ getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML
+    private void mousePressedBtnCadastrar() {
+        getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae");
+    }
 
-    @FXML private void screenLogin() throws IOException, ClassNotFoundException { App.setRoot("Login"); }
+    @FXML
+    private void mouseReleaseBtnCadastrar() {
+        getBtnCadastrar().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8");
+    }
+
+    @FXML
+    private void buttonCadastrarNovaSenhaEntered() {
+        getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae");
+    }
+
+    @FXML
+    private void buttonCadastrarNovaSenhaExited() {
+        getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8");
+    }
+
+    @FXML
+    private void mousePressedCadastrarNovaSenha() {
+        getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color:  #0190ae");
+    }
+
+    @FXML
+    private void mouseReleaseCadastrarNovaSenha() {
+        getBtnCadastrarNovaSenha().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8");
+    }
+
+    @FXML
+    private void screenLogin() throws IOException, ClassNotFoundException {
+        App.setRoot("Login");
+    }
 
     @FXML
     private void btnSendCodeEmail() throws UnirestException {
-        if(composVazios()){
+        if (composVazios()) {
             composVazios();
-        }else{
-            if(new ValidateCPF().validate(getCpf().getText())){
+        } else {
+            if (new ValidateCPF().validate(getCpf().getText())) {
                 getAlertaCpf().setVisible(false);
-                if(getNewPassword().getText().equals(getConfPassword().getText())){
+                if (getNewPassword().getText().equals(getConfPassword().getText())) {
                     String value = Integer.toString(getRandom().nextInt(999999));
                     while (value.length() < 6)
                         value = Integer.toString(getRandom().nextInt(999999));
 
                     setRandomCode(Integer.parseInt(value));
 
-                    if(new EmailValidation().emailValidation(getEmail().getText())){
-                        new EmailClient(getEmail().getText(),"nathanaelsantos15@gmail.com","Recuperação de senha", getRandomCode()).sendSimpleMessage();
+                    if (new EmailValidation().emailValidation(getEmail().getText())) {
+                        new EmailClient(getEmail().getText(), "nathanaelsantos15@gmail.com", "Recuperação de senha",
+                                getRandomCode()).sendSimpleMessage();
                         getStackPaneLogin().setVisible(false);
                         getStackPaneCode().setVisible(true);
-                    }else{
+                    } else {
                         getAlertDialog().alertDialog("Email inválido!");
                     }
-                }else{
+                } else {
                     getAlertDialog().alertDialog("Senhas diferentes!");
                 }
-            }else{
+            } else {
                 getAlertaCpf().setVisible(true);
             }
         }
@@ -95,17 +143,18 @@ public class RecoverPasswordController implements Initializable {
     @FXML
     private void cadastraNovaSenha() throws Exception {
 
-        if(getCodeEmail().getText().isBlank()){
+        if (getCodeEmail().getText().isBlank()) {
             getCodeEmail().setStyle("-fx-border-color: red;");
-        }else{
+        } else {
             getCodeEmail().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);");
-            if(Integer.parseInt(getCodeEmail().getText()) == getRandomCode()){
+            if (Integer.parseInt(getCodeEmail().getText()) == getRandomCode()) {
                 getAlertaCode().setVisible(false);
                 ReturnConnection connection = new ReturnConnection();
                 PreparedStatement preparedStatement = null;
                 try {
-                    preparedStatement = connection.getConnection().prepareStatement("UPDATE db_usuario SET senha = ? WHERE cpf = ?");
-                    preparedStatement.setString(1,new StringUtil().gerarHash(getNewPassword().getText()));
+                    preparedStatement = connection.getConnection()
+                            .prepareStatement("UPDATE db_usuario SET senha = ? WHERE cpf = ?");
+                    preparedStatement.setString(1, new StringUtil().gerarHash(getNewPassword().getText()));
                     preparedStatement.setString(2, getCpf().getText());
                     preparedStatement.executeUpdate();
 
@@ -115,9 +164,9 @@ public class RecoverPasswordController implements Initializable {
                 } catch (SQLException throwables) {
                     throwables.printStackTrace();
                 } finally {
-                    connection.closeConnection(connection.getConnection(),preparedStatement);
+                    connection.closeConnection(connection.getConnection(), preparedStatement);
                 }
-            }else{
+            } else {
                 getAlertaCode().setVisible(true);
             }
         }
@@ -133,27 +182,28 @@ public class RecoverPasswordController implements Initializable {
 
     public boolean composVazios() {
 
-        if(getCpf().getText().isBlank())
+        if (getCpf().getText().isBlank())
             getCpf().setStyle("-fx-border-color: red;");
         else
             getCpf().setStyle("-fx-border-color: rgba(27,72,171,0.4)");
 
-        if(getEmail().getText().isBlank())
+        if (getEmail().getText().isBlank())
             getEmail().setStyle("-fx-border-color: red;");
         else
             getEmail().setStyle("-fx-border-color: rgba(27,72,171,0.4)");
 
-        if(getNewPassword().getText().isBlank())
+        if (getNewPassword().getText().isBlank())
             getNewPassword().setStyle("-fx-border-color: red;");
         else
             getNewPassword().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        if(getConfPassword().getText().isBlank())
+        if (getConfPassword().getText().isBlank())
             getConfPassword().setStyle("-fx-border-color: red;");
         else
             getConfPassword().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
 
-        return (getCpf().getText().isBlank()|| getEmail().getText().isBlank() || getNewPassword().getText().isBlank() || getConfPassword().getText().isBlank());
+        return (getCpf().getText().isBlank() || getEmail().getText().isBlank() || getNewPassword().getText().isBlank()
+                || getConfPassword().getText().isBlank());
     }
 
     @Override
@@ -164,13 +214,13 @@ public class RecoverPasswordController implements Initializable {
         getStackPaneCode().setVisible(false);
 
         isTextFormatterNumber(getCpf());
-            addTextLimiter(getCpf(),11);
+        addTextLimiter(getCpf(), 11);
         isTextFormatterNumber(getNewPassword());
-            addTextLimiter(getNewPassword(),6);
+        addTextLimiter(getNewPassword(), 6);
         isTextFormatterNumber(getConfPassword());
-            addTextLimiter(getConfPassword(),6);
+        addTextLimiter(getConfPassword(), 6);
         isTextFormatterNumber(getCodeEmail());
-            addTextLimiter(getCodeEmail(),6);
+        addTextLimiter(getCodeEmail(), 6);
     }
 
     public int getRandomCode() {

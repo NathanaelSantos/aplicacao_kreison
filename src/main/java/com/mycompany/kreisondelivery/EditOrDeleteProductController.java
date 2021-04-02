@@ -28,29 +28,42 @@ public class EditOrDeleteProductController implements Initializable {
 
     private AlertDialog alertDialog = new AlertDialog();
 
-    @FXML private TableView<Produto> deliveryTable;
-    @FXML private TableColumn<Produto, String> deliveryMan;
-    @FXML private TableColumn<Produto, String> priceProduct;
-    @FXML private TableColumn<Produto, Integer> remainingQuantity;
-    @FXML private TableColumn<Produto, Integer> idProduct;
-
-    @FXML private TextField newNameProduct;
-    @FXML private TextField newPrice;
-    @FXML private TextField quantidade;
-
-    @FXML private StackPane alertModificaProduto;
-
-    @FXML private Button btnEditar;
-    @FXML private Button btnDeletar;
-
-
-    @FXML private void adminScreen() throws IOException, ClassNotFoundException { App.setRoot("admin"); }
+    @FXML
+    private TableView<Produto> deliveryTable;
+    @FXML
+    private TableColumn<Produto, String> deliveryMan;
+    @FXML
+    private TableColumn<Produto, String> priceProduct;
+    @FXML
+    private TableColumn<Produto, Integer> remainingQuantity;
+    @FXML
+    private TableColumn<Produto, Integer> idProduct;
 
     @FXML
-    public void editProduct(){
-        if(getDeliveryTable().getSelectionModel().isEmpty()){
+    private TextField newNameProduct;
+    @FXML
+    private TextField newPrice;
+    @FXML
+    private TextField quantidade;
+
+    @FXML
+    private StackPane alertModificaProduto;
+
+    @FXML
+    private Button btnEditar;
+    @FXML
+    private Button btnDeletar;
+
+    @FXML
+    private void adminScreen() throws IOException, ClassNotFoundException {
+        App.setRoot("admin");
+    }
+
+    @FXML
+    public void editProduct() {
+        if (getDeliveryTable().getSelectionModel().isEmpty()) {
             getAlertDialog().alertDialog("Selecione uma linha da tabela!");
-        }else {
+        } else {
 
             getAlertModificaProduto().setVisible(true);
             getBtnEditar().setDisable(true);
@@ -59,15 +72,15 @@ public class EditOrDeleteProductController implements Initializable {
 
             getNewNameProduct().setText(getDeliveryTable().getSelectionModel().getSelectedItem().getNome());
             getNewPrice().setText(String.valueOf(getDeliveryTable().getSelectionModel().getSelectedItem().getPreco()));
-            getQuantidade().setText(Integer.toString(getDeliveryTable().getSelectionModel().getSelectedItem().getQuantidade()));
+            getQuantidade().setText(
+                    Integer.toString(getDeliveryTable().getSelectionModel().getSelectedItem().getQuantidade()));
         }
 
     }
+
     @FXML
     public void buttonEditProduct() throws IOException, SQLException, ClassNotFoundException {
-        new EditOrDeleteProduct().editProduct(
-                getNewNameProduct().getText(),
-                Float.parseFloat(getNewPrice().getText()),
+        new EditOrDeleteProduct().editProduct(getNewNameProduct().getText(), Float.parseFloat(getNewPrice().getText()),
                 Integer.parseInt(getQuantidade().getText()),
                 getDeliveryTable().getSelectionModel().getSelectedItem().getId_produto());
 
@@ -84,13 +97,12 @@ public class EditOrDeleteProductController implements Initializable {
     }
 
     @FXML
-    public void deleteProduct(){
-        if(getDeliveryTable().getSelectionModel().isEmpty()){
+    public void deleteProduct() {
+        if (getDeliveryTable().getSelectionModel().isEmpty()) {
             getAlertDialog().alertDialog("Selecione uma linha da tabela!");
-        }else {
-            new EditOrDeleteProduct().deleteProduct(
-                    getDeliveryTable().getSelectionModel().getSelectedItem().getId_produto()
-            );
+        } else {
+            new EditOrDeleteProduct()
+                    .deleteProduct(getDeliveryTable().getSelectionModel().getSelectedItem().getId_produto());
         }
     }
 
@@ -103,10 +115,14 @@ public class EditOrDeleteProductController implements Initializable {
         ObservableList<Produto> oblist = FXCollections.observableArrayList();
 
         try {
-            pstment = returnConnection.getConnection().prepareStatement("SELECT nome, preco, quantidade, id_produto FROM db_produto");
+            pstment = returnConnection.getConnection()
+                    .prepareStatement("SELECT nome, preco, quantidade, id_produto FROM db_produto");
             res = pstment.executeQuery();
 
-            while (res.next()){ oblist.add(new Produto(res.getFloat("preco"),res.getString("nome"),res.getInt("quantidade"),res.getInt("id_produto"))); }
+            while (res.next()) {
+                oblist.add(new Produto(res.getFloat("preco"), res.getString("nome"), res.getInt("quantidade"),
+                        res.getInt("id_produto")));
+            }
 
             this.getDeliveryMan().setCellValueFactory(new PropertyValueFactory<>("nome"));
             this.getPriceProduct().setCellValueFactory(new PropertyValueFactory<>("preco"));
@@ -117,8 +133,8 @@ public class EditOrDeleteProductController implements Initializable {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }finally {
-            returnConnection.closeConnection(returnConnection.getConnection(),pstment);
+        } finally {
+            returnConnection.closeConnection(returnConnection.getConnection(), pstment);
         }
     }
 
@@ -129,9 +145,9 @@ public class EditOrDeleteProductController implements Initializable {
         isTextFormatterString(getNewNameProduct());
         addTextLimiter(getNewNameProduct(), 200);
         isTextFormatterFloat(getNewPrice());
-        addTextLimiter(getNewPrice(),5);
+        addTextLimiter(getNewPrice(), 5);
         isTextFormatterFloat(getQuantidade());
-        addTextLimiter(getQuantidade(),5);
+        addTextLimiter(getQuantidade(), 5);
 
         try {
             getProdutoDB();

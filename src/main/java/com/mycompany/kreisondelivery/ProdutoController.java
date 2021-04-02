@@ -25,60 +25,87 @@ public class ProdutoController implements Initializable {
 
     private boolean check = false;
 
-    @FXML private TextField nomeProduto;
-    @FXML private TextField quantidadeProduto;
-    @FXML private TextField precoProduto;
-    @FXML private Button buttonCadastrarProduto;
+    @FXML
+    private TextField nomeProduto;
+    @FXML
+    private TextField quantidadeProduto;
+    @FXML
+    private TextField precoProduto;
+    @FXML
+    private Button buttonCadastrarProduto;
 
-    @FXML private void homeScreen() throws IOException { App.setRoot("home"); }
-    @FXML private void adminScreen() throws IOException { App.setRoot("admin"); }
+    @FXML
+    private void homeScreen() throws IOException {
+        App.setRoot("home");
+    }
 
-    @FXML private void buttonCadastrarProdutoEntered(){ getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
-    @FXML private void buttonCadastrarProdutoExited(){ getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8"); }
-    @FXML private void mousePressedButtonCadastrarProduto(){ getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8"); }
-    @FXML private void mouseReleaseButtonCadastrarProduto(){ getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8"); }
+    @FXML
+    private void adminScreen() throws IOException {
+        App.setRoot("admin");
+    }
+
+    @FXML
+    private void buttonCadastrarProdutoEntered() {
+        getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8");
+    }
+
+    @FXML
+    private void buttonCadastrarProdutoExited() {
+        getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8");
+    }
+
+    @FXML
+    private void mousePressedButtonCadastrarProduto() {
+        getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8");
+    }
+
+    @FXML
+    private void mouseReleaseButtonCadastrarProduto() {
+        getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8");
+    }
 
     public void composVazios() throws SQLException, ClassNotFoundException {
         boolean validate = false;
-        if(getNomeProduto().getText().isBlank()){
+        if (getNomeProduto().getText().isBlank()) {
             getNomeProduto().setStyle("-fx-border-color: red;");
-        }else{
+        } else {
             validate = true;
             getNomeProduto().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
-        if(getQuantidadeProduto().getText().isBlank()){
+        if (getQuantidadeProduto().getText().isBlank()) {
             validate = false;
             getQuantidadeProduto().setStyle("-fx-border-color: red;");
-        }else{
+        } else {
             validate = true;
             getQuantidadeProduto().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
-        if(getPrecoProduto().getText().isBlank()){
+        if (getPrecoProduto().getText().isBlank()) {
             validate = false;
             getPrecoProduto().setStyle("-fx-border-color: red;");
-        }else{
+        } else {
             validate = true;
             getPrecoProduto().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
 
-        if(validate){
+        if (validate) {
             insertProdutoDB();
         }
     }
 
-
     public void insertProdutoDB() throws SQLException, ClassNotFoundException {
         ReturnConnection connection = new ReturnConnection();
-        Produto produto = new Produto(getNomeProduto().getText(),Float.parseFloat(getPrecoProduto().getText()),Integer.parseInt(getQuantidadeProduto().getText()));
+        Produto produto = new Produto(getNomeProduto().getText(), Float.parseFloat(getPrecoProduto().getText()),
+                Integer.parseInt(getQuantidadeProduto().getText()));
         PreparedStatement preparedStatement = null;
 
         try {
 
-            preparedStatement = connection.getConnection().prepareStatement("INSERT INTO db_produto(nome, preco, quantidade,venda)  VALUES (?,?,?,?)");
-            preparedStatement.setString(1,produto.getNome());
-            preparedStatement.setFloat(2,produto.getPreco());
-            preparedStatement.setInt(3,produto.getQuantidade());
-            preparedStatement.setInt(4,produto.getVenda());
+            preparedStatement = connection.getConnection()
+                    .prepareStatement("INSERT INTO db_produto(nome, preco, quantidade,venda)  VALUES (?,?,?,?)");
+            preparedStatement.setString(1, produto.getNome());
+            preparedStatement.setFloat(2, produto.getPreco());
+            preparedStatement.setInt(3, produto.getQuantidade());
+            preparedStatement.setInt(4, produto.getVenda());
 
             preparedStatement.executeUpdate();
 
@@ -94,8 +121,8 @@ public class ProdutoController implements Initializable {
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-        }finally {
-            connection.closeConnection(connection.getConnection(),preparedStatement);
+        } finally {
+            connection.closeConnection(connection.getConnection(), preparedStatement);
         }
     }
 
@@ -103,11 +130,11 @@ public class ProdutoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
         isTextFormatterString(getNomeProduto());
-            addTextLimiter(getNomeProduto(),200);
+        addTextLimiter(getNomeProduto(), 200);
         isTextFormatterNumber(getQuantidadeProduto());
-            addTextLimiter(getQuantidadeProduto(),5);
+        addTextLimiter(getQuantidadeProduto(), 5);
         isTextFormatterFloat(getPrecoProduto());
-            addTextLimiter(getPrecoProduto(),5);
+        addTextLimiter(getPrecoProduto(), 5);
     }
 
     public boolean isCheck() {

@@ -13,7 +13,7 @@ public class EmailClient {
     private static Object codeText;
     private static Object subjectText;
 
-    public EmailClient(Object emailTo, Object emailFrom, Object subjectText, Object codeText){
+    public EmailClient(Object emailTo, Object emailFrom, Object subjectText, Object codeText) {
         EmailClient.setEmailTo(emailTo);
         EmailClient.setEmailFrom(emailFrom);
         EmailClient.setSubjectText(subjectText);
@@ -21,13 +21,11 @@ public class EmailClient {
     }
 
     public JsonNode sendSimpleMessage() throws UnirestException {
-        HttpResponse<JsonNode> request = Unirest.post("https://api.mailgun.net/v3/sandbox868d888d056c4e669d10d3862e70d665.mailgun.org/messages")
-			    .basicAuth("api", getApiKey())
-                .queryString("from", getEmailFrom())
-                .queryString("to", getEmailTo())
+        HttpResponse<JsonNode> request = Unirest
+                .post("https://api.mailgun.net/v3/sandbox868d888d056c4e669d10d3862e70d665.mailgun.org/messages")
+                .basicAuth("api", getApiKey()).queryString("from", getEmailFrom()).queryString("to", getEmailTo())
                 .queryString("subject", getSubjectText())
-                .queryString("text", "Olá, tudo bem? aqui está o seu código: "+ getCodeText())
-                .asJson();
+                .queryString("text", "Olá, tudo bem? aqui está o seu código: " + getCodeText()).asJson();
         return request.getBody();
     }
 

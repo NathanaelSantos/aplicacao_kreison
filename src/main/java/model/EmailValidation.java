@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class EmailValidation {
-    public boolean emailValidation(String email){
+    public boolean emailValidation(String email) {
         boolean isEmailIdValid = false;
         if (email != null && email.length() > 0) {
             String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
