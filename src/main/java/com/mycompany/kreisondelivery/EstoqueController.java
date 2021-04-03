@@ -1,15 +1,8 @@
 
 package com.mycompany.kreisondelivery;
 
-import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.chart.PieChart;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import model.ReturnConnection;
+import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
+import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,8 +13,15 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import static java.time.temporal.TemporalAdjusters.firstDayOfMonth;
-import static java.time.temporal.TemporalAdjusters.lastDayOfMonth;
+import javafx.beans.binding.Bindings;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import model.ReturnConnection;
 
 public class EstoqueController implements Initializable {
 

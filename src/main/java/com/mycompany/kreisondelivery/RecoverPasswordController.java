@@ -1,15 +1,7 @@
 package com.mycompany.kreisondelivery;
 
-import com.mashape.unirest.http.exceptions.UnirestException;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
-import model.*;
+import static model.AddTextLimiter.addTextLimiter;
+import static model.TextFormatter.isTextFormatterNumber;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,8 +11,22 @@ import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
-import static model.AddTextLimiter.addTextLimiter;
-import static model.TextFormatter.isTextFormatterNumber;
+import com.mashape.unirest.http.exceptions.UnirestException;
+
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import model.AlertDialog;
+import model.EmailClient;
+import model.EmailValidation;
+import model.ReturnConnection;
+import model.StringUtil;
+import model.ValidateCPF;
 
 public class RecoverPasswordController implements Initializable {
 
@@ -112,7 +118,10 @@ public class RecoverPasswordController implements Initializable {
     @FXML
     private void btnSendCodeEmail() throws UnirestException {
         if (composVazios()) {
-            composVazios();
+            cpfReleased();
+            emailReleased();
+            newPasswordReleased();
+            confPasswordReleased();
         } else {
             if (new ValidateCPF().validate(getCpf().getText())) {
                 getAlertaCpf().setVisible(false);
@@ -144,11 +153,10 @@ public class RecoverPasswordController implements Initializable {
     private void cadastraNovaSenha() throws Exception {
 
         if (getCodeEmail().getText().isBlank()) {
-            getCodeEmail().setStyle("-fx-border-color: red;");
+            getCodeEmail().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         } else {
-            getCodeEmail().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);");
+            getCodeEmail().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
             if (Integer.parseInt(getCodeEmail().getText()) == getRandomCode()) {
-                getAlertaCode().setVisible(false);
                 ReturnConnection connection = new ReturnConnection();
                 PreparedStatement preparedStatement = null;
                 try {
@@ -171,6 +179,11 @@ public class RecoverPasswordController implements Initializable {
             }
         }
     }
+    @FXML
+    private void codeEmailEmpty() {
+        if(getCodeEmail().getText().isBlank())
+            getAlertaCode().setVisible(false);
+    }
 
     public static String getEmailPattern() {
         return EMAIL_PATTERN;
@@ -180,31 +193,41 @@ public class RecoverPasswordController implements Initializable {
         return pattern;
     }
 
+    @FXML
     public boolean composVazios() {
-
-        if (getCpf().getText().isBlank())
-            getCpf().setStyle("-fx-border-color: red;");
-        else
-            getCpf().setStyle("-fx-border-color: rgba(27,72,171,0.4)");
-
-        if (getEmail().getText().isBlank())
-            getEmail().setStyle("-fx-border-color: red;");
-        else
-            getEmail().setStyle("-fx-border-color: rgba(27,72,171,0.4)");
-
-        if (getNewPassword().getText().isBlank())
-            getNewPassword().setStyle("-fx-border-color: red;");
-        else
-            getNewPassword().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
-
-        if (getConfPassword().getText().isBlank())
-            getConfPassword().setStyle("-fx-border-color: red;");
-        else
-            getConfPassword().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
-
         return (getCpf().getText().isBlank() || getEmail().getText().isBlank() || getNewPassword().getText().isBlank()
                 || getConfPassword().getText().isBlank());
     }
+
+    @FXML
+    private void cpfReleased() {
+        if (getCpf().getText().isBlank())
+            getCpf().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
+        else
+            getCpf().setStyle("-fx-border-color: rgba(27,72,171,0.4);-fx-text-fill: #00b4d8");
+    }
+    @FXML
+    private void emailReleased() {
+        if (getEmail().getText().isBlank())
+            getEmail().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
+        else
+            getEmail().setStyle("-fx-border-color: rgba(27,72,171,0.4);-fx-text-fill: #00b4d8");
+    }
+    @FXML
+    private void newPasswordReleased() {
+        if (getNewPassword().getText().isBlank())
+            getNewPassword().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
+        else
+            getNewPassword().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
+    }
+    @FXML
+    private void confPasswordReleased() {
+        if (getConfPassword().getText().isBlank())
+            getConfPassword().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
+        else
+            getConfPassword().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -221,6 +244,8 @@ public class RecoverPasswordController implements Initializable {
         addTextLimiter(getConfPassword(), 6);
         isTextFormatterNumber(getCodeEmail());
         addTextLimiter(getCodeEmail(), 6);
+
+
     }
 
     public int getRandomCode() {

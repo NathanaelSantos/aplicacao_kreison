@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.kreisondelivery;
 
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
-import model.*;
+import static java.sql.Types.NULL;
+import static model.AddTextLimiter.addTextLimiter;
+import static model.TextFormatter.isTextFormatterNumber;
+import static model.TextFormatter.isTextFormatterString;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,10 +14,22 @@ import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
-import static java.sql.Types.NULL;
-import static model.AddTextLimiter.addTextLimiter;
-import static model.TextFormatter.isTextFormatterNumber;
-import static model.TextFormatter.isTextFormatterString;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import model.AlertDialog;
+import model.CheckCpfdatabase;
+import model.ReturnConnection;
+import model.StringUtil;
+import model.Usuario;
+import model.ValidateCPF;
 
 public class CadastraController implements Initializable {
 
@@ -93,39 +101,39 @@ public class CadastraController implements Initializable {
     public boolean composVazios() {
 
         if (getNome().getText().isBlank())
-            getNome().setStyle("-fx-border-color: red;");
+            getNome().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getNome().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getNome().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getSenha().getText().isBlank())
-            getSenha().setStyle("-fx-border-color: red;");
+            getSenha().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getSenha().setStyle("-fx-border-color: rgba(27,72,171,0.4)");
+            getSenha().setStyle("-fx-border-color: rgba(27,72,171,0.4);-fx-text-fill: #00b4d8");
 
         if (getConfirmaSenha().getText().isBlank())
-            getConfirmaSenha().setStyle("-fx-border-color: red;");
+            getConfirmaSenha().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getConfirmaSenha().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getConfirmaSenha().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getCpf().getText().isBlank())
-            getCpf().setStyle("-fx-border-color: red;");
+            getCpf().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getCpf().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getCpf().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getDataNascimento().getValue() == null)
-            getDataNascimento().setStyle("-fx-border-color: red;");
+            getDataNascimento().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getDataNascimento().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getDataNascimento().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getSelection().getSelectedToggle() == null)
-            getTipoFuncionario().setStyle("-fx-border-color: red;");
+            getTipoFuncionario().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getTipoFuncionario().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getTipoFuncionario().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getCodeAdmin().getText().isBlank())
-            getCodeAdmin().setStyle("-fx-border-color: red;");
+            getCodeAdmin().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getCodeAdmin().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getCodeAdmin().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         return ((getNome().getText().isBlank() || getSenha().getText().isBlank()
                 || getConfirmaSenha().getText().isBlank() || getCpf().getText().isBlank()

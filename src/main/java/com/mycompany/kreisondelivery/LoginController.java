@@ -51,7 +51,6 @@ public class LoginController implements Initializable {
         } else {
             getAlerta().setVisible(false);
             if (new ValidateCPF().validate(getLogin().getText())) {
-                getAlertaCpf().setVisible(false);
 
                 if (returnConnection.getConnection() != null) {
                     try {
@@ -70,6 +69,11 @@ public class LoginController implements Initializable {
                 alertDialog.alertDialog("CPF fornecido não é válido!");
             }
         }
+    }
+
+    @FXML
+    private void emptyFilds() {
+        getAlerta().setVisible(false);
     }
 
     @FXML
