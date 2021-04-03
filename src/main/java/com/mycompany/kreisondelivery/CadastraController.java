@@ -191,53 +191,58 @@ public class CadastraController implements Initializable {
             if (getSenha().getText().equals(getConfirmaSenha().getText())) {
                 if (new ValidateCPF().validate(getCpf().getText())) {
 
-                    ReturnConnection returnConnection = new ReturnConnection();
-                    Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()),
-                            getCpf().getText(), dateNascimento(), tipoFuncionario());
-                    PreparedStatement pstment = null;
+                    if(Integer.parseInt(getDataNascimento().getValue().format(DateTimeFormatter.ofPattern("yyyy"))) > 2003){
+                        getAlertDialog().alertDialog("Cadastro disponível apenas para maiores de 18 anos!");
+                    }else{
 
-                    if (new CadastraController().verificaCodigoAdimin(getCodeAdmin().getText())) {
-                        if (new CheckCpfdatabase().checkCpfdatabase(getCpf().getText())) {
-                            getAlertDialog().alertDialog("Cpf ja cadastrado!");
-                        } else {
-                            try {
-                                pstment = returnConnection.getConnection().prepareStatement(
-                                        "INSERT INTO db_usuario(nome, cpf, data_nasc, senha,tipo_usuario,codAdmin)  VALUES (?,?,?,?,?,?)");
+                        ReturnConnection returnConnection = new ReturnConnection();
+                        Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()),
+                                getCpf().getText(), dateNascimento(), tipoFuncionario());
+                        PreparedStatement pstment = null;
 
-                                pstment.setString(1, user.getNome());
-                                pstment.setString(2, user.getCpf());
-                                pstment.setString(3, user.getData_nasc());
-                                pstment.setString(4, user.getPassword());
-                                pstment.setInt(5, user.getUserType());
-
-                                if (tipoFuncionario() == 1) {
-                                    pstment.setInt(6, Integer.parseInt(getCodeAdmin().getText()));
-                                } else {
-                                    pstment.setNull(6, NULL);
-                                }
-
-                                pstment.executeUpdate();
-
-                                if (tipoFuncionario() == 1) {
-                                    getAlertDialog().alertDialog("Gerente cadastrado com sucesso!!!");
-                                } else if (tipoFuncionario() == 2) {
-                                    getAlertDialog().alertDialog("Entregador cadastrado com sucesso!!!");
-                                }
-
+                        if (new CadastraController().verificaCodigoAdimin(getCodeAdmin().getText())) {
+                            if (new CheckCpfdatabase().checkCpfdatabase(getCpf().getText())) {
+                                getAlertDialog().alertDialog("Cpf ja cadastrado!");
+                            } else {
                                 try {
-                                    App.setRoot("cadastra");
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
+                                    pstment = returnConnection.getConnection().prepareStatement(
+                                            "INSERT INTO db_usuario(nome, cpf, data_nasc, senha,tipo_usuario,codAdmin)  VALUES (?,?,?,?,?,?)");
 
-                            } catch (SQLException throwables) {
-                                throwables.printStackTrace();
-                            } finally {
-                                returnConnection.closeConnection(returnConnection.getConnection(), pstment);
+                                    pstment.setString(1, user.getNome());
+                                    pstment.setString(2, user.getCpf());
+                                    pstment.setString(3, user.getData_nasc());
+                                    pstment.setString(4, user.getPassword());
+                                    pstment.setInt(5, user.getUserType());
+
+                                    if (tipoFuncionario() == 1) {
+                                        pstment.setInt(6, Integer.parseInt(getCodeAdmin().getText()));
+                                    } else {
+                                        pstment.setNull(6, NULL);
+                                    }
+
+                                    pstment.executeUpdate();
+
+                                    if (tipoFuncionario() == 1) {
+                                        getAlertDialog().alertDialog("Gerente cadastrado com sucesso!!!");
+                                    } else if (tipoFuncionario() == 2) {
+                                        getAlertDialog().alertDialog("Entregador cadastrado com sucesso!!!");
+                                    }
+
+                                    try {
+                                        App.setRoot("cadastra");
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+
+                                } catch (SQLException throwables) {
+                                    throwables.printStackTrace();
+                                } finally {
+                                    returnConnection.closeConnection(returnConnection.getConnection(), pstment);
+                                }
                             }
+                        } else {
+                            getAlertDialog().alertDialog("Código inválido!");
                         }
-                    } else {
-                        getAlertDialog().alertDialog("Código inválido!");
                     }
                 } else {
                     getAlertDialog().alertDialog("Cpf inválido!");
@@ -250,6 +255,7 @@ public class CadastraController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
 
         getTxtCodeAdmin().setVisible(false);
         getAlerta().setVisible(false);
