@@ -118,34 +118,34 @@ public class NovaEntregaController implements Initializable {
         boolean validate = false;
 
         if (getEndereco_entrega().getText().isBlank())
-            getEndereco_entrega().setStyle("-fx-border-color: red;");
+            getEndereco_entrega().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getEndereco_entrega().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getEndereco_entrega().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getNome_cliente().getText().isBlank())
-            getNome_cliente().setStyle("-fx-border-color: red;");
+            getNome_cliente().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getNome_cliente().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getNome_cliente().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getBairro().getText().isBlank())
-            getBairro().setStyle("-fx-border-color: red;");
+            getBairro().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getBairro().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getBairro().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getCep().getText().isBlank())
-            getCep().setStyle("-fx-border-color: red;");
+            getCep().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getCep().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getCep().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getNumero().getText().isBlank())
-            getNumero().setStyle("-fx-border-color: red;");
+            getNumero().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getNumero().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getNumero().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getQuantidade().getText().isBlank())
-            getQuantidade().setStyle("-fx-border-color: red;");
+            getQuantidade().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getQuantidade().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getQuantidade().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getEndereco_entrega().getText().isBlank() || getNome_cliente().getText().isBlank()
                 || getBairro().getText().isBlank() || getCep().getText().isBlank() || getNumero().getText().isBlank()

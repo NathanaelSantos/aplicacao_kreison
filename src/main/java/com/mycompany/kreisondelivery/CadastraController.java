@@ -101,39 +101,39 @@ public class CadastraController implements Initializable {
     public boolean composVazios() {
 
         if (getNome().getText().isBlank())
-            getNome().setStyle("-fx-border-color: red;");
+            getNome().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getNome().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getNome().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getSenha().getText().isBlank())
-            getSenha().setStyle("-fx-border-color: red;");
+            getSenha().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getSenha().setStyle("-fx-border-color: rgba(27,72,171,0.4)");
+            getSenha().setStyle("-fx-border-color: rgba(27,72,171,0.4);-fx-text-fill: #00b4d8");
 
         if (getConfirmaSenha().getText().isBlank())
-            getConfirmaSenha().setStyle("-fx-border-color: red;");
+            getConfirmaSenha().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getConfirmaSenha().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getConfirmaSenha().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getCpf().getText().isBlank())
-            getCpf().setStyle("-fx-border-color: red;");
+            getCpf().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getCpf().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getCpf().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getDataNascimento().getValue() == null)
-            getDataNascimento().setStyle("-fx-border-color: red;");
+            getDataNascimento().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getDataNascimento().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getDataNascimento().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getSelection().getSelectedToggle() == null)
-            getTipoFuncionario().setStyle("-fx-border-color: red;");
+            getTipoFuncionario().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getTipoFuncionario().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getTipoFuncionario().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         if (getCodeAdmin().getText().isBlank())
-            getCodeAdmin().setStyle("-fx-border-color: red;");
+            getCodeAdmin().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
         else
-            getCodeAdmin().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
+            getCodeAdmin().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         return ((getNome().getText().isBlank() || getSenha().getText().isBlank()
                 || getConfirmaSenha().getText().isBlank() || getCpf().getText().isBlank()
