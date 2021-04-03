@@ -1,5 +1,16 @@
 package com.mycompany.kreisondelivery;
 
+import static model.AddTextLimiter.addTextLimiter;
+import static model.TextFormatter.isTextFormatterFloat;
+import static model.TextFormatter.isTextFormatterString;
+
+import java.io.IOException;
+import java.net.URL;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,16 +24,6 @@ import javafx.scene.layout.StackPane;
 import model.AlertDialog;
 import model.EditOrDeleteProduct;
 import model.ReturnConnection;
-
-import java.io.IOException;
-import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ResourceBundle;
-
-import static model.AddTextLimiter.addTextLimiter;
-import static model.TextFormatter.*;
 
 public class EditOrDeleteProductController implements Initializable {
 
