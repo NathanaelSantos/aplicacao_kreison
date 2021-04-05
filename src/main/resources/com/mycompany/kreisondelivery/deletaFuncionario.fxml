@@ -28,6 +28,7 @@
                   <TableColumn fx:id="nomeFuncionario" maxWidth="312.0" minWidth="0.0" prefWidth="305.0" resizable="false" sortable="false" text="Nome do funcionário" />
                   <TableColumn fx:id="cpf" prefWidth="177.0" text="CPF" />
                   <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="tipo" prefWidth="75.0" text="Tipo" />
                </columns>
             </TableView>
          </children>

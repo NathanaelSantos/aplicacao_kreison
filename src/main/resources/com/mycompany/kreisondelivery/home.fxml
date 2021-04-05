@@ -23,9 +23,9 @@
                   <Image url="@../../../images/setaEsquerda.png" />
                </image>
             </ImageView>
-            <HBox fx:id="btnAdmin" alignment="CENTER_RIGHT" layoutX="433.0" prefHeight="25.0" prefWidth="78.0" spacing="3.0" style="-fx-background-radius: 2em;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <HBox fx:id="btnAdmin" alignment="CENTER_RIGHT" layoutX="433.0" prefHeight="25.0" prefWidth="84.0" spacing="3.0" style="-fx-background-radius: 2em;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Button fx:id="buttonAdmin" mnemonicParsing="false" onAction="#telaLogin" onMouseEntered="#mouseEnteredBtnAdmin" onMouseExited="#mouseExitedBtnAdmin" style="-fx-background-color: #00b4d8; -fx-background-radius: 2em;" text="Admin">
+                  <Button fx:id="buttonAdmin" mnemonicParsing="false" onAction="#telaLogin" onMouseEntered="#mouseEnteredBtnAdmin" onMouseExited="#mouseExitedBtnAdmin" style="-fx-background-color: #00b4d8; -fx-background-radius: 2em;" text="Gerente">
                      <graphic>
                         <ImageView fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -83,18 +83,14 @@
                <children>
                   <VBox alignment="TOP_CENTER" fillWidth="false" prefHeight="289.0" prefWidth="257.0" spacing="15.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.5em;" StackPane.alignment="CENTER">
                      <children>
-                        <Label contentDisplay="CENTER" text="Login admin" textFill="#fdfdfd">
+                        <Label contentDisplay="CENTER" text="Login gerente" textFill="#fdfdfd">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
                         <TextField fx:id="login" focusTraversable="false" prefHeight="32.0" prefWidth="234.0" promptText="Cpf" styleClass="text-field" stylesheets="@../../../styles/homeTelaLogin.css" />
                         <PasswordField fx:id="senha" focusTraversable="false" prefHeight="32.0" prefWidth="234.0" promptText="Senha" styleClass="text-field" stylesheets="@../../../styles/homeTelaLogin.css" />
-                        <TextField fx:id="codAdmin" alignment="CENTER" prefHeight="32.0" prefWidth="90.0" promptText="Código admin" style="-fx-background-radius: 2em; -fx-prompt-text-fill: #d9d9d9; -fx-border-color: #d9d9d9; -fx-text-fill: #ffffff; -fx-background-color: transparent; -fx-border-radius: 2em;" styleClass="text-field" stylesheets="@../../../styles/homeTelaLogin.css">
-                           <font>
-                              <Font name="Arial" size="12.0" />
-                           </font>
-                        </TextField>
+                        <PasswordField fx:id="codAdmin" alignment="CENTER" prefHeight="30.0" prefWidth="108.0" promptText="Código gerente" stylesheets="@../../../styles/homeTelaLogin.css" />
                         <Label fx:id="alerta" text="*Campos precisam estar preenchidos!" textFill="RED">
                            <font>
                               <Font name="Arial Bold" size="12.0" />
