@@ -32,13 +32,13 @@ public class HomeController implements Initializable {
     @FXML
     private PasswordField senha;
     @FXML
+    private PasswordField codAdmin;
+    @FXML
     private Label alerta;
     @FXML
     private Label alertaCpf;
     @FXML
     private Button buttonAdmin;
-    @FXML
-    private TextField codAdmin;
     @FXML
     private Button buttonConsultaEstoque;
     @FXML
@@ -259,14 +259,6 @@ public class HomeController implements Initializable {
         this.buttonAdmin = buttonAdmin;
     }
 
-    public TextField getCodAdmin() {
-        return codAdmin;
-    }
-
-    public void setCodAdmin(TextField codAdmin) {
-        this.codAdmin = codAdmin;
-    }
-
     public Button getButtonConsultaEstoque() {
         return buttonConsultaEstoque;
     }
@@ -289,5 +281,13 @@ public class HomeController implements Initializable {
 
     public void setBtnLogin(Button btnLogin) {
         this.btnLogin = btnLogin;
+    }
+
+    public PasswordField getCodAdmin() {
+        return codAdmin;
+    }
+
+    public void setCodAdmin(PasswordField codAdmin) {
+        this.codAdmin = codAdmin;
     }
 }

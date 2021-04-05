@@ -5,6 +5,7 @@ public class Pessoa {
     private String nome;
     private int id_usuario;
     private String data_nasc;
+    private int tipo_usuario;
 
     public Pessoa() {
     }
@@ -19,11 +20,13 @@ public class Pessoa {
         this.setData_nasc(data_nasc);
     }
 
-    public Pessoa(String cpf, String nome, int id_usuario) {
+    public Pessoa(String cpf, String nome, int id_usuario, int tipo_usuario) {
         this.setCpf(cpf);
         this.setNome(nome);
         this.setId_usuario(id_usuario);
+        this.setTipo_usuario(tipo_usuario);
     }
+
 
     public String getCpf() {
         return cpf;
@@ -55,5 +58,13 @@ public class Pessoa {
 
     public void setId_usuario(int id_usuario) {
         this.id_usuario = id_usuario;
+    }
+
+    public int getTipo_usuario() {
+        return tipo_usuario;
+    }
+
+    public void setTipo_usuario(int tipo_usuario) {
+        this.tipo_usuario = tipo_usuario;
     }
 }
