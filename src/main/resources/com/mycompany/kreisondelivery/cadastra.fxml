@@ -22,9 +22,9 @@
    <children>
       <AnchorPane prefHeight="183.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="90.0" layoutY="35.0" prefHeight="15.0" prefWidth="131.0" text="Cadastro de Usuário" textFill="WHITE" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="35.0">
+            <Label layoutX="90.0" layoutY="35.0" prefHeight="16.0" prefWidth="159.0" text="Cadastro de Usuário" textFill="WHITE" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="35.0">
                <font>
-                  <Font name="Arial Bold" size="12.0" />
+                  <Font name="Arial Bold" size="14.0" />
                </font>
             </Label>
          </children></AnchorPane>
@@ -32,53 +32,62 @@
          <children>
             <Button fx:id="buttonCadastrar" focusTraversable="false" layoutX="141.0" layoutY="301.0" mnemonicParsing="false" onAction="#insertUsuarioDB" onMouseEntered="#buttonCadastrarEntered" onMouseExited="#buttonCadastrarExited" onMousePressed="#mousePressedButtonCadastrar" onMouseReleased="#mouseReleaseButtonCadastrar" prefHeight="32.0" prefWidth="343.0" style="-fx-background-radius: 3em; -fx-background-color: #00b4d8;" text="Cadastrar" textFill="WHITE" AnchorPane.leftAnchor="141.0" AnchorPane.rightAnchor="141.0">
                <font>
-                  <Font name="Arial Bold" size="12.0" />
+                  <Font name="Arial Bold" size="13.0" />
                </font>
             </Button>
             <VBox layoutX="13.0" layoutY="14.0" prefHeight="151.0" prefWidth="593.0" spacing="8.0" stylesheets="@../../../styles/textField.css" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="14.0">
                <children>
-                  <TextField fx:id="nome" focusTraversable="false" prefHeight="30.0" prefWidth="554.0" promptText="Nome" style="-fx-text-fill: #00b4d8;" stylesheets="@../../../styles/textField.css">
+                  <TextField fx:id="nome" focusTraversable="false" prefHeight="30.0" prefWidth="554.0" promptText="Nome" style="-fx-text-fill: #00b4d8;-fx-prompt-text-fill: rgba(0, 180, 216, 0.7);" stylesheets="@../../../styles/textField.css">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
+                     <font>
+                        <Font name="Arial Bold" size="12.0" />
+                     </font>
                   </TextField>
-                  <PasswordField fx:id="senha" focusTraversable="false" prefHeight="30.0" prefWidth="554.0" promptText="Senha" style="-fx-text-fill: #00b4d8;">
+                  <PasswordField fx:id="senha" focusTraversable="false" prefHeight="30.0" prefWidth="554.0" promptText="Senha" style="-fx-text-fill: #00b4d8;-fx-prompt-text-fill: rgba(0, 180, 216, 0.7);">
                      <font>
-                        <Font name="Arial" size="12.0" />
+                        <Font name="Arial Bold" size="12.0" />
                      </font>
                   </PasswordField>
-                  <PasswordField fx:id="confirmaSenha" focusTraversable="false" prefHeight="30.0" prefWidth="554.0" promptText="Confirmar senha" style="-fx-text-fill: #00b4d8;">
+                  <PasswordField fx:id="confirmaSenha" focusTraversable="false" prefHeight="30.0" prefWidth="554.0" promptText="Confirmar senha" style="-fx-text-fill: #00b4d8;-fx-prompt-text-fill: rgba(0, 180, 216, 0.7);">
                      <font>
-                        <Font name="Arial" size="12.0" />
+                        <Font name="Arial Bold" size="12.0" />
                      </font>
                   </PasswordField>
-                  <TextField fx:id="cpf" focusTraversable="false" prefHeight="30.0" prefWidth="554.0" promptText="cpf" style="-fx-text-fill: #00b4d8;">
+                  <TextField fx:id="cpf" focusTraversable="false" prefHeight="30.0" prefWidth="554.0" promptText="cpf" style="-fx-text-fill: #00b4d8;-fx-prompt-text-fill: rgba(0, 180, 216, 0.7);">
                      <font>
-                        <Font name="Arial" size="12.0" />
+                        <Font name="Arial Bold" size="12.0" />
                      </font>
                   </TextField>
                </children>
             </VBox>
-            <HBox alignment="CENTER" layoutX="14.0" layoutY="184.0" prefHeight="32.0" prefWidth="439.0" spacing="5.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="167.0">
+            <HBox alignment="CENTER" layoutX="14.0" layoutY="184.0" prefHeight="32.0" prefWidth="452.0" spacing="5.0" AnchorPane.bottomAnchor="165.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="154.0">
                <children>
-                  <DatePicker fx:id="dataNascimento" editable="false" focusTraversable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="159.0" promptText="Data de nascimento" showWeekNumbers="true" style="-fx-background-color: #00b4d8;-fx-text-fill: #00b4d8;" />
-                  <MenuButton fx:id="tipoFuncionario" focusTraversable="false" lineSpacing="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="144.0" style="-fx-background-color: #00b4d8; -fx-border-radius: 2em;" text="Tipo de funcionário" textFill="WHITE">
+                  <DatePicker fx:id="dataNascimento" editable="false" focusTraversable="false" nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="150.0" promptText="Data de nascimento" showWeekNumbers="true" style="-fx-background-color: #00b4d8;-fx-text-fill: #00b4d8;-fx-prompt-text-fill: rgba(0, 180, 216, 0.7);" />
+                  <MenuButton fx:id="tipoFuncionario" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" lineSpacing="1.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="157.0" style="-fx-background-color: #00b4d8; -fx-border-radius: 2em;" text="Tipo de funcionário" textAlignment="CENTER" textFill="WHITE">
                     <items>
-                        <RadioMenuItem fx:id="entregador" mnemonicParsing="false" text="Entregador">
+                        <RadioMenuItem fx:id="entregador" mnemonicParsing="false" style="-fx-font-family: Arial" text="      Entregador      ">
                            <toggleGroup>
                               <ToggleGroup fx:id="selection" />
                            </toggleGroup>
                         </RadioMenuItem>
-                        <RadioMenuItem fx:id="gerente" mnemonicParsing="false" text="Gerente" toggleGroup="$selection" />
+                        <RadioMenuItem fx:id="gerente" mnemonicParsing="false" style="-fx-font-family: Arial" text="      Gerente      " toggleGroup="$selection" />
                     </items>
                      <font>
-                        <Font name="Arial" size="12.0" />
+                        <Font name="Arial Bold" size="13.0" />
                      </font>
                   </MenuButton>
-                  <StackPane prefHeight="32.0" prefWidth="100.0">
+                  <StackPane prefHeight="32.0" prefWidth="114.0">
                      <children>
-                        <PasswordField fx:id="codeAdmin" alignment="CENTER" focusTraversable="false" layoutX="10.0" layoutY="11.0" prefHeight="30.0" prefWidth="105.0" promptText="Código gerente" style="-fx-text-fill: #00b4d8;" />
-                        <TextField fx:id="txtCodeAdmin" alignment="CENTER" editable="false" prefHeight="30.0" prefWidth="105.0" promptText="Código gerente" style="-fx-text-fill: #00b4d8;" />
+                        <PasswordField fx:id="codeAdmin" alignment="CENTER" focusTraversable="false" layoutX="10.0" layoutY="11.0" prefHeight="30.0" prefWidth="114.0" promptText="Código gerente" style="-fx-text-fill: #00b4d8;-fx-prompt-text-fill: rgba(0, 180, 216, 0.7);">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font></PasswordField>
+                        <TextField fx:id="txtCodeAdmin" alignment="CENTER" editable="false" prefHeight="30.0" prefWidth="114.0" promptText="Código gerente" style="-fx-text-fill: #00b4d8;-fx-prompt-text-fill: rgba(0, 180, 216, 0.7);">
+                           <font>
+                              <Font name="Arial Bold" size="13.0" />
+                           </font></TextField>
                      </children>
                   </StackPane>
                   <ImageView fx:id="iconVisible" fitHeight="20.0" fitWidth="15.0" onMousePressed="#mousePressedSetVisibleCode" onMouseReleased="#mouseReleaseSetVisibleCode" pickOnBounds="true" preserveRatio="true">
@@ -90,7 +99,7 @@
             </HBox>
             <Label fx:id="alerta" layoutX="13.0" layoutY="228.0" prefHeight="15.0" prefWidth="210.0" text="*Campos precisam ser preenchidos!" textFill="RED" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="397.0">
                <font>
-                  <Font name="Arial Bold" size="12.0" />
+                  <Font name="Arial Bold" size="13.0" />
                </font>
             </Label>
          </children>

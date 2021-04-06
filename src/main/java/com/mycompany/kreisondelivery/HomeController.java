@@ -75,6 +75,14 @@ public class HomeController implements Initializable {
     }
 
     @FXML
+    private void mouseClickedAnchor() throws IOException {
+        if (isOnScreenLogin()) {
+            getTelaLogin().setVisible(false);
+            setOnScreenLogin(false);
+        }
+    }
+
+    @FXML
     private void buttonLoginEntered() {
         getBtnLogin().setStyle("-fx-background-radius: 3em; -fx-background-color:  #009cba; -fx-text-fill: #ffffff");
     }
@@ -96,12 +104,12 @@ public class HomeController implements Initializable {
 
     @FXML
     private void mouseExitedBtnAdmin() throws IOException {
-        getButtonAdmin().setStyle("-fx-background-color: #00b4d8");
+        getButtonAdmin().setStyle("-fx-background-color: #ffffff");
     }
 
     @FXML
     private void mouseEnteredBtnAdmin() throws IOException {
-        getButtonAdmin().setStyle("-fx-background-color: #038ca9");
+        getButtonAdmin().setStyle("-fx-background-color: #e7e6e6");
     }
 
     @FXML

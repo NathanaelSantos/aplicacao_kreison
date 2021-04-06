@@ -30,46 +30,46 @@
                               </ImageView>
                               <Label contentDisplay="CENTER" text="Login" textFill="#00b4d8">
                                  <font>
-                                    <Font name="System Bold" size="16.0" />
+                                    <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
                               <TextField fx:id="login" focusTraversable="false" onKeyReleased="#emptyFilds" prefHeight="32.0" prefWidth="360.0" promptText="Cpf" style="-fx-background-radius: 2em;-fx-text-fill: #00b4d8">
                                  <font>
-                                    <Font name="Tahoma" size="12.0" />
+                                    <Font name="Tahoma" size="13.0" />
                                  </font>
                               </TextField>
                               <PasswordField fx:id="senha" focusTraversable="false" onKeyReleased="#emptyFilds" prefHeight="32.0" prefWidth="360.0" promptText="Senha" style="-fx-background-radius: 2em;-fx-text-fill: #00b4d8">
                                  <font>
-                                    <Font name="Tahoma" size="12.0" />
+                                    <Font name="Tahoma" size="13.0" />
                                  </font>
                               </PasswordField>
                               <HBox alignment="CENTER_RIGHT" fillHeight="false" prefHeight="16.0" prefWidth="354.0" spacing="18.0">
                                  <children>
                                     <Label fx:id="txtCadastra" alignment="CENTER" onMouseClicked="#cadastrar" onMouseEntered="#mouseEnteredTxtCad" onMouseExited="#mouseExitedTxtCad" text="Cadastrar" textFill="#00b4d8c7">
                                        <font>
-                                          <Font name="Tahoma Bold" size="11.0" />
+                                          <Font name="Tahoma Bold" size="13.0" />
                                        </font>
                                     </Label>
                                     <Label fx:id="recoverPassword" onMouseClicked="#recoverPassword" onMouseEntered="#mouseEnteredRecoverPassword" onMouseExited="#mouseExitedRecoverPassword" text="Recuperar senha" textFill="#00b4d8c7">
                                        <font>
-                                          <Font name="Tahoma bold" size="11.0" />
+                                          <Font name="Tahoma Bold" size="13.0" />
                                        </font>
                                     </Label>
                                  </children>
                               </HBox>
                               <Label fx:id="alerta" text="*Campos precisam estar preenchidos!" textFill="RED">
                                  <font>
-                                    <Font name="Tahoma Bold" size="12.0" />
+                                    <Font name="Tahoma Bold" size="13.0" />
                                  </font>
                               </Label>
                               <Label fx:id="alertaCpf" text="*Cpf inválido!" textFill="RED">
                                  <font>
-                                    <Font name="Tahoma Bold" size="12.0" />
+                                    <Font name="Tahoma Bold" size="13.0" />
                                  </font>
                               </Label>
                               <Button id="buttonLogin" fx:id="btnLogin" focusTraversable="false" mnemonicParsing="false" onAction="#switchToPrimary" onMouseEntered="#buttonLoginEntered" onMouseExited="#setButtonLoginExited" onMousePressed="#mousePressedButtonLogin" onMouseReleased="#mouseReleaseButtonLogin" prefHeight="32.0" prefWidth="369.0" style="-fx-background-radius: 3em; -fx-background-color: #00b4d8;" text="Fazer login" textFill="WHITE">
                                  <font>
-                                    <Font name="System Bold" size="12.0" />
+                                    <Font name="Tahoma Bold" size="13.0" />
                                  </font>
                               </Button>
                            </children>
@@ -90,7 +90,7 @@
                         </VBox>
                      </children>
                      <effect>
-                        <DropShadow color="#7c7c7cf2" height="26.93" radius="12.965" width="26.93" />
+                        <DropShadow color="#616060f2" height="26.93" radius="12.965" width="26.93" />
                      </effect>
                   </AnchorPane>
                </children>

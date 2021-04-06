@@ -14,13 +14,14 @@
 
 .table-view .column-header,
 .table-view .column-header-background .filler {
-    -fx-background-color:   #00b4d8;
+    -fx-background-color: #00b4d8;
 }
 
 .table-view .cell{
+    -fx-font-family: Arial;
     -fx-cell-size: 35;
     -fx-alignment: center-left;
-    -fx-text-fill: #29292D;
+    -fx-text-fill: #292828;
     -fx-alignment: CENTER_LEFT;
 
 }
@@ -42,7 +43,8 @@
     -fx-background-color: #abfaa4;
 }
 .table-row-cell:selected .text {
-    -fx-fill: #0c0c0c;
+    -fx-fill: #1a1a1a;
+    -fx-font-weight: bold;
 
 }
 

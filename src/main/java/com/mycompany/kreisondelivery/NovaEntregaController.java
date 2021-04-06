@@ -37,6 +37,10 @@ public class NovaEntregaController implements Initializable {
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private AlertDialog alertDialog = new AlertDialog();
 
+    ReturnConnection connection = new ReturnConnection();
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+
     @FXML
     private TableView<Produto> table_entegador;
     @FXML
@@ -174,8 +178,6 @@ public class NovaEntregaController implements Initializable {
                 if (Integer.parseInt(getQuantidade().getText()) <= getTable_entegador().getSelectionModel()
                         .getSelectedItem().getQuantidade()) {
 
-                    ReturnConnection connection = new ReturnConnection();
-                    PreparedStatement preparedStatement = null;
 
                     try {
                         preparedStatement = connection.getConnection().prepareStatement(
@@ -215,9 +217,6 @@ public class NovaEntregaController implements Initializable {
     }
 
     public void atualizaVenda() throws SQLException {
-        ReturnConnection connection = new ReturnConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
         int valueVenda = 0;
 
@@ -258,10 +257,6 @@ public class NovaEntregaController implements Initializable {
 
     public void getProdutoDB() throws SQLException, ClassNotFoundException {
 
-        ReturnConnection connection = new ReturnConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
-
         ObservableList<Produto> oblist = FXCollections.observableArrayList();
 
         try {
@@ -289,10 +284,6 @@ public class NovaEntregaController implements Initializable {
     }
 
     public void getNomeEntregador() throws SQLException, ClassNotFoundException {
-
-        ReturnConnection connection = new ReturnConnection();
-        PreparedStatement preparedStatement = null;
-        ResultSet resultSet = null;
 
         ObservableList<Pessoa> oblist = FXCollections.observableArrayList();
 
