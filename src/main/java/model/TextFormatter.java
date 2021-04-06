@@ -13,7 +13,7 @@ public class TextFormatter {
 
     public static void isTextFormatterString(TextField textField) {
         textField.textProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.matches("[a-z A-Z]*")) {
+            if (!newValue.matches("[a-z A-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ´]*")) {
                 textField.setText(oldValue);
             }
         });

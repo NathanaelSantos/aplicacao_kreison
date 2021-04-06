@@ -10,6 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.Label?>
 <AnchorPane prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.kreisondelivery.DeletaFuncionarioController">
    <children>
       <AnchorPane prefHeight="36.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -24,6 +25,9 @@
       <StackPane layoutY="36.0" prefHeight="395.0" prefWidth="800.0" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
          <children>
             <TableView fx:id="deletaFuncionarioTable" accessibleRole="IMAGE_VIEW" editable="true" fixedCellSize="0.0" focusTraversable="false" prefHeight="395.0" prefWidth="670.0" style="-fx-border-color: #00b4d8; -fx-background-color: #00b4d8;" stylesheets="@../../../styles/table.css">
+               <placeholder>
+                  <Label text="Não há funcionário cadastrado!" style="-fx-font-family: Arial" />
+               </placeholder>
                <columns>
                   <TableColumn fx:id="nomeFuncionario" maxWidth="312.0" minWidth="0.0" prefWidth="305.0" resizable="false" sortable="false" text="Nome do funcionário" />
                   <TableColumn fx:id="cpf" prefWidth="177.0" text="CPF" />
