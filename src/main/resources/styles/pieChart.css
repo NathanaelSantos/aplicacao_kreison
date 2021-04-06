@@ -5,21 +5,23 @@ and open the template in the editor.
 */
 /* 
     Created on : Dec 29, 2020, 12:00:56 PM
-    Author     : natha
+    Author     : nathan
 */
 
 .chart{
     -fx-clockwise:false;
     -fx-pie-label-visible:true;
     -fx-start-angle:10;
+    -fx-font-family: Arial;
+    -fx-font-size: 13.0;
 }
 
 
 .default-color0.chart-pie{
-    -fx-pie-color: #0fff95;
+    -fx-pie-color: #42f8a8;
 }
 .default-color1.chart-pie{
-    -fx-pie-color: #ff4343;
+    -fx-pie-color: #ff6262;
 }
 
 

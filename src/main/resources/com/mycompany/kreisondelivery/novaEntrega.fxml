@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.kreisondelivery.NovaEntregaController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #F8F7F7;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.kreisondelivery.NovaEntregaController">
    <children>
       <AnchorPane prefHeight="27.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -26,13 +26,16 @@
          </children>
       </AnchorPane>
       <AnchorPane layoutY="27.0" prefHeight="153.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
-      <AnchorPane layoutX="19.0" layoutY="37.0" minHeight="-Infinity" prefHeight="496.0" prefWidth="749.0" style="-fx-background-color: #ffffff; -fx-background-radius: 1em;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="37.0">
+      <AnchorPane layoutX="19.0" layoutY="37.0" minHeight="-Infinity" prefHeight="496.0" prefWidth="749.0" style="-fx-background-color: #F8F7F7; -fx-background-radius: 1em;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="37.0">
          <children>
             <StackPane layoutX="8.0" layoutY="3.0" prefHeight="329.0" prefWidth="735.0" AnchorPane.bottomAnchor="164.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
                <children>
                   <HBox prefHeight="208.0" prefWidth="323.0" spacing="5.0">
                      <children>
                         <TableView fx:id="table_entegador" accessibleRole="IMAGE_VIEW" fixedCellSize="0.0" focusTraversable="false" prefHeight="328.0" prefWidth="421.0" stylesheets="@../../../styles/table.css">
+                           <placeholder>
+                              <Label text="Não há produto cadastrado!" />
+                           </placeholder>
                           <columns>
                             <TableColumn fx:id="entregador" editable="false" maxWidth="187.0" minWidth="0.0" prefWidth="187.0" resizable="false" sortable="false" text="Especificação do produto" />
                               <TableColumn fx:id="precoProduto" editable="false" maxWidth="78.0" prefWidth="78.0" resizable="false" sortable="false" text="Preço R$" />
@@ -52,13 +55,13 @@
                   </HBox>
                </children>
             </StackPane>
-            <StackPane layoutX="27.0" layoutY="347.0" prefHeight="144.0" prefWidth="698.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
+            <StackPane layoutX="27.0" layoutY="347.0" prefHeight="161.0" prefWidth="738.0" AnchorPane.bottomAnchor="-3.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0">
                <children>
-                  <VBox alignment="CENTER" fillWidth="false" prefHeight="223.0" prefWidth="534.0" spacing="6.0" stylesheets="@../../../styles/textField.css" StackPane.alignment="CENTER">
+                  <VBox alignment="CENTER" fillWidth="false" prefHeight="159.0" prefWidth="738.0" spacing="6.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0.7em;" stylesheets="@../../../styles/textField.css" StackPane.alignment="CENTER">
                      <children>
                         <TextField fx:id="endereco_entrega" focusTraversable="false" prefHeight="30.0" prefWidth="656.0" promptText="Endereço de entrega" style="-fx-text-fill: #00b4d8;" stylesheets="@../../../styles/textField.css">
                            <font>
-                              <Font name="Arial Bold" size="12.0" />
+                              <Font name="Arial Bold" size="13.0" />
                            </font>
                            <opaqueInsets>
                               <Insets />
@@ -66,26 +69,26 @@
                         </TextField>
                         <TextField fx:id="nome_cliente" focusTraversable="false" prefHeight="30.0" prefWidth="656.0" promptText="Nome do cliente" style="-fx-text-fill: #00b4d8;">
                            <font>
-                              <Font name="Arial Bold" size="12.0" />
+                              <Font name="Arial Bold" size="13.0" />
                            </font>
                         </TextField>
                         <TextField fx:id="bairro" focusTraversable="false" prefHeight="30.0" prefWidth="656.0" promptText="Bairro" style="-fx-text-fill: #00b4d8;">
                            <font>
-                              <Font name="Arial Bold" size="12.0" />
+                              <Font name="Arial Bold" size="13.0" />
                            </font></TextField>
                         <HBox alignment="CENTER" prefHeight="32.0" prefWidth="549.0" spacing="5.0">
                            <children>
                               <TextField fx:id="cep" focusTraversable="false" prefHeight="30.0" prefWidth="188.0" promptText="Cep" style="-fx-text-fill: #00b4d8;">
                                  <font>
-                                    <Font name="Arial Bold" size="12.0" />
+                                    <Font name="Arial Bold" size="13.0" />
                                  </font></TextField>
                               <TextField fx:id="numero" focusTraversable="false" prefHeight="30.0" prefWidth="181.0" promptText="Número" style="-fx-text-fill: #00b4d8;">
                                  <font>
-                                    <Font name="Arial Bold" size="12.0" />
+                                    <Font name="Arial Bold" size="13.0" />
                                  </font></TextField>
                               <TextField fx:id="quantidade" focusTraversable="false" prefHeight="30.0" prefWidth="148.0" promptText="Quantidade" style="-fx-text-fill: #00b4d8;">
                                  <font>
-                                    <Font name="Arial Bold" size="12.0" />
+                                    <Font name="Arial Bold" size="13.0" />
                                  </font></TextField>
                            </children>
                         </HBox>
@@ -99,7 +102,7 @@
          <children>
             <Button fx:id="cadastraEntrega" focusTraversable="false" mnemonicParsing="false" onAction="#cadastraEntrega" onMouseEntered="#buttonCadastraEntregaEntered" onMouseExited="#buttonCadastraEntregaExited" onMousePressed="#mousePressedButtonCadastraEntrega" onMouseReleased="#mouseReleaseButtonCadastraEntrega" prefHeight="32.0" prefWidth="493.0" style="-fx-background-radius: 3em; -fx-background-color: #00b4d8;" text="Cadastrar nova entrega" textFill="WHITE">
                <font>
-                  <Font name="Arial Bold" size="12.0" />
+                  <Font name="Arial Bold" size="13.0" />
                </font>
             </Button>
          </children>
