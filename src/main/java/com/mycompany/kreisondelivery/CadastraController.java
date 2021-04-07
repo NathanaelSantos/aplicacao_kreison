@@ -36,31 +36,41 @@ public class CadastraController implements Initializable {
     private AlertDialog alertDialog = new AlertDialog();
 
     @FXML
-    private Button buttonCadastrar;
+    private Label alerta;
+
+
     @FXML
     private TextField nome;
+    @FXML
+    private TextField cpf;
+    @FXML
+    private TextField txtCodeAdmin;
+
     @FXML
     private PasswordField senha;
     @FXML
     private PasswordField confirmaSenha;
     @FXML
-    private TextField cpf;
+    private PasswordField codeAdmin;
+
     @FXML
     private DatePicker dataNascimento;
+
+    @FXML
+    private Button buttonCadastrar;
     @FXML
     private MenuButton tipoFuncionario;
     @FXML
+    private MenuButton typeOfClient;
+
+    @FXML
     private RadioMenuItem entregador;
     @FXML
-    private ToggleGroup selection;
-    @FXML
     private RadioMenuItem gerente;
+
     @FXML
-    private PasswordField codeAdmin;
-    @FXML
-    private TextField txtCodeAdmin;
-    @FXML
-    private Label alerta;
+    private ToggleGroup selection;
+
 
     @FXML
     private void buttonCadastrarEntered() {
@@ -97,6 +107,7 @@ public class CadastraController implements Initializable {
         getTxtCodeAdmin().setVisible(true);
         getTxtCodeAdmin().setText(getCodeAdmin().getText());
     }
+
 
     public boolean composVazios() {
 
@@ -141,14 +152,14 @@ public class CadastraController implements Initializable {
                 || (getSelection().getSelectedToggle() == null || getDataNascimento().getValue() == null));
     }
 
-    public int tipoFuncionario() {
-        int tipoFunc = -1;
+    public int typeOfEmployment() {
+        int typeOfEmployment = -1;
         if (getEntregador().isSelected()) {
-            tipoFunc = 2;
+            typeOfEmployment = 2; // Deliverer
         } else if (getGerente().isSelected()) {
-            tipoFunc = 1;
+            typeOfEmployment = 1; // Manager
         }
-        return tipoFunc;
+        return typeOfEmployment;
     }
 
     public String dateNascimento() {
@@ -197,7 +208,7 @@ public class CadastraController implements Initializable {
 
                         ReturnConnection returnConnection = new ReturnConnection();
                         Usuario user = new Usuario(getNome().getText(), new StringUtil().gerarHash(getSenha().getText()),
-                                getCpf().getText(), dateNascimento(), tipoFuncionario());
+                                getCpf().getText(), dateNascimento(), typeOfEmployment());
                         PreparedStatement pstment = null;
 
                         if (new CadastraController().verificaCodigoAdimin(getCodeAdmin().getText())) {
@@ -214,7 +225,7 @@ public class CadastraController implements Initializable {
                                     pstment.setString(4, user.getPassword());
                                     pstment.setInt(5, user.getUserType());
 
-                                    if (tipoFuncionario() == 1) {
+                                    if (typeOfEmployment() == 1) {
                                         pstment.setInt(6, Integer.parseInt(getCodeAdmin().getText()));
                                     } else {
                                         pstment.setNull(6, NULL);
@@ -222,9 +233,9 @@ public class CadastraController implements Initializable {
 
                                     pstment.executeUpdate();
 
-                                    if (tipoFuncionario() == 1) {
+                                    if (typeOfEmployment() == 1) {
                                         getAlertDialog().alertDialog("Gerente cadastrado com sucesso!!!");
-                                    } else if (tipoFuncionario() == 2) {
+                                    } else if (typeOfEmployment() == 2) {
                                         getAlertDialog().alertDialog("Entregador cadastrado com sucesso!!!");
                                     }
 
@@ -386,4 +397,11 @@ public class CadastraController implements Initializable {
         this.txtCodeAdmin = txtCodeAdmin;
     }
 
+    public MenuButton getTypeOfClient() {
+        return typeOfClient;
+    }
+
+    public void setTypeOfClient(MenuButton typeOfClient) {
+        this.typeOfClient = typeOfClient;
+    }
 }
