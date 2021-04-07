@@ -3,9 +3,12 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -48,7 +51,7 @@
                               <Label text="Não há entregador cadastrado!" />
                            </placeholder>
                            <columns>
-                            <TableColumn fx:id="nome_entregador" editable="false" maxWidth="364.0" prefWidth="364.0" resizable="false" sortable="false" text="Nome do entregador" />
+                            <TableColumn fx:id="nome_entregador" editable="false" maxWidth="364.0" prefWidth="341.0" resizable="false" sortable="false" text="Nome do entregador" />
                           </columns>
                         </TableView>
                      </children>
@@ -67,18 +70,35 @@
                               <Insets />
                            </opaqueInsets>
                         </TextField>
-                        <TextField fx:id="nome_cliente" focusTraversable="false" prefHeight="30.0" prefWidth="656.0" promptText="Nome do cliente" style="-fx-text-fill: #00b4d8;">
-                           <font>
-                              <Font name="Arial Bold" size="13.0" />
-                           </font>
-                        </TextField>
-                        <TextField fx:id="bairro" focusTraversable="false" prefHeight="30.0" prefWidth="656.0" promptText="Bairro" style="-fx-text-fill: #00b4d8;">
+                        <HBox prefHeight="30.0" prefWidth="652.0" spacing="10.0">
+                           <children>
+                              <TextField fx:id="nome_cliente" focusTraversable="false" prefHeight="30.0" prefWidth="513.0" promptText="Nome do cliente" style="-fx-text-fill: #00b4d8;">
+                                 <font>
+                                    <Font name="Arial Bold" size="13.0" />
+                                 </font>
+                              </TextField>
+                              <MenuButton fx:id="btnTypeOfClient" focusTraversable="false" mnemonicParsing="false" prefHeight="30.0" style="-fx-background-color: #00b4d8;" text="Tipo de cliente" textFill="WHITE">
+                                <items>
+                                    <RadioMenuItem fx:id="personType" mnemonicParsing="false" text="Pessoa">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="selection" />
+                                       </toggleGroup>
+                                    </RadioMenuItem>
+                                    <RadioMenuItem fx:id="merchantType" mnemonicParsing="false" text="Comerciante" toggleGroup="$selection" />
+                                </items>
+                                 <font>
+                                    <Font name="Arial Bold" size="13.0" />
+                                 </font>
+                              </MenuButton>
+                           </children>
+                        </HBox>
+                        <TextField fx:id="bairro" focusTraversable="false" prefHeight="30.0" prefWidth="656.0" promptText="Bairro" style="-fx-text-fill: #00b4d8;" text="Centro">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font></TextField>
                         <HBox alignment="CENTER" prefHeight="32.0" prefWidth="549.0" spacing="5.0">
                            <children>
-                              <TextField fx:id="cep" focusTraversable="false" prefHeight="30.0" prefWidth="188.0" promptText="Cep" style="-fx-text-fill: #00b4d8;">
+                              <TextField fx:id="cep" focusTraversable="false" prefHeight="30.0" prefWidth="188.0" promptText="Cep" style="-fx-text-fill: #00b4d8;" text="00000000">
                                  <font>
                                     <Font name="Arial Bold" size="13.0" />
                                  </font></TextField>

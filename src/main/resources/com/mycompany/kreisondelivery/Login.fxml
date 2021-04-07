@@ -33,12 +33,12 @@
                                     <Font name="System Bold" size="18.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="login" focusTraversable="false" onKeyReleased="#emptyFilds" prefHeight="32.0" prefWidth="360.0" promptText="Cpf" style="-fx-background-radius: 2em;-fx-text-fill: #00b4d8">
+                              <TextField fx:id="login" focusTraversable="false" onKeyReleased="#emptyFilds" prefHeight="32.0" prefWidth="360.0" promptText="Cpf" style="-fx-background-radius: 2em;-fx-text-fill: #00b4d8" text="07765328557">
                                  <font>
                                     <Font name="Tahoma" size="13.0" />
                                  </font>
                               </TextField>
-                              <PasswordField fx:id="senha" focusTraversable="false" onKeyReleased="#emptyFilds" prefHeight="32.0" prefWidth="360.0" promptText="Senha" style="-fx-background-radius: 2em;-fx-text-fill: #00b4d8">
+                              <PasswordField fx:id="senha" focusTraversable="false" onKeyReleased="#emptyFilds" prefHeight="32.0" prefWidth="360.0" promptText="Senha" style="-fx-background-radius: 2em;-fx-text-fill: #00b4d8" text="111111">
                                  <font>
                                     <Font name="Tahoma" size="13.0" />
                                  </font>

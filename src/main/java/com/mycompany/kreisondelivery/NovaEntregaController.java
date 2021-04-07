@@ -19,15 +19,13 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
+import javafx.scene.control.ToggleGroup;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.AlertDialog;
 import model.ReturnConnection;
@@ -37,9 +35,9 @@ public class NovaEntregaController implements Initializable {
     private DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     private AlertDialog alertDialog = new AlertDialog();
 
-    ReturnConnection connection = new ReturnConnection();
-    PreparedStatement preparedStatement = null;
-    ResultSet resultSet = null;
+    private ReturnConnection connection = new ReturnConnection();
+    private PreparedStatement preparedStatement = null;
+    private ResultSet resultSet = null;
 
     @FXML
     private TableView<Produto> table_entegador;
@@ -68,8 +66,19 @@ public class NovaEntregaController implements Initializable {
     private TextField numero;
     @FXML
     private TextField quantidade;
+
     @FXML
     private Button cadastraEntrega;
+    @FXML
+    private MenuButton btnTypeOfClient;
+
+    @FXML
+    private RadioMenuItem personType;
+    @FXML
+    private RadioMenuItem merchantType;
+
+    @FXML
+    private ToggleGroup selection;
 
     @FXML
     private void buttonCadastraEntregaEntered() {
@@ -96,6 +105,22 @@ public class NovaEntregaController implements Initializable {
         App.setRoot("home");
     }
 
+    /**
+     * @return a client type.
+     * If @return is 4, this client is a person.
+     * If @return is 3, this client is a merchant.
+     */
+    public int typeOfClient(){
+        int typeOfCliente = -1;
+        if(getMerchantType().isSelected()){
+            typeOfCliente = 3; // Tipo comerciante
+        }else if(getPersonType().isSelected()){
+            typeOfCliente = 4; // Tipo pessoa
+        }
+
+        return typeOfCliente;
+    }
+
     public boolean emptyTable() {
         boolean validate = false;
 
@@ -119,7 +144,6 @@ public class NovaEntregaController implements Initializable {
     }
 
     public boolean composVazios() {
-        boolean validate = false;
 
         if (getEndereco_entrega().getText().isBlank())
             getEndereco_entrega().setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
@@ -151,13 +175,14 @@ public class NovaEntregaController implements Initializable {
         else
             getQuantidade().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
-        if (getEndereco_entrega().getText().isBlank() || getNome_cliente().getText().isBlank()
-                || getBairro().getText().isBlank() || getCep().getText().isBlank() || getNumero().getText().isBlank()
-                || getQuantidade().getText().isBlank()) {
-            validate = true;
-        }
+        if (getSelection().getSelectedToggle() == null)
+            btnTypeOfClient.setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
+        else
+            btnTypeOfClient.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
-        return validate;
+        return (getEndereco_entrega().getText().isBlank() || getNome_cliente().getText().isBlank()
+                || getBairro().getText().isBlank() || getCep().getText().isBlank() || getNumero().getText().isBlank()
+                || getQuantidade().getText().isBlank() || (getSelection().getSelectedToggle() == null));
     }
 
     private String getDateTime() {
@@ -169,8 +194,9 @@ public class NovaEntregaController implements Initializable {
         if (emptyTable()) {
             getAlertDialog().alertDialog("É precisso selecionar um campo da tabela!!!");
         } else if (composVazios()) {
-            getAlertDialog().alertDialog("Campos precisam estar preenchidos!");
+            getAlertDialog().alertDialog("Campos precisam estar preenchidos ou selecionados!");
         } else {
+
             if (Integer.parseInt(getQuantidade().getText()) == 0) {
                 getAlertDialog().alertDialog("Digite um valor válido para a quantidade!");
             } else {
@@ -180,32 +206,31 @@ public class NovaEntregaController implements Initializable {
 
 
                     try {
-                        preparedStatement = connection.getConnection().prepareStatement(
-                                "INSERT INTO db_pedido(especiProduto,nomeEntregador,enderEntrega,nomeCliente,bairro,cep,numero,quantidade, data_entrega) VALUES (?,?,?,?,?,?,?,?,?)");
-                        preparedStatement.setString(1,
+                        setPreparedStatement(getConnection().getConnection().prepareStatement(
+                                "INSERT INTO db_pedido(especiProduto,nomeEntregador,enderEntrega,nomeCliente,bairro,cep,numero,quantidade, tipoCliente, data_entrega) VALUES (?,?,?,?,?,?,?,?,?,?)"));
+                        getPreparedStatement().setString(1,
                                 getTable_entegador().getSelectionModel().getSelectedItem().getNome());
-                        preparedStatement.setString(2,
+                        getPreparedStatement().setString(2,
                                 getTb_nome_entregador().getSelectionModel().getSelectedItem().getNome());
-                        preparedStatement.setString(3, getEndereco_entrega().getText());
-                        preparedStatement.setString(4, getNome_cliente().getText());
-                        preparedStatement.setString(5, getBairro().getText());
-                        preparedStatement.setInt(6, Integer.parseInt(getCep().getText()));
-                        preparedStatement.setInt(7, Integer.parseInt(getNumero().getText()));
-                        preparedStatement.setInt(8, Integer.parseInt(getQuantidade().getText()));
-                        preparedStatement.setString(9, getDateTime());
+                        getPreparedStatement().setString(3, getEndereco_entrega().getText());
+                        getPreparedStatement().setString(4, getNome_cliente().getText());
+                        getPreparedStatement().setString(5, getBairro().getText());
+                        getPreparedStatement().setInt(6, Integer.parseInt(getCep().getText()));
+                        getPreparedStatement().setInt(7, Integer.parseInt(getNumero().getText()));
+                        getPreparedStatement().setInt(8, Integer.parseInt(getQuantidade().getText()));
+                        getPreparedStatement().setInt(9, typeOfClient());
+                        getPreparedStatement().setString(10, getDateTime());
 
-                        preparedStatement.executeUpdate();
+                        getPreparedStatement().executeUpdate();
                         atualizaVenda();
                         getAlertDialog().alertDialog("Pedido realizado com sucesso!");
 
-                        try {
-                            App.setRoot("home");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                        App.setRoot("novaEntrega");
 
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     } finally {
-                        connection.closeConnection(connection.getConnection(), preparedStatement);
+                        getConnection().closeConnection(getConnection().getConnection(), getPreparedStatement());
                     }
 
                 } else {
@@ -222,36 +247,36 @@ public class NovaEntregaController implements Initializable {
 
         try {
 
-            preparedStatement = connection.getConnection()
-                    .prepareStatement("SELECT venda FROM db_produto WHERE id_produto = ?");
-            preparedStatement.setInt(1, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
-            resultSet = preparedStatement.executeQuery();
+            setPreparedStatement(getConnection().getConnection()
+                    .prepareStatement("SELECT venda FROM db_produto WHERE id_produto = ?"));
+            getPreparedStatement().setInt(1, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
+            setResultSet(getPreparedStatement().executeQuery());
 
-            while (resultSet.next()) {
-                valueVenda = resultSet.getInt("venda");
+            while (getResultSet().next()) {
+                valueVenda = getResultSet().getInt("venda");
             }
 
-            preparedStatement = null;
-            preparedStatement = connection.getConnection()
-                    .prepareStatement("UPDATE db_produto SET venda = ? WHERE id_produto = ?");
-            preparedStatement.setInt(1, valueVenda + Integer.parseInt(getQuantidade().getText()));
-            preparedStatement.setInt(2, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
+            setPreparedStatement(null);
+            setPreparedStatement(getConnection().getConnection()
+                    .prepareStatement("UPDATE db_produto SET venda = ? WHERE id_produto = ?"));
+            getPreparedStatement().setInt(1, valueVenda + Integer.parseInt(getQuantidade().getText()));
+            getPreparedStatement().setInt(2, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
 
-            preparedStatement.executeUpdate();
+            getPreparedStatement().executeUpdate();
 
-            preparedStatement = null;
-            preparedStatement = connection.getConnection()
-                    .prepareStatement("UPDATE db_produto SET quantidade = ? WHERE id_produto = ?");
-            preparedStatement.setInt(1, (getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade()
+            setPreparedStatement(null);
+            setPreparedStatement(getConnection().getConnection()
+                    .prepareStatement("UPDATE db_produto SET quantidade = ? WHERE id_produto = ?"));
+            getPreparedStatement().setInt(1, (getTable_entegador().getSelectionModel().getSelectedItem().getQuantidade()
                     - Integer.parseInt(getQuantidade().getText())));
-            preparedStatement.setInt(2, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
+            getPreparedStatement().setInt(2, getTable_entegador().getSelectionModel().getSelectedItem().getId_produto());
 
-            preparedStatement.executeUpdate();
+            getPreparedStatement().executeUpdate();
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            connection.closeConnection(connection.getConnection(), preparedStatement);
+            getConnection().closeConnection(getConnection().getConnection(), getPreparedStatement());
         }
     }
 
@@ -260,13 +285,13 @@ public class NovaEntregaController implements Initializable {
         ObservableList<Produto> oblist = FXCollections.observableArrayList();
 
         try {
-            preparedStatement = connection.getConnection()
-                    .prepareStatement("SELECT nome, preco, quantidade, id_produto FROM db_produto");
-            resultSet = preparedStatement.executeQuery();
+            setPreparedStatement(getConnection().getConnection()
+                    .prepareStatement("SELECT nome, preco, quantidade, id_produto FROM db_produto"));
+            setResultSet(getPreparedStatement().executeQuery());
 
-            while (resultSet.next()) {
-                oblist.add(new Produto(resultSet.getFloat("preco"), resultSet.getString("nome"),
-                        resultSet.getInt("quantidade"), resultSet.getInt("id_produto")));
+            while (getResultSet().next()) {
+                oblist.add(new Produto(getResultSet().getFloat("preco"), getResultSet().getString("nome"),
+                        getResultSet().getInt("quantidade"), getResultSet().getInt("id_produto")));
             }
 
             this.getEntregador().setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -279,7 +304,7 @@ public class NovaEntregaController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            connection.closeConnection(connection.getConnection(), preparedStatement);
+            getConnection().closeConnection(getConnection().getConnection(), getPreparedStatement());
         }
     }
 
@@ -290,12 +315,12 @@ public class NovaEntregaController implements Initializable {
         try {
 
             String query = "SELECT nome FROM db_usuario WHERE tipo_usuario = 2";
-            preparedStatement = connection.getConnection().prepareStatement(query);
+            setPreparedStatement(getConnection().getConnection().prepareStatement(query));
 
-            resultSet = preparedStatement.executeQuery();
+            setResultSet(getPreparedStatement().executeQuery());
 
-            while (resultSet.next()) {
-                oblist.add(new Pessoa(resultSet.getString("nome")));
+            while (getResultSet().next()) {
+                oblist.add(new Pessoa(getResultSet().getString("nome")));
             }
 
             this.getNome_entregador().setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -304,7 +329,7 @@ public class NovaEntregaController implements Initializable {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } finally {
-            connection.closeConnection(connection.getConnection(), preparedStatement);
+            getConnection().closeConnection(getConnection().getConnection(), getPreparedStatement());
         }
     }
 
@@ -460,5 +485,61 @@ public class NovaEntregaController implements Initializable {
 
     public void setCadastraEntrega(Button cadastraEntrega) {
         this.cadastraEntrega = cadastraEntrega;
+    }
+
+    public ReturnConnection getConnection() {
+        return connection;
+    }
+
+    public void setConnection(ReturnConnection connection) {
+        this.connection = connection;
+    }
+
+    public PreparedStatement getPreparedStatement() {
+        return preparedStatement;
+    }
+
+    public void setPreparedStatement(PreparedStatement preparedStatement) {
+        this.preparedStatement = preparedStatement;
+    }
+
+    public ResultSet getResultSet() {
+        return resultSet;
+    }
+
+    public void setResultSet(ResultSet resultSet) {
+        this.resultSet = resultSet;
+    }
+
+    public MenuButton getBtnTypeOfClient() {
+        return btnTypeOfClient;
+    }
+
+    public void setBtnTypeOfClient(MenuButton btnTypeOfClient) {
+        this.btnTypeOfClient = btnTypeOfClient;
+    }
+
+    public RadioMenuItem getPersonType() {
+        return personType;
+    }
+
+    public void setPersonType(RadioMenuItem personType) {
+        this.personType = personType;
+    }
+
+    public RadioMenuItem getMerchantType() {
+        return merchantType;
+    }
+
+    public void setMerchantType(RadioMenuItem merchantType) {
+        this.merchantType = merchantType;
+    }
+
+    public ToggleGroup getSelection() {
+        return selection;
+    }
+
+    public void setSelection(ToggleGroup selection) {
+        this.selection = selection;
     }
 }
