@@ -11,6 +11,9 @@ public class Produto {
 
 
     public Produto(){}
+    public Produto(float price){
+        this.preco = price;
+    }
 
     public Produto(String nome,float preco,int quantidade) {
         this.setNome(nome);

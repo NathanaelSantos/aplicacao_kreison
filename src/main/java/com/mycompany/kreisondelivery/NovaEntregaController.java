@@ -6,8 +6,7 @@
 package com.mycompany.kreisondelivery;
 
 import static model.AddTextLimiter.addTextLimiter;
-import static model.TextFormatter.isTextFormatterNumber;
-import static model.TextFormatter.isTextFormatterString;
+import static model.TextFormatter.*;
 
 import java.io.IOException;
 import java.net.URL;
@@ -55,6 +54,13 @@ public class NovaEntregaController implements Initializable {
     private TableColumn<Produto, Integer> idProduto;
 
     @FXML
+    private TableView<Produto> table_price;
+
+    @FXML
+    private TableColumn<Produto, String> precoProduto1;
+
+
+    @FXML
     private TextField endereco_entrega;
     @FXML
     private TextField nome_cliente;
@@ -66,6 +72,9 @@ public class NovaEntregaController implements Initializable {
     private TextField numero;
     @FXML
     private TextField quantidade;
+
+    @FXML
+    private TextField preco;
 
     @FXML
     private Button cadastraEntrega;
@@ -105,6 +114,13 @@ public class NovaEntregaController implements Initializable {
         App.setRoot("home");
     }
 
+    @FXML
+    public void clearSelection(){
+        table_price.getSelectionModel().clearSelection();
+    }
+    
+
+
     /**
      * @return a client type.
      * If @return is 4, this client is a person.
@@ -135,6 +151,8 @@ public class NovaEntregaController implements Initializable {
         } else {
             getTb_nome_entregador().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4)");
         }
+
+        if(table_price.getSelectionModel().isEmpty())
 
         if (getTable_entegador().getSelectionModel().isEmpty()
                 || getTb_nome_entregador().getSelectionModel().isEmpty()) {
@@ -175,14 +193,10 @@ public class NovaEntregaController implements Initializable {
         else
             getQuantidade().setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
-        if (getSelection().getSelectedToggle() == null)
-            btnTypeOfClient.setStyle("-fx-border-color: red;-fx-text-fill: #00b4d8");
-        else
-            btnTypeOfClient.setStyle("-fx-border-color: rgba(27, 72, 171, 0.4);-fx-text-fill: #00b4d8");
 
         return (getEndereco_entrega().getText().isBlank() || getNome_cliente().getText().isBlank()
                 || getBairro().getText().isBlank() || getCep().getText().isBlank() || getNumero().getText().isBlank()
-                || getQuantidade().getText().isBlank() || (getSelection().getSelectedToggle() == null));
+                || getQuantidade().getText().isBlank());
     }
 
     private String getDateTime() {
@@ -207,7 +221,7 @@ public class NovaEntregaController implements Initializable {
 
                     try {
                         setPreparedStatement(getConnection().getConnection().prepareStatement(
-                                "INSERT INTO db_pedido(especiProduto,nomeEntregador,enderEntrega,nomeCliente,bairro,cep,numero,quantidade, tipoCliente, data_entrega) VALUES (?,?,?,?,?,?,?,?,?,?)"));
+                                "INSERT INTO db_pedido(especiProduto, nomeEntregador, enderEntrega, nomeCliente, bairro, cep, numero, quantidade, valorTotal, data_entrega) VALUES (?,?,?,?,?,?,?,?,?,?)"));
                         getPreparedStatement().setString(1,
                                 getTable_entegador().getSelectionModel().getSelectedItem().getNome());
                         getPreparedStatement().setString(2,
@@ -218,7 +232,13 @@ public class NovaEntregaController implements Initializable {
                         getPreparedStatement().setInt(6, Integer.parseInt(getCep().getText()));
                         getPreparedStatement().setInt(7, Integer.parseInt(getNumero().getText()));
                         getPreparedStatement().setInt(8, Integer.parseInt(getQuantidade().getText()));
-                        getPreparedStatement().setInt(9, typeOfClient());
+
+                        if(preco.getText().isBlank()){
+                            getPreparedStatement().setFloat(9, table_price.getSelectionModel().getSelectedItem().getPreco() * (Integer.parseInt(getQuantidade().getText())));
+                        }else{
+                            getPreparedStatement().setFloat(9, Float.parseFloat(preco.getText()) * (Integer.parseInt(getQuantidade().getText())));
+                        }
+
                         getPreparedStatement().setString(10, getDateTime());
 
                         getPreparedStatement().executeUpdate();
@@ -283,6 +303,7 @@ public class NovaEntregaController implements Initializable {
     public void getProdutoDB() throws SQLException, ClassNotFoundException {
 
         ObservableList<Produto> oblist = FXCollections.observableArrayList();
+        ObservableList<Produto> oblist1 = FXCollections.observableArrayList();
 
         try {
             setPreparedStatement(getConnection().getConnection()
@@ -290,16 +311,21 @@ public class NovaEntregaController implements Initializable {
             setResultSet(getPreparedStatement().executeQuery());
 
             while (getResultSet().next()) {
-                oblist.add(new Produto(getResultSet().getFloat("preco"), getResultSet().getString("nome"),
-                        getResultSet().getInt("quantidade"), getResultSet().getInt("id_produto")));
+                oblist.add(
+                        new Produto(
+                                getResultSet().getFloat("preco"), getResultSet().getString("nome"),
+                                getResultSet().getInt("quantidade"), getResultSet().getInt("id_produto")));
+
+                oblist1.add(new Produto(getResultSet().getFloat("preco")));
             }
 
             this.getEntregador().setCellValueFactory(new PropertyValueFactory<>("nome"));
-            this.getPrecoProduto().setCellValueFactory(new PropertyValueFactory<>("preco"));
             this.getQtd_restante().setCellValueFactory(new PropertyValueFactory<>("quantidade"));
             this.getIdProduto().setCellValueFactory(new PropertyValueFactory<>("id_produto"));
+            this.precoProduto1.setCellValueFactory(new PropertyValueFactory<>("preco"));
 
             getTable_entegador().getItems().setAll(oblist);
+            table_price.getItems().setAll(oblist1);
 
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -336,6 +362,7 @@ public class NovaEntregaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        table_price.setStyle("-fx-border-color: #ffffff");
         isTextFormatterString(getEndereco_entrega());
         addTextLimiter(getEndereco_entrega(), 200);
         isTextFormatterString(getNome_cliente());
@@ -348,6 +375,9 @@ public class NovaEntregaController implements Initializable {
         addTextLimiter(getNumero(), 6);
         isTextFormatterNumber(getCep());
         addTextLimiter(getCep(), 8);
+        isTextFormatterFloat(preco);
+        addTextLimiter(preco, 5);
+
 
         try {
             getProdutoDB();
