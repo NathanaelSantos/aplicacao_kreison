@@ -11,6 +11,7 @@ import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
@@ -266,7 +267,6 @@ public class CadastraController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
 
         getTxtCodeAdmin().setVisible(false);
         getAlerta().setVisible(false);
