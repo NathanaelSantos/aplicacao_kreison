@@ -12,8 +12,7 @@ public class LoginConnection {
         String returnStr = null;
 
         try {
-            preparedStatement = connection.getConnection()
-                    .prepareStatement("SELECT " + columnName + " FROM db_usuario WHERE cpf = ?");
+            preparedStatement = connection.getConnection().prepareStatement("SELECT " + columnName + " FROM db_usuario WHERE cpf = ?");
 
             if (preparedStatement != null) {
                 preparedStatement.setString(1, parameterValue);

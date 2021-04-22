@@ -46,22 +46,22 @@ public class ProdutoController implements Initializable {
 
     @FXML
     private void buttonCadastrarProdutoEntered() {
-        getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8");
+        getButtonCadastrarProduto().setStyle(" -fx-background-color:  #019AB8");
     }
 
     @FXML
     private void buttonCadastrarProdutoExited() {
-        getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #00b4d8");
+        getButtonCadastrarProduto().setStyle("-fx-background-color:  #00b4d8");
     }
 
     @FXML
     private void mousePressedButtonCadastrarProduto() {
-        getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color:  #019AB8");
+        getButtonCadastrarProduto().setStyle("-fx-background-color:  #019AB8");
     }
 
     @FXML
     private void mouseReleaseButtonCadastrarProduto() {
-        getButtonCadastrarProduto().setStyle("-fx-background-radius: 3em; -fx-background-color: #00b4d8");
+        getButtonCadastrarProduto().setStyle("-fx-background-color: #00b4d8");
     }
 
     public void composVazios() throws SQLException, ClassNotFoundException {
@@ -92,7 +92,7 @@ public class ProdutoController implements Initializable {
         }
     }
 
-    public void insertProdutoDB() throws SQLException, ClassNotFoundException {
+    public void insertProdutoDB() {
         ReturnConnection connection = new ReturnConnection();
         Produto produto = new Produto(getNomeProduto().getText(), Float.parseFloat(getPrecoProduto().getText()),
                 Integer.parseInt(getQuantidadeProduto().getText()));

@@ -28,7 +28,7 @@ public class App extends Application {
         stage.getIcons().add(new Image(getClass().getResourceAsStream("/images/k.png")));
 
         App.stage = stage;
-        scene = new Scene(loadFXML("Login"), 800, 500);
+        scene = new Scene(loadFXML("home"), 800, 500);
         stage.setScene(scene);
 
         deserializer.deserializer();
