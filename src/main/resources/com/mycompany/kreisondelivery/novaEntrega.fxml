@@ -25,14 +25,13 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="27.0" prefHeight="153.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
-      <AnchorPane layoutX="19.0" layoutY="37.0" minHeight="-Infinity" prefHeight="496.0" prefWidth="749.0" style="-fx-background-color: #F8F7F7; -fx-background-radius: 1em;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="37.0">
+      <AnchorPane layoutY="27.0" minHeight="-Infinity" prefHeight="506.0" prefWidth="800.0" style="-fx-background-color: #F8F7F7;" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0">
          <children>
             <StackPane layoutX="8.0" layoutY="3.0" prefHeight="302.0" prefWidth="738.0" AnchorPane.bottomAnchor="191.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="3.0">
                <children>
-                  <HBox prefHeight="208.0" prefWidth="323.0" spacing="5.0">
+                  <HBox prefHeight="302.0" prefWidth="920.0" spacing="3.0">
                      <children>
-                        <TableView fx:id="table_entegador" accessibleRole="IMAGE_VIEW" fixedCellSize="0.0" focusTraversable="false" prefHeight="329.0" prefWidth="396.0" stylesheets="@../../../styles/table.css">
+                        <TableView fx:id="table_entegador" accessibleRole="IMAGE_VIEW" fixedCellSize="0.0" focusTraversable="false" prefHeight="312.0" prefWidth="423.0" stylesheets="@../../../styles/table.css">
                            <placeholder>
                               <Label text="Não há produto cadastrado!" />
                            </placeholder>
@@ -42,7 +41,7 @@
                               <TableColumn fx:id="idProduto" editable="false" maxWidth="60.0" prefWidth="32.0" resizable="false" sortable="false" text="Id" />
                           </columns>
                         </TableView>
-                        <TableView fx:id="tb_nome_entregador" focusTraversable="false" prefHeight="245.0" prefWidth="371.0" stylesheets="@../../../styles/table.css">
+                        <TableView fx:id="tb_nome_entregador" focusTraversable="false" prefHeight="312.0" prefWidth="448.0" stylesheets="@../../../styles/table.css">
                            <placeholder>
                               <Label text="Não há entregador cadastrado!" />
                            </placeholder>
@@ -50,6 +49,20 @@
                             <TableColumn fx:id="nome_entregador" editable="false" maxWidth="364.0" prefWidth="341.0" resizable="false" sortable="false" text="Nome do entregador" />
                           </columns>
                         </TableView>
+                        <StackPane prefHeight="150.0" prefWidth="200.0">
+                           <children>
+                              <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+                                 <children>
+                                    <TableView fx:id="table_price" accessibleRole="IMAGE_VIEW" fixedCellSize="0.0" focusTraversable="false" prefHeight="268.0" prefWidth="132.0" stylesheets="@../../../styles/table.css">
+                                       <columns>
+                                          <TableColumn fx:id="precoProduto1" editable="false" maxWidth="140.0" prefWidth="96.0" resizable="false" sortable="false" text="Preço R$" />
+                                       </columns>
+                                    </TableView>
+                                    <TextField fx:id="preco" focusTraversable="false" onKeyReleased="#clearSelection" onMouseClicked="#clearSelection" prefHeight="31.0" prefWidth="135.0" promptText="Outro preço" stylesheets="@../../../styles/textField.css" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </StackPane>
                      </children>
                   </HBox>
                </children>
@@ -58,35 +71,11 @@
       </AnchorPane>
       <HBox alignment="CENTER" layoutX="31.0" layoutY="330.0" prefHeight="186.0" prefWidth="738.0" spacing="10.0" AnchorPane.bottomAnchor="53.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0">
          <children>
-            <StackPane prefHeight="186.0" prefWidth="165.0" style="-fx-background-radius: 1em; -fx-background-color: #ffffff;">
+            <StackPane prefHeight="186.0" prefWidth="739.0">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="186.0" prefWidth="165.0">
+                  <VBox alignment="CENTER" fillWidth="false" prefHeight="186.0" prefWidth="551.0" spacing="6.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0.7em;" StackPane.alignment="CENTER">
                      <children>
-                        <TableView fx:id="table_price" accessibleRole="IMAGE_VIEW" fixedCellSize="0.0" focusTraversable="false" prefHeight="137.0" prefWidth="159.0" stylesheets="@../../../styles/table.css">
-                           <columns>
-                              <TableColumn fx:id="precoProduto1" editable="false" maxWidth="140.0" prefWidth="130.0" resizable="false" sortable="false" text="Preço R$" />
-                           </columns>
-                        </TableView>
-                        <Label text="Outro preço" textFill="#00b4d8">
-                           <font>
-                              <Font name="Arial Bold" size="12.0" />
-                           </font></Label>
-                        <TextField fx:id="preco" focusTraversable="false" onKeyReleased="#clearSelection" onMouseClicked="#clearSelection" prefHeight="31.0" prefWidth="135.0" stylesheets="@../../../styles/textField.css" />
-                     </children>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                  </VBox>
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </StackPane>
-            <StackPane prefHeight="186.0" prefWidth="542.0">
-               <children>
-                  <VBox alignment="CENTER" fillWidth="false" prefHeight="186.0" prefWidth="551.0" spacing="6.0" style="-fx-background-color: #ffffff; -fx-background-radius: 0.7em;" stylesheets="@../../../styles/textField.css" StackPane.alignment="CENTER">
-                     <children>
-                        <TextField fx:id="endereco_entrega" focusTraversable="false" prefHeight="30.0" prefWidth="565.0" promptText="Endereço de entrega" style="-fx-text-fill: #00b4d8;" stylesheets="@../../../styles/textField.css">
+                        <TextField fx:id="endereco_entrega" focusTraversable="false" prefHeight="30.0" prefWidth="565.0" promptText="Endereço de entrega" style="-fx-text-fill: #00b4d8;">
                            <font>
                               <Font name="Arial Bold" size="13.0" />
                            </font>
@@ -96,7 +85,7 @@
                         </TextField>
                         <HBox prefHeight="30.0" prefWidth="565.0" spacing="10.0">
                            <children>
-                              <TextField fx:id="nome_cliente" focusTraversable="false" prefHeight="30.0" prefWidth="545.0" promptText="Nome do cliente" style="-fx-text-fill: #00b4d8;">
+                              <TextField fx:id="nome_cliente" focusTraversable="false" prefHeight="30.0" prefWidth="568.0" promptText="Nome do cliente" style="-fx-text-fill: #00b4d8;">
                                  <font>
                                     <Font name="Arial Bold" size="13.0" />
                                  </font>
@@ -110,7 +99,7 @@
                         </TextField>
                         <HBox alignment="CENTER" prefHeight="32.0" prefWidth="549.0" spacing="5.0">
                            <children>
-                              <TextField fx:id="cep" focusTraversable="false" prefHeight="30.0" prefWidth="188.0" promptText="Cep" style="-fx-text-fill: #00b4d8;" text="00000000">
+                              <TextField fx:id="cep" focusTraversable="false" prefHeight="30.0" prefWidth="211.0" promptText="Cep" style="-fx-text-fill: #00b4d8;" text="00000000">
                                  <font>
                                     <Font name="Arial Bold" size="13.0" />
                                  </font>
@@ -135,7 +124,7 @@
       </HBox>
       <StackPane layoutX="153.0" layoutY="560.0" prefHeight="47.0" prefWidth="494.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="153.0" AnchorPane.rightAnchor="153.0">
          <children>
-            <Button fx:id="cadastraEntrega" focusTraversable="false" mnemonicParsing="false" onAction="#cadastraEntrega" onMouseEntered="#buttonCadastraEntregaEntered" onMouseExited="#buttonCadastraEntregaExited" onMousePressed="#mousePressedButtonCadastraEntrega" onMouseReleased="#mouseReleaseButtonCadastraEntrega" prefHeight="32.0" prefWidth="493.0" style="-fx-background-radius: 3em; -fx-background-color: #00b4d8;" text="Cadastrar nova entrega" textFill="WHITE">
+            <Button fx:id="cadastraEntrega" focusTraversable="false" mnemonicParsing="false" onAction="#cadastraEntrega" onMouseEntered="#buttonCadastraEntregaEntered" onMouseExited="#buttonCadastraEntregaExited" onMousePressed="#mousePressedButtonCadastraEntrega" onMouseReleased="#mouseReleaseButtonCadastraEntrega" prefHeight="32.0" prefWidth="493.0" style="-fx-background-color: #00b4d8;" text="Cadastrar nova entrega" textFill="WHITE">
                <font>
                   <Font name="Arial Bold" size="13.0" />
                </font>

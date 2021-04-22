@@ -19,32 +19,32 @@ public class AdminController implements Initializable {
 
     @FXML
     private void mouseEnteredButtonCadastraProduto() {
-        getButtonCadastraProduto().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc");
+        getButtonCadastraProduto().setStyle("-fx-background-color: #009abc");
     }
 
     @FXML
     private void mouseExitedButtonCadastraProduto() {
-        getButtonCadastraProduto().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8");
+        getButtonCadastraProduto().setStyle("-fx-background-color: #00b4d8");
     }
 
     @FXML
     private void mouseEnteredButtonDeletaEditaProduto() {
-        getButtonDeletaEditaProduto().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc");
+        getButtonDeletaEditaProduto().setStyle("-fx-background-color: #009abc");
     }
 
     @FXML
     private void mouseExitedButtonDeletaEditaProduto() {
-        getButtonDeletaEditaProduto().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8");
+        getButtonDeletaEditaProduto().setStyle("-fx-background-color: #00b4d8");
     }
 
     @FXML
     private void mouseEnteredButtonDeletaFuncionario() {
-        getButtonDeletaFuncionario().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc");
+        getButtonDeletaFuncionario().setStyle("-fx-background-color: #009abc");
     }
 
     @FXML
     private void mouseExitedButtonDeletaFuncionario() {
-        getButtonDeletaFuncionario().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8");
+        getButtonDeletaFuncionario().setStyle("-fx-background-color: #00b4d8");
     }
 
     @FXML

@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import model.AlertDialog;
 import model.LoginConnection;
 import model.ReturnConnection;
@@ -45,6 +46,8 @@ public class HomeController implements Initializable {
     private Button buttonNovaEntrega;
     @FXML
     private Button btnLogin;
+    @FXML
+    private StackPane loginCode;
 
     public static boolean isOnScreenLogin() {
         return onScreenLogin;
@@ -54,10 +57,6 @@ public class HomeController implements Initializable {
         HomeController.onScreenLogin = onScreenLogin;
     }
 
-    @FXML
-    private void screenLogin() throws IOException {
-        App.setRoot("Login");
-    }
 
     @FXML
     private void novaEntrega() throws IOException {
@@ -77,7 +76,7 @@ public class HomeController implements Initializable {
     @FXML
     private void mouseClickedAnchor() throws IOException {
         if (isOnScreenLogin()) {
-            getTelaLogin().setVisible(false);
+            loginCode.setVisible(false);
             setOnScreenLogin(false);
         }
     }
@@ -114,53 +113,37 @@ public class HomeController implements Initializable {
 
     @FXML
     private void mouseEnteredButtonConsultaEstoque() throws IOException {
-        getButtonConsultaEstoque().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc");
+        getButtonConsultaEstoque().setStyle("-fx-background-color: #009abc");
     }
 
     @FXML
     private void mouseExitedButtonConsultaEstoque() throws IOException {
-        getButtonConsultaEstoque().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8");
+        getButtonConsultaEstoque().setStyle("-fx-background-color: #00b4d8");
     }
 
     @FXML
     private void mouseEnteredButtonNovaEntrega() throws IOException {
-        getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #009abc");
+        getButtonNovaEntrega().setStyle("-fx-background-color: #009abc");
     }
 
     @FXML
     private void mouseExitedButtonNovaEntrega() throws IOException {
-        getButtonNovaEntrega().setStyle("-fx-background-radius: 1.2em; -fx-background-color: #00b4d8");
+        getButtonNovaEntrega().setStyle("-fx-background-color: #00b4d8");
     }
 
     @FXML
     private void telaLogin() throws IOException {
         if (!isOnScreenLogin()) {
-            getTelaLogin().setVisible(true);
+            loginCode.setVisible(true);
             setOnScreenLogin(true);
         } else {
-            getTelaLogin().setVisible(false);
+            loginCode.setVisible(false);
             setOnScreenLogin(false);
         }
-
     }
 
     public boolean emptyFields() throws SQLException, ClassNotFoundException {
         boolean validate = false;
-
-        if (getLogin().getText().isBlank())
-
-            getLogin().setStyle(" -fx-border-color: #ff3b3b;\n" + "        -fx-border-radius: 2em;\n"
-                    + "        -fx-background-color: #00b4d8;\n" + "        -fx-text-fill: #ffffff;");
-        else
-            getLogin().setStyle(" -fx-border-color: #ffffff;\n" + "    -fx-border-radius: 2em;\n"
-                    + "    -fx-background-color: #00b4d8;\n" + "    -fx-text-fill: #ffffff;");
-
-        if (getSenha().getText().isBlank())
-            getSenha().setStyle(" -fx-border-color: #ff3b3b;\n" + "        -fx-border-radius: 2em;\n"
-                    + "        -fx-background-color: #00b4d8;\n" + "        -fx-text-fill: #ffffff;");
-        else
-            getSenha().setStyle(" -fx-border-color: #ffffff;\n" + "    -fx-border-radius: 2em;\n"
-                    + "    -fx-background-color: #00b4d8;\n" + "    -fx-text-fill: #ffffff;");
 
         if (getCodAdmin().getText().isBlank())
             getCodAdmin().setStyle(" -fx-border-color: #ff3b3b;\n" + "        -fx-border-radius: 2em;\n"
@@ -169,7 +152,7 @@ public class HomeController implements Initializable {
             getCodAdmin().setStyle(" -fx-border-color: #ffffff;\n" + "    -fx-border-radius: 2em;\n"
                     + "    -fx-background-color: #00b4d8;\n" + "    -fx-text-fill: #ffffff;");
 
-        if (getLogin().getText().isBlank() || getSenha().getText().isBlank() || getCodAdmin().getText().isBlank()) {
+        if (getCodAdmin().getText().isBlank()) {
             validate = true;
         }
 
@@ -183,38 +166,21 @@ public class HomeController implements Initializable {
         if (emptyFields()) {
             getAlerta().setVisible(true);
         } else {
-
-            if (new ValidateCPF().validate(getLogin().getText())) {
-                getAlertaCpf().setVisible(false);
-
                 if (returnConnection.getConnection() != null) {
-
-                    if (new StringUtil().gerarHash(getSenha().getText())
-                            .equals(new LoginConnection().loginConection(getLogin().getText(), "senha"))
-                            && new LoginConnection().loginConection(getLogin().getText(), "codAdmin")
-                                    .equals(getCodAdmin().getText()))
+                    if (new LoginConnection().loginConection("07765328557", "codAdmin").equals(getCodAdmin().getText()))
                         App.setRoot("admin");
                     else
                         new AlertDialog().alertDialog("Erro ao fazer login!");
                 } else
                     new AlertDialog().alertDialog("Erro de conexao!");
-            } else {
-                getAlertaCpf().setVisible(true);
-            }
         }
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        getTelaLogin().setVisible(false);
-        getAlerta().setVisible(false);
-        getAlertaCpf().setVisible(false);
+        loginCode.setVisible(false);
 
-        isTextFormatterNumber(getLogin());
-        addTextLimiter(getLogin(), 11);
-        isTextFormatterNumber(getSenha());
-        addTextLimiter(getSenha(), 6);
         isTextFormatterNumber(getCodAdmin());
         addTextLimiter(getCodAdmin(), 6);
     }

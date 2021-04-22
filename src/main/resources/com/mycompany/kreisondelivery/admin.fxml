@@ -4,13 +4,13 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.kreisondelivery.AdminController">
    <children>
-      <AnchorPane layoutY="1.0" prefHeight="27.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutY="1.0" prefHeight="32.0" prefWidth="800.0" style="-fx-background-color: #00b4d8;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="18.0" fitWidth="22.0" layoutX="5.0" layoutY="5.0" onMouseClicked="#homeScreen" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -21,38 +21,38 @@
       </AnchorPane>
       <StackPane layoutX="122.0" layoutY="117.0" prefHeight="298.0" prefWidth="618.0" AnchorPane.bottomAnchor="85.0" AnchorPane.leftAnchor="91.0" AnchorPane.rightAnchor="91.0" AnchorPane.topAnchor="117.0">
          <children>
-            <HBox alignment="TOP_CENTER" prefHeight="314.0" prefWidth="618.0" spacing="15.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="6.0">
                <children>
-                  <Button fx:id="buttonCadastraProduto" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#cadastraProduto" onMouseEntered="#mouseEnteredButtonCadastraProduto" onMouseExited="#mouseExitedButtonCadastraProduto" prefHeight="124.0" prefWidth="189.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Cadastrar produto" textFill="#fdfdfd">
+                  <Button fx:id="buttonCadastraProduto" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#cadastraProduto" onMouseEntered="#mouseEnteredButtonCadastraProduto" onMouseExited="#mouseExitedButtonCadastraProduto" prefHeight="28.0" prefWidth="434.0" style="-fx-background-color: #00b4d8;" text="Cadastrar produto" textFill="#fdfdfd">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../images/nota.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="buttonDeletaEditaProduto" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#editOrDeleteProduct" onMouseEntered="#mouseEnteredButtonDeletaEditaProduto" onMouseExited="#mouseExitedButtonDeletaEditaProduto" prefHeight="124.0" prefWidth="189.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Deletar ou editar produto" textFill="#fdfdfd">
+                  <Button fx:id="buttonDeletaEditaProduto" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#editOrDeleteProduct" onMouseEntered="#mouseEnteredButtonDeletaEditaProduto" onMouseExited="#mouseExitedButtonDeletaEditaProduto" prefHeight="28.0" prefWidth="434.0" style="-fx-background-color: #00b4d8;" text="Deletar ou editar produto" textFill="#fdfdfd">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../images/nota.png" />
                            </image>
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button fx:id="buttonDeletaFuncionario" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#deletaFuncionario" onMouseEntered="#mouseEnteredButtonDeletaFuncionario" onMouseExited="#mouseExitedButtonDeletaFuncionario" prefHeight="124.0" prefWidth="189.0" style="-fx-background-color: #00b4d8; -fx-background-radius: 1.2em;" text="Deletar funcionário" textFill="#fdfdfd">
+                  <Button fx:id="buttonDeletaFuncionario" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#deletaFuncionario" onMouseEntered="#mouseEnteredButtonDeletaFuncionario" onMouseExited="#mouseExitedButtonDeletaFuncionario" prefHeight="28.0" prefWidth="434.0" style="-fx-background-color: #00b4d8;" text="Deletar funcionário" textFill="#fdfdfd">
                      <font>
                         <Font name="Arial Bold" size="13.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="43.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="31.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../../images/nota.png" />
                            </image>
@@ -60,7 +60,7 @@
                      </graphic>
                   </Button>
                </children>
-            </HBox>
+            </VBox>
          </children>
       </StackPane>
    </children>

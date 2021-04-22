@@ -11,8 +11,7 @@ public class ReturnConnection {
 
     public Connection getConnection() {
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://34.95.228.172:3306/db_kreison_delivery?useSSL=false",
-                    "root", "1uCelvjuIChNpF0C");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_kreison_delivery", "root", "");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
